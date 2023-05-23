@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KolodvorApp.Client", "Kolod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KolodvorApp.Shared", "KolodvorApp\Shared\KolodvorApp.Shared.csproj", "{6ADCB44B-2F63-4BB3-B312-4542C5118182}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KolodvorApp.Persistance", "KolodvorApp.Persistance\KolodvorApp.Persistance.csproj", "{96719E6F-9976-49F7-ADAD-A87C7684211C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6ADCB44B-2F63-4BB3-B312-4542C5118182}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ADCB44B-2F63-4BB3-B312-4542C5118182}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ADCB44B-2F63-4BB3-B312-4542C5118182}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96719E6F-9976-49F7-ADAD-A87C7684211C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96719E6F-9976-49F7-ADAD-A87C7684211C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96719E6F-9976-49F7-ADAD-A87C7684211C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96719E6F-9976-49F7-ADAD-A87C7684211C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
