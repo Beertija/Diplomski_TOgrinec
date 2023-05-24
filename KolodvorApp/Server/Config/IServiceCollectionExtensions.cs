@@ -20,6 +20,7 @@ public static class IServiceCollectionExtensions
         services.AddControllersWithViews();
         services.AddRazorPages();
         services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
 
         services.AddFeatureManagement();
 

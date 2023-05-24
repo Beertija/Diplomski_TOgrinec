@@ -27,6 +27,10 @@ public static class WebApplicationExtensions
         app.UseAuthentication();
         app.UseAuthorization();
 
+        app.MapRazorPages();
+        app.MapControllers();
+        app.MapFallbackToFile("index.html");
+
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
@@ -36,10 +40,6 @@ public static class WebApplicationExtensions
                 o.OAuthAppName("Kolodvor Swagger UI");
             });
         }
-
-        app.MapRazorPages();
-        app.MapControllers();
-        app.MapFallbackToFile("index.html");
 
         return app;
     }
@@ -70,7 +70,7 @@ public static class WebApplicationExtensions
             var services = scope.ServiceProvider;
             var context = services.GetRequiredService<KolodvorAppContext>();
 
-            DbInitializer.InitializeAsync(services).ConfigureAwait(false);
+            DbInitializer.Initialize(services);
         }
 
         return app;

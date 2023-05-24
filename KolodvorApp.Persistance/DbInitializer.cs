@@ -1,4 +1,5 @@
-﻿using KolodvorApp.Persistance.DataContext;
+﻿using KolodvorApp.Domain.Entities;
+using KolodvorApp.Persistance.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,16 +7,46 @@ namespace KolodvorApp.Persistance;
 
 public static class DbInitializer
 {
-    public static async Task InitializeAsync(IServiceProvider serviceProvider)
+    public static void Initialize(IServiceProvider serviceProvider)
     {
         using var context = new KolodvorAppContext(serviceProvider.GetRequiredService<DbContextOptions<KolodvorAppContext>>());
 
         context.Database.SetCommandTimeout(30);
 
-        var applyChanges = false;
+        if (!context.Trains.Any())
+        {
+            AddTrainsWithSomeMaintances(context);
+        }
+    }
 
-        //TODO: seed data checks & method calls
+    private static void AddTrainsWithSomeMaintances(KolodvorAppContext context)
+    {
+        context.Trains.AddRange(
+                new Train
+                {
+                    Tag = "0112",
+                    Capacity = 100,
+                    Maintenances = new List<TrainMaintenance>
+                    {
+                        new TrainMaintenance()
+                        {
+                            Maintenance = "Popravak sjedišta",
+                            Cost = 2000m
+                        },
+                        new TrainMaintenance()
+                        {
+                            Maintenance = "Popravak glavnog motora",
+                            Cost = 30000m
+                        }
+                    }
+                },
+                new Train
+                {
+                    Tag = "1825",
+                    Capacity = 210
+                }
+            );
 
-        if (applyChanges) await context.SaveChangesAsync();
+        context.SaveChanges();
     }
 }
