@@ -1,4 +1,8 @@
-﻿using KolodvorApp.Persistance.DataContext;
+﻿using KolodvorApp.Domain;
+using KolodvorApp.Domain.Entities;
+using KolodvorApp.Domain.Services;
+using KolodvorApp.Persistance;
+using KolodvorApp.Persistance.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.FeatureManagement;
 
@@ -20,6 +24,7 @@ public static class IServiceCollectionExtensions
         services.AddControllersWithViews();
         services.AddRazorPages();
         services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
 
         services.AddFeatureManagement();
 
@@ -34,14 +39,16 @@ public static class IServiceCollectionExtensions
                 options => options.EnableRetryOnFailure());
         });
 
-        //TODO: Add repositories
+        services.AddScoped<IRepository<Train>, Repository<Train>>();
+        services.AddScoped<IRepository<TrainMaintenance>, Repository<TrainMaintenance>>();
 
         return services;
     }
 
     private static IServiceCollection ConfigureServices(this IServiceCollection services)
     {
-        // TODO: Add domain services
+        services.AddScoped<ITrainService, TrainService>();
+        services.AddScoped<ITrainMaintenanceService, TrainMaintenanceService>();
 
         return services;
     }
