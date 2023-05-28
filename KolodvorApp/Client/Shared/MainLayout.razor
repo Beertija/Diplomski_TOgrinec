@@ -15,3 +15,27 @@
         </article>
     </main>
 </div>
+
+<MudThemeProvider Theme=@currentTheme />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+@code {
+    MudTheme currentTheme = new MudTheme
+        {
+            Typography = new Typography
+            {
+                Default = new Default()
+                {
+                    FontFamily = new[] { "Poppins", "Helvetica"}
+                }
+            },
+
+            Palette = new Palette
+            {
+                //TODO: edit color pallete
+                Primary = "#019592",
+                Secondary = "#ffff"
+            }
+        };
+}
