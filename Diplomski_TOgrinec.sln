@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KolodvorApp.Shared", "Kolod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KolodvorApp.Persistance", "KolodvorApp.Persistance\KolodvorApp.Persistance.csproj", "{96719E6F-9976-49F7-ADAD-A87C7684211C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KolodvorApp.Domain", "KolodvorApp.Domain\KolodvorApp.Domain.csproj", "{71EB41DC-438E-491F-A1B4-A53981D2B492}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KolodvorApp.Domain", "KolodvorApp.Domain\KolodvorApp.Domain.csproj", "{71EB41DC-438E-491F-A1B4-A53981D2B492}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
