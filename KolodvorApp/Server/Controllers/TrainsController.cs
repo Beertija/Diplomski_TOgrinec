@@ -23,12 +23,12 @@ public class TrainsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<TrainDto>> GetAsync(Guid id)
+    [HttpGet("{id}/{includeMaintaining}")]
+    public async Task<ActionResult<TrainDto>> GetAsync(Guid id, bool includeMaintaining)
     {
         try
         {
-            var result = await _service.GetAsync(id);
+            var result = await _service.GetAsync(id, includeMaintaining);
             return Ok(result);
         }
         catch (KeyNotFoundException)

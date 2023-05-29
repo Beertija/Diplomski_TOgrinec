@@ -16,7 +16,15 @@ public class AutoMapperProfile : Profile
                 Cost = model.Cost,
                 Maintenance = model.Maintenance
             })))
+            .ForMember(dest => dest.Categories,
+            opt => opt.MapFrom(src => src.Categories.Select(model => new ContainsDto
+            {
+                TrainId = model.TrainId,
+                TrainCategoryId = model.TrainCategoryId,
+            })))
             .ReverseMap();
+
         CreateMap<TrainMaintenance, TrainMaintenanceDto>().ReverseMap();
+        CreateMap<TrainCategory, TrainCategoryDto>().ReverseMap();
     }
 }
