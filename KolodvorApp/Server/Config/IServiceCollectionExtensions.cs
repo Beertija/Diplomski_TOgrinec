@@ -41,6 +41,7 @@ public static class IServiceCollectionExtensions
 
         services.AddScoped<IRepository<Train>, Repository<Train>>();
         services.AddScoped<IRepository<TrainMaintenance>, Repository<TrainMaintenance>>();
+        services.AddScoped<IRepository<TrainCategory>, Repository<TrainCategory>>();
 
         return services;
     }
@@ -49,6 +50,7 @@ public static class IServiceCollectionExtensions
     {
         services.AddScoped<ITrainService, TrainService>();
         services.AddScoped<ITrainMaintenanceService, TrainMaintenanceService>();
+        services.AddScoped<ITrainCategoryService, TrainCategoryService>();
 
         return services;
     }

@@ -58,7 +58,7 @@ public class TrainMaintenanceService : ITrainMaintenanceService
     {
         try
         {
-            await _trainService.GetAsync(trainId);
+            await _trainService.GetAsync(trainId, false);
         }
         catch (KeyNotFoundException)
         {

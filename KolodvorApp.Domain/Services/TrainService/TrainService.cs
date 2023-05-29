@@ -8,23 +8,47 @@ public class TrainService : ITrainService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<Train> _repository;
+    private readonly ITrainCategoryService _categoryService;
 
-    public TrainService(IMapper mapper, IRepository<Train> repository)
+    public TrainService(IMapper mapper, IRepository<Train> repository, ITrainCategoryService categoryService)
     {
         _mapper = mapper;
         _repository = repository;
+        _categoryService = categoryService;
     }
 
     public List<TrainDto> GetAll()
     {
-        var trainList = _repository.GetAll();
-        return _mapper.Map<List<TrainDto>>(trainList);
+        var trainList = _repository.WithDetails(x => x.Categories);
+        var modelList = _mapper.Map<List<TrainDto>>(trainList);
+
+        var trainCategories = _categoryService.GetAll();
+
+        foreach (var item in modelList)
+        {
+            foreach (var category in item.Categories)
+            {
+                category.TrainCategory = trainCategories.Single(x => x.Id == category.TrainCategoryId);
+            }
+        }
+
+        return modelList;
     }
 
-    public async Task<TrainDto> GetAsync(Guid id)
+    public async Task<TrainDto> GetAsync(Guid id, bool includeMaintaining)
     {
-        var train = await _repository.GetAsync(id);
-        return _mapper.Map<TrainDto>(train);
+        var train = (includeMaintaining
+            ? _repository.WithDetails(x => x.Maintenances, x => x.Categories).Where(x => x.Id == id).SingleOrDefault()
+            : _repository.WithDetails(x => x.Categories).Where(x => x.Id == id).SingleOrDefault())
+            ?? throw new KeyNotFoundException();
+
+        var model = _mapper.Map<TrainDto>(train);
+        foreach (var category in model.Categories)
+        {
+            category.TrainCategory = await _categoryService.GetAsync(category.TrainCategoryId);
+        }
+
+        return model;
     }
 
     public async Task<TrainDto> CreateOrUpdateAsync(TrainDto trainDto)

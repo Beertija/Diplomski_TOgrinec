@@ -6,5 +6,7 @@ public class Train : BaseEntity
 
     public int Capacity { get; set; }
 
-    public virtual ICollection<TrainMaintenance> Maintenances { get; set; }
+    public virtual ICollection<TrainMaintenance> Maintenances { get; set; } = new List<TrainMaintenance>();
+
+    public virtual ICollection<Contains> Categories { get; set; } = new List<Contains>();
 }
