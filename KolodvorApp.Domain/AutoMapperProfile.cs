@@ -26,5 +26,6 @@ public class AutoMapperProfile : Profile
 
         CreateMap<TrainMaintenance, TrainMaintenanceDto>().ReverseMap();
         CreateMap<TrainCategory, TrainCategoryDto>().ReverseMap();
+        CreateMap<Station, StationDto>().ReverseMap();
     }
 }

@@ -42,6 +42,9 @@ public static class IServiceCollectionExtensions
         services.AddScoped<IRepository<Train>, Repository<Train>>();
         services.AddScoped<IRepository<TrainMaintenance>, Repository<TrainMaintenance>>();
         services.AddScoped<IRepository<TrainCategory>, Repository<TrainCategory>>();
+        services.AddScoped<IRepository<Station>, Repository<Station>>();
+        services.AddScoped<IRepository<RouteStation>, Repository<RouteStation>>();
+        services.AddScoped<IRepository<Domain.Entities.Route>, Repository<Domain.Entities.Route>>();
 
         return services;
     }
@@ -51,6 +54,7 @@ public static class IServiceCollectionExtensions
         services.AddScoped<ITrainService, TrainService>();
         services.AddScoped<ITrainMaintenanceService, TrainMaintenanceService>();
         services.AddScoped<ITrainCategoryService, TrainCategoryService>();
+        services.AddScoped<IStationService, StationService>();
 
         return services;
     }
