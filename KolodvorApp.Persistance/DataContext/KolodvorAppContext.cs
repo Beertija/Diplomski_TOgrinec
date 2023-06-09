@@ -14,6 +14,8 @@ public sealed class KolodvorAppContext : DbContext
     public DbSet<Station> Stations { get; set; }
     public DbSet<Route> Routes { get; set; }
     public DbSet<RouteStation> RouteStations { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Ticket> Tickets { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -146,6 +148,48 @@ public sealed class KolodvorAppContext : DbContext
             b.HasOne(x => x.Train)
                 .WithMany(x => x.Routes)
                 .HasForeignKey(x => x.TrainId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<User>(b =>
+        {
+            b.ToTable("Users");
+
+            b.HasIndex(x => x.Email)
+                .IsUnique();
+
+            b.Property(x => x.Name)
+                .IsRequired();
+
+            b.Property(x => x.Password)
+                .IsRequired();
+            
+            b.Property(x => x.Email)
+                .IsRequired();
+
+            b.Property(x => x.Role)
+                .HasDefaultValue(Role.User)
+                .IsRequired();
+        });
+
+        modelBuilder.Entity<Ticket>(b =>
+        {
+            b.ToTable("Tickets");
+
+            b.Property(x => x.StartStation)
+                .IsRequired();
+
+            b.Property(x => x.EndStation)
+                .IsRequired();
+
+            b.Property(x => x.Cost)
+                .HasPrecision(18, 2)
+                .IsRequired();
+
+            b.HasOne(x => x.User)
+                .WithMany(x => x.Tickets)
+                .HasForeignKey(x => x.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
         });

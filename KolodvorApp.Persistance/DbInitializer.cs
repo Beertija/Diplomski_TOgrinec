@@ -32,6 +32,11 @@ public static class DbInitializer
         {
             AddRoutes(context);
         }
+
+        if (!context.Users.Any())
+        {
+            AddUsers(context);
+        }
     }
 
     private static void AddTrainCategories(KolodvorAppContext context)
@@ -742,6 +747,35 @@ public static class DbInitializer
                             Order = 19
                         }
                     }
+                }
+            );
+
+        context.SaveChanges();
+    }
+
+    private static void AddUsers(KolodvorAppContext context)
+    {
+        context.Users.AddRange(
+                new User
+                {
+                    Name = "Test User",
+                    Email = "testuser@gmail.com",
+                    Password = "testuser",
+                    Role = Role.User
+                },
+                new User
+                {
+                    Name = "Test Worker",
+                    Email = "testworker@gmail.com",
+                    Password = "testworker",
+                    Role = Role.Worker
+                },
+                new User
+                {
+                    Name = "Admin",
+                    Email = "admin@gmail.com",
+                    Password = "admin",
+                    Role = Role.Admin
                 }
             );
 
