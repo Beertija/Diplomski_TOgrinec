@@ -10,5 +10,5 @@ public class Train : BaseEntity
 
     public virtual ICollection<Contains> Categories { get; set; } = new List<Contains>();
 
-    public virtual ICollection<RouteTrain> RouteTrains { get; set; } = new List<RouteTrain>();
+    public virtual ICollection<Route> Routes { get; set; } = new List<Route>();
 }

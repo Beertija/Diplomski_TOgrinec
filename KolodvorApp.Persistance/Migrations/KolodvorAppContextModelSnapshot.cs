@@ -43,22 +43,17 @@ namespace KolodvorApp.Persistance.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("Cost")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid>("FirstStation")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsDaily")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<Guid>("LastStation")
+                    b.Property<Guid>("TrainId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TrainId");
 
                     b.ToTable("Routes", (string)null);
                 });
@@ -69,46 +64,38 @@ namespace KolodvorApp.Persistance.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("Arrival")
+                    b.Property<DateTime>("Arrival")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("Departure")
+                    b.Property<decimal>("Cost")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Departure")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid>("EndStationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("RouteId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("StationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TrainId")
+                    b.Property<Guid>("StartStationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EndStationId");
+
                     b.HasIndex("RouteId");
 
-                    b.HasIndex("StationId");
-
-                    b.HasIndex("TrainId", "StationId", "RouteId")
+                    b.HasIndex("StartStationId", "EndStationId", "RouteId", "Order")
                         .IsUnique();
 
                     b.ToTable("RouteStations", (string)null);
-                });
-
-            modelBuilder.Entity("KolodvorApp.Domain.Entities.RouteTrain", b =>
-                {
-                    b.Property<Guid>("TrainId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RouteId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("TrainId", "RouteId");
-
-                    b.HasIndex("RouteId");
-
-                    b.ToTable("RouteTrains", (string)null);
                 });
 
             modelBuilder.Entity("KolodvorApp.Domain.Entities.Station", b =>
@@ -206,42 +193,42 @@ namespace KolodvorApp.Persistance.Migrations
                     b.Navigation("TrainCategory");
                 });
 
-            modelBuilder.Entity("KolodvorApp.Domain.Entities.RouteStation", b =>
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.Route", b =>
                 {
-                    b.HasOne("KolodvorApp.Domain.Entities.Route", "Route")
-                        .WithMany("RouteStations")
-                        .HasForeignKey("RouteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KolodvorApp.Domain.Entities.Station", "Station")
-                        .WithMany("RouteStations")
-                        .HasForeignKey("StationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Route");
-
-                    b.Navigation("Station");
-                });
-
-            modelBuilder.Entity("KolodvorApp.Domain.Entities.RouteTrain", b =>
-                {
-                    b.HasOne("KolodvorApp.Domain.Entities.Route", "Route")
-                        .WithMany("RouteTrains")
-                        .HasForeignKey("RouteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("KolodvorApp.Domain.Entities.Train", "Train")
-                        .WithMany("RouteTrains")
+                        .WithMany("Routes")
                         .HasForeignKey("TrainId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("Train");
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.RouteStation", b =>
+                {
+                    b.HasOne("KolodvorApp.Domain.Entities.Station", "EndStation")
+                        .WithMany("EndRouteStations")
+                        .HasForeignKey("EndStationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("KolodvorApp.Domain.Entities.Route", "Route")
+                        .WithMany("RouteStations")
+                        .HasForeignKey("RouteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KolodvorApp.Domain.Entities.Station", "StartStation")
+                        .WithMany("StartRouteStations")
+                        .HasForeignKey("StartStationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("EndStation");
+
                     b.Navigation("Route");
 
-                    b.Navigation("Train");
+                    b.Navigation("StartStation");
                 });
 
             modelBuilder.Entity("KolodvorApp.Domain.Entities.TrainMaintenance", b =>
@@ -258,13 +245,13 @@ namespace KolodvorApp.Persistance.Migrations
             modelBuilder.Entity("KolodvorApp.Domain.Entities.Route", b =>
                 {
                     b.Navigation("RouteStations");
-
-                    b.Navigation("RouteTrains");
                 });
 
             modelBuilder.Entity("KolodvorApp.Domain.Entities.Station", b =>
                 {
-                    b.Navigation("RouteStations");
+                    b.Navigation("EndRouteStations");
+
+                    b.Navigation("StartRouteStations");
                 });
 
             modelBuilder.Entity("KolodvorApp.Domain.Entities.Train", b =>
@@ -273,7 +260,7 @@ namespace KolodvorApp.Persistance.Migrations
 
                     b.Navigation("Maintenances");
 
-                    b.Navigation("RouteTrains");
+                    b.Navigation("Routes");
                 });
 
             modelBuilder.Entity("KolodvorApp.Domain.Entities.TrainCategory", b =>

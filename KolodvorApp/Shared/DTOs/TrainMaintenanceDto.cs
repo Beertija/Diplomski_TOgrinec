@@ -8,5 +8,5 @@ public class TrainMaintenanceDto
 
     public decimal Cost { get; set; }
 
-    public Guid? TrainId { get; set; }
+    public Guid TrainId { get; set; }
 }

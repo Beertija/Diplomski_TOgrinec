@@ -567,155 +567,179 @@ public static class DbInitializer
                 new Route
                 {
                     IsDaily = true,
-                    Cost = 7.17m,
-                    FirstStation = context.Stations.Single(x => x.Name.Equals("Koprivnica")).Id,
-                    LastStation = context.Stations.Single(x => x.Name.Equals("Zagreb Glavni Kolodvor")).Id,
+                    TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id,
                     RouteStations = new List<RouteStation>
                     {
                         new RouteStation
                         {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Koprivnica")).Id,
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Koprivnica")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Mučna Reka")).Id,
                             DepartureTime = new TimeOnly(11, 15),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Mučna Reka")).Id,
                             ArrivalTime = new TimeOnly(11, 20),
+                            Cost = 1.32m,
+                            Order = 1
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Mučna Reka")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Sokolovac")).Id,
                             DepartureTime = new TimeOnly(11, 21),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Sokolovac")).Id,
                             ArrivalTime = new TimeOnly(11, 24),
+                            Cost = 1.15m,
+                            Order = 2
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Sokolovac")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Lepavina")).Id,
                             DepartureTime = new TimeOnly(11, 24),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Lepavina")).Id,
                             ArrivalTime = new TimeOnly(11, 28),
+                            Cost = 1.15m,
+                            Order = 3
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Lepavina")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Carevdar")).Id,
                             DepartureTime = new TimeOnly(11, 29),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Carevdar")).Id,
                             ArrivalTime = new TimeOnly(11, 34),
+                            Cost = 1.32m,
+                            Order = 4
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Carevdar")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Vojakovački Kloštar")).Id,
                             DepartureTime = new TimeOnly(11, 34),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Vojakovački Kloštar")).Id,
                             ArrivalTime = new TimeOnly(11, 37),
+                            Cost = 1.15m,
+                            Order = 5
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Vojakovački Kloštar")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Majurec")).Id,
                             DepartureTime = new TimeOnly(11, 37),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Majurec")).Id,
                             ArrivalTime = new TimeOnly(11, 40),
+                            Cost = 1.15m,
+                            Order = 6
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Majurec")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Križevci")).Id,
                             DepartureTime = new TimeOnly(11, 40),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Križevci")).Id,
                             ArrivalTime = new TimeOnly(11, 45),
+                            Cost = 1.15m,
+                            Order = 7
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Križevci")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Repinec")).Id,
                             DepartureTime = new TimeOnly(11, 47),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Repinec")).Id,
                             ArrivalTime = new TimeOnly(11, 53),
+                            Cost = 1.32m,
+                            Order = 8
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Repinec")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Gradec Stajalište")).Id,
                             DepartureTime = new TimeOnly(11, 54),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Gradec Stajalište")).Id,
                             ArrivalTime = new TimeOnly(11, 58),
+                            Cost = 1.15m,
+                            Order = 9
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Gradec Stajalište")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Vrbovec")).Id,
                             DepartureTime = new TimeOnly(11, 59),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Vrbovec")).Id,
                             ArrivalTime = new TimeOnly(12, 06),
+                            Cost = 1.32m,
+                            Order = 10
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Vrbovec")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Božjakovina")).Id,
                             DepartureTime = new TimeOnly(12, 08),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Božjakovina")).Id,
                             ArrivalTime = new TimeOnly(12, 18),
+                            Cost = 1.32m,
+                            Order = 11
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Božjakovina")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Dugo Selo")).Id,
                             DepartureTime = new TimeOnly(12, 19),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Dugo Selo")).Id,
                             ArrivalTime = new TimeOnly(12, 25),
+                            Cost = 1.32m,
+                            Order = 12
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Dugo Selo")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Sesvetski Kraljevec")).Id,
                             DepartureTime = new TimeOnly(12, 27),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Sesvetski Kraljevec")).Id,
                             ArrivalTime = new TimeOnly(12, 33),
+                            Cost = 1.32m,
+                            Order = 13
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Sesvetski Kraljevec")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Sesvete")).Id,
                             DepartureTime = new TimeOnly(12, 33),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Sesvete")).Id,
                             ArrivalTime = new TimeOnly(12, 38),
+                            Cost = 1.15m,
+                            Order = 14
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Sesvete")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Sesvetska Sopnica")).Id,
                             DepartureTime = new TimeOnly(12, 39),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Sesvetska Sopnica")).Id,
                             ArrivalTime = new TimeOnly(12, 42),
+                            Cost = 1.15m,
+                            Order = 15
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Sesvetska Sopnica")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Čulinec")).Id,
                             DepartureTime = new TimeOnly(12, 42),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Čulinec")).Id,
                             ArrivalTime = new TimeOnly(12, 45),
+                            Cost = 1.15m,
+                            Order = 16
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Čulinec")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Trnava")).Id,
                             DepartureTime = new TimeOnly(12, 45),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Trnava")).Id,
                             ArrivalTime = new TimeOnly(12, 47),
+                            Cost = 1.15m,
+                            Order = 17
+                        },
+                        new RouteStation
+                        {
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Trnava")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Maksimir")).Id,
                             DepartureTime = new TimeOnly(12, 47),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        },
-                        new RouteStation
-                        {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Maksimir")).Id,
                             ArrivalTime = new TimeOnly(12, 50),
-                            DepartureTime = new TimeOnly(12, 51),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
+                            Cost = 1.15m,
+                            Order = 18
                         },
                         new RouteStation
                         {
-                            StationId = context.Stations.Single(x => x.Name.Equals("Zagreb Glavni Kolodvor")).Id,
+                            StartStationId = context.Stations.Single(x => x.Name.Equals("Maksimir")).Id,
+                            EndStationId = context.Stations.Single(x => x.Name.Equals("Zagreb Glavni Kolodvor")).Id,
+                            DepartureTime = new TimeOnly(12, 51), 
                             ArrivalTime = new TimeOnly(12, 57),
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
-                        }
-                    },
-                    RouteTrains = new List<RouteTrain>
-                    {
-                        new RouteTrain
-                        {
-                            TrainId = context.Trains.Single(x => x.Tag.Equals("2206")).Id
+                            Cost = 1.15m,
+                            Order = 19
                         }
                     }
                 }

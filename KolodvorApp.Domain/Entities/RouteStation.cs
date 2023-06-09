@@ -2,29 +2,35 @@
 
 public class RouteStation : BaseEntity
 {
-    public DateTime? Arrival { get; set; }
+    public DateTime Arrival { get; set; }
 
-    public TimeOnly? ArrivalTime
+    public TimeOnly ArrivalTime
     {
-        get => Arrival.HasValue ? TimeOnly.FromDateTime(Arrival.Value) : null;
-        set => Arrival = value.HasValue ? new DateOnly(2020, 1, 1).ToDateTime(value.Value) : null;
+        get => TimeOnly.FromDateTime(Arrival);
+        set => Arrival = new DateOnly(2020, 1, 1).ToDateTime(value);
     }
 
-    public DateTime? Departure { get; set; }
+    public DateTime Departure { get; set; }
 
-    public TimeOnly? DepartureTime
+    public TimeOnly DepartureTime
     {
-        get => Departure.HasValue ? TimeOnly.FromDateTime(Departure.Value) : null;
-        set => Departure = value.HasValue ? new DateOnly(2020, 1, 1).ToDateTime(value.Value) : null;
+        get => TimeOnly.FromDateTime(Departure);
+        set => Departure = new DateOnly(2020, 1, 1).ToDateTime(value);
     }
 
-    public Guid TrainId { get; set; }
+    public Guid StartStationId { get; set; }
 
-    public Guid StationId { get; set; }
+    public Station StartStation { get; set; } = null!;
 
-    public Station Station { get; set; } = null!;
+    public Guid EndStationId { get; set; }
+
+    public Station EndStation { get; set; } = null!;
 
     public Guid RouteId { get; set; }
 
     public Route Route { get; set; } = null!;
+
+    public decimal Cost { get; set; }
+
+    public int Order { get; set; }
 }
