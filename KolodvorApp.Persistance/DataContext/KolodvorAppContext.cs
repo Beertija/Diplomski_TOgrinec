@@ -11,6 +11,9 @@ public sealed class KolodvorAppContext : DbContext
     public DbSet<TrainMaintenance> TrainMaintenances { get; set; }
     public DbSet<TrainCategory> TrainCategories { get; set; }
     public DbSet<Contains> Contains { get; set; }
+    public DbSet<Station> Stations { get; set; }
+    public DbSet<Route> Routes { get; set; }
+    public DbSet<RouteStation> RouteStations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,6 +32,9 @@ public sealed class KolodvorAppContext : DbContext
 
             b.HasIndex(x => new { x.Tag })
                 .IsUnique();
+
+            b.Navigation(x => x.Categories)
+                .AutoInclude();
         });
 
         modelBuilder.Entity<TrainMaintenance>(b =>
@@ -73,6 +79,75 @@ public sealed class KolodvorAppContext : DbContext
                 .HasForeignKey(x => x.TrainCategoryId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
+        });
+
+        modelBuilder.Entity<Station>(b =>
+        {
+            b.ToTable("Stations");
+
+            b.Property(x => x.Name)
+                .IsRequired();
+        });
+
+        modelBuilder.Entity<RouteStation>(b =>
+        {
+            b.ToTable("RouteStations");
+
+            b.HasIndex(x => new { x.StartStationId, x.EndStationId, x.RouteId, x.Order})
+                .IsUnique();
+
+            b.Property(x => x.Order)
+                .IsRequired();
+
+            b.Property(x => x.Cost)
+                .HasPrecision(18, 2)
+                .IsRequired();
+
+            b.Property(x => x.Arrival)
+                .IsRequired();
+
+            b.Property(x => x.Departure)
+                .IsRequired();
+
+            b.Ignore(x => x.ArrivalTime);
+
+            b.Ignore(x => x.DepartureTime);
+
+            b.HasOne(x => x.StartStation)
+                .WithMany(x => x.StartRouteStations)
+                .HasForeignKey(x => x.StartStationId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
+            
+            b.HasOne(x => x.EndStation)
+                .WithMany(x => x.EndRouteStations)
+                .HasForeignKey(x => x.EndStationId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
+
+            b.HasOne(x => x.Route)
+                .WithMany(x => x.RouteStations)
+                .HasForeignKey(x => x.RouteId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+        });
+
+        modelBuilder.Entity<Route>(b =>
+        {
+            b.ToTable("Routes");
+
+            b.Property(x => x.IsDaily)
+                .HasDefaultValue(false)
+                .IsRequired();
+
+            b.Navigation(x => x.RouteStations)
+                .AutoInclude();
+
+            b.HasOne(x => x.Train)
+                .WithMany(x => x.Routes)
+                .HasForeignKey(x => x.TrainId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         });
     }
 }

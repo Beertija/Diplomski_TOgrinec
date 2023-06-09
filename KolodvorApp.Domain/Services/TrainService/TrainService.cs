@@ -19,14 +19,14 @@ public class TrainService : ITrainService
 
     public List<TrainDto> GetAll()
     {
-        var trainList = _repository.WithDetails(x => x.Categories);
+        var trainList = _repository.GetAll();
         var modelList = _mapper.Map<List<TrainDto>>(trainList);
 
         var trainCategories = _categoryService.GetAll();
 
-        foreach (var item in modelList)
+        foreach (var train in modelList)
         {
-            foreach (var category in item.Categories)
+            foreach (var category in train.Categories)
             {
                 category.TrainCategory = trainCategories.Single(x => x.Id == category.TrainCategoryId);
             }
@@ -38,8 +38,8 @@ public class TrainService : ITrainService
     public async Task<TrainDto> GetAsync(Guid id, bool includeMaintaining)
     {
         var train = (includeMaintaining
-            ? _repository.WithDetails(x => x.Maintenances, x => x.Categories).Where(x => x.Id == id).SingleOrDefault()
-            : _repository.WithDetails(x => x.Categories).Where(x => x.Id == id).SingleOrDefault())
+            ? _repository.WithDetails(x => x.Maintenances).Where(x => x.Id == id).SingleOrDefault()
+            : await _repository.GetAsync(id))
             ?? throw new KeyNotFoundException();
 
         var model = _mapper.Map<TrainDto>(train);
