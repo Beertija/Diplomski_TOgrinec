@@ -20,4 +20,10 @@ public class StationService : IStationService
         var stationList = _repository.GetAll();
         return _mapper.Map<List<StationDto>>(stationList);
     }
+
+    public async Task<StationDto> GetAsync(Guid id)
+    {
+        var result = await _repository.GetAsync(id);
+        return _mapper.Map<StationDto>(result);
+    }
 }

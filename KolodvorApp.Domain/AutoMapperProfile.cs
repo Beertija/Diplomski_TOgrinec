@@ -27,5 +27,20 @@ public class AutoMapperProfile : Profile
         CreateMap<TrainMaintenance, TrainMaintenanceDto>().ReverseMap();
         CreateMap<TrainCategory, TrainCategoryDto>().ReverseMap();
         CreateMap<Station, StationDto>().ReverseMap();
+        CreateMap<RouteStation, RouteStationDto>().ReverseMap();
+
+        CreateMap<Route, RouteDto>()
+            .ForMember(dest => dest.RouteStations,
+            opt => opt.MapFrom(src => src.RouteStations.Select(model => new RouteStationDto
+            {
+                Id = model.Id,
+                Cost = model.Cost,
+                ArrivalTime = model.ArrivalTime,
+                DepartureTime = model.DepartureTime,
+                StartStationId = model.StartStationId,
+                EndStationId = model.EndStationId,
+                Order = model.Order
+            })))
+            .ReverseMap();
     }
 }
