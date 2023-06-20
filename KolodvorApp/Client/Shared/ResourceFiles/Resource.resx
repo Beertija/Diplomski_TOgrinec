@@ -117,10 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ABSENCE_DAY" xml:space="preserve">
-    <value> day</value>
-  </data>
   <data name="APP_TITLE" xml:space="preserve">
-    <value>Aplikacija za upravljanje kolodvorom</value>
+    <value>KolodvorApp</value>
+  </data>
+  <data name="NAV_MENU_FETCH_DATA" xml:space="preserve">
+    <value>Fetch Data</value>
+  </data>
+  <data name="NAV_MENU_HOME" xml:space="preserve">
+    <value> Home</value>
+  </data>
+  <data name="NAV_MENU_TRAINS" xml:space="preserve">
+    <value>Train Overview</value>
+  </data>
+  <data name="OPEN_TRAIN_DETAILS" xml:space="preserve">
+    <value>Open train details</value>
+  </data>
+  <data name="PAGE_TITLE_TRAIN_OVERVIEW" xml:space="preserve">
+    <value>TRAIN OVERVIEW</value>
+  </data>
+  <data name="TABLE_ACTIONS" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="TABLE_CAPACITY" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="TABLE_TAG" xml:space="preserve">
+    <value>Tag</value>
   </data>
 </root>

@@ -61,20 +61,83 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  day.
-        /// </summary>
-        public static string ABSENCE_DAY {
-            get {
-                return ResourceManager.GetString("ABSENCE_DAY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Aplikacija za upravljanje kolodvorom.
+        ///   Looks up a localized string similar to KolodvorApp.
         /// </summary>
         public static string APP_TITLE {
             get {
                 return ResourceManager.GetString("APP_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fetch Data.
+        /// </summary>
+        public static string NAV_MENU_FETCH_DATA {
+            get {
+                return ResourceManager.GetString("NAV_MENU_FETCH_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Home.
+        /// </summary>
+        public static string NAV_MENU_HOME {
+            get {
+                return ResourceManager.GetString("NAV_MENU_HOME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Train Overview.
+        /// </summary>
+        public static string NAV_MENU_TRAINS {
+            get {
+                return ResourceManager.GetString("NAV_MENU_TRAINS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open train details.
+        /// </summary>
+        public static string OPEN_TRAIN_DETAILS {
+            get {
+                return ResourceManager.GetString("OPEN_TRAIN_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TRAIN OVERVIEW.
+        /// </summary>
+        public static string PAGE_TITLE_TRAIN_OVERVIEW {
+            get {
+                return ResourceManager.GetString("PAGE_TITLE_TRAIN_OVERVIEW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string TABLE_ACTIONS {
+            get {
+                return ResourceManager.GetString("TABLE_ACTIONS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capacity.
+        /// </summary>
+        public static string TABLE_CAPACITY {
+            get {
+                return ResourceManager.GetString("TABLE_CAPACITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tag.
+        /// </summary>
+        public static string TABLE_TAG {
+            get {
+                return ResourceManager.GetString("TABLE_TAG", resourceCulture);
             }
         }
     }

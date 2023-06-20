@@ -1,0 +1,71 @@
+﻿@page "/trains-page"
+
+@using KolodvorApp.Client.HttpServices;
+@using KolodvorApp.Shared.DTOs;
+
+@inject ITrainService _trainService
+@inject NavigationManager Navigation
+
+@inherits PageBase
+
+<MudText Typo="Typo.h4">@localizer["PAGE_TITLE_TRAIN_OVERVIEW"]</MudText>
+<br />
+
+<MudTable Items="TrainList" FixedHeader="true" Hover="true" Dense="true" Virtualize="true" Breakpoint="Breakpoint.Sm" Filter="new Func<TrainDto, bool>(FilterFunc)">
+    <HeaderContent>
+        <MudTh>
+            <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Tag)">@localizer["TABLE_TAG"]</MudTableSortLabel>
+        </MudTh>
+        <MudTh>
+            <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Capacity)">@localizer["TABLE_CAPACITY"]</MudTableSortLabel>
+        </MudTh>
+        <MudTh>@localizer["TABLE_ACTIONS"]</MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd>@context.Tag</MudTd>
+        <MudTd>@context.Capacity</MudTd>
+        <MudTd>
+            <MudButtonGroup Variant="Variant.Filled" OverrideStyles="false">
+                <MudTooltip Text=@localizer["OPEN_TRAIN_DETAILS"]>
+                    <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="@((e) => OpenTrainDetail(context))">
+                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.OpenInNew"></MudIcon>
+                    </MudButton>
+                </MudTooltip>
+            </MudButtonGroup>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+@code {
+
+    #region General Summary
+
+    private IEnumerable<TrainDto> TrainList = new List<TrainDto>();
+
+    #endregion
+
+    private string? _searchString { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        TrainList = await _trainService.GetAll();
+    }
+
+    private bool FilterFunc(TrainDto element) => FilterFunction(element, _searchString);
+
+    private bool FilterFunction(TrainDto element, string? searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString) ||
+            element.Tag.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        return false;
+    }
+
+    private void OpenTrainDetail(TrainDto employee) => Navigation.NavigateTo($"/overview/employees/{employee.Id.ToString()}");
+}
