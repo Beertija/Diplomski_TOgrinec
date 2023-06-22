@@ -79,7 +79,7 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  Home.
+        ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string NAV_MENU_HOME {
             get {
@@ -115,15 +115,6 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actions.
-        /// </summary>
-        public static string TABLE_ACTIONS {
-            get {
-                return ResourceManager.GetString("TABLE_ACTIONS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Capacity.
         /// </summary>
         public static string TABLE_CAPACITY {
@@ -133,11 +124,65 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Categories.
+        /// </summary>
+        public static string TABLE_CATEGORIES {
+            get {
+                return ResourceManager.GetString("TABLE_CATEGORIES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cost.
+        /// </summary>
+        public static string TABLE_COST {
+            get {
+                return ResourceManager.GetString("TABLE_COST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance.
+        /// </summary>
+        public static string TABLE_MAINTENANCE {
+            get {
+                return ResourceManager.GetString("TABLE_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tag.
         /// </summary>
         public static string TABLE_TAG {
             get {
                 return ResourceManager.GetString("TABLE_TAG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Cost.
+        /// </summary>
+        public static string TABLE_TOTAL_COST {
+            get {
+                return ResourceManager.GetString("TABLE_TOTAL_COST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Train .
+        /// </summary>
+        public static string TRAIN_DIALOG_TITLE_1 {
+            get {
+                return ResourceManager.GetString("TRAIN_DIALOG_TITLE_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  detail view.
+        /// </summary>
+        public static string TRAIN_DIALOG_TITLE_2 {
+            get {
+                return ResourceManager.GetString("TRAIN_DIALOG_TITLE_2", resourceCulture);
             }
         }
     }

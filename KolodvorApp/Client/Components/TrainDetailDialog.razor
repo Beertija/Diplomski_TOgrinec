@@ -1,0 +1,49 @@
+﻿@using KolodvorApp.Shared.DTOs;
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h5" Style="color: var(--primary-color)">@localizer["TRAIN_DIALOG_TITLE_1"] @TrainData.Tag @localizer["TRAIN_DIALOG_TITLE_2"]</MudText>
+    </TitleContent>
+    <DialogContent>
+        <span>@localizer["TABLE_CAPACITY"]: @TrainData.Capacity</span>
+        <br /><br />
+        <MudTable Items="TrainData.Maintenances" NoRecordsContent="NoRecords" FixedHeader="true" FixedFooter="true" Hover="true" Breakpoint="Breakpoint.Sm" RowsPerPage="4">
+            <HeaderContent>
+                <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_MAINTENANCE"]</MudTh>
+                <MudTh Style="background-color: var(--primary-color); color: var(--white); text-align: right; font-weight: 600;">@localizer["TABLE_COST"]</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd Style="font-weight: 400">@context.Maintenance</MudTd>
+                <MudTd Style="text-align: right; font-weight: 400;">@context.Cost €</MudTd>
+            </RowTemplate>
+            <FooterContent>
+                @if (TrainData.Maintenances!.Count > 0)
+                {
+                    <MudTd />
+                    <MudTd Style="text-align: right; font-weight: 400;">@localizer["TABLE_TOTAL_COST"]: @TotalCost €</MudTd>
+                }
+            </FooterContent>
+            <PagerContent>
+                @if (TrainData.Maintenances!.Count > 0)
+                {
+                    <MudTablePager HideRowsPerPage="true" />
+                }
+            </PagerContent>
+        </MudTable>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    public MudDialogInstance? MudDialog { get; set; }
+
+    [Parameter, EditorRequired]
+    public TrainDto TrainData { get; set; } = null!;
+
+    private decimal TotalCost => TrainData.Maintenances?.Sum(x => x.Cost) ?? 0;
+
+    private RenderFragment NoRecords => builder =>
+    {
+        builder.AddMarkupContent(1, "<span style=\"color: var(--primary-color)\"><i>No records found</i></span>");
+    };
+}

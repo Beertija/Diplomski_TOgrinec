@@ -17,4 +17,9 @@ public class TrainService : ITrainService
     {
         return await _http.GetFromJsonAsync<List<TrainDto>>(RequestUri);
     }
+
+    public async Task<TrainDto> GetTrainByIdWithMaintenances(Guid trainId)
+    {
+        return await _http.GetFromJsonAsync<TrainDto>($"{RequestUri}/{trainId}/{true}");
+    }
 }

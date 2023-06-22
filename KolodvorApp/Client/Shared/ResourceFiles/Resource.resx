@@ -124,7 +124,7 @@
     <value>Fetch Data</value>
   </data>
   <data name="NAV_MENU_HOME" xml:space="preserve">
-    <value> Home</value>
+    <value>Home</value>
   </data>
   <data name="NAV_MENU_TRAINS" xml:space="preserve">
     <value>Train Overview</value>
@@ -135,13 +135,28 @@
   <data name="PAGE_TITLE_TRAIN_OVERVIEW" xml:space="preserve">
     <value>TRAIN OVERVIEW</value>
   </data>
-  <data name="TABLE_ACTIONS" xml:space="preserve">
-    <value>Actions</value>
-  </data>
   <data name="TABLE_CAPACITY" xml:space="preserve">
     <value>Capacity</value>
   </data>
+  <data name="TABLE_CATEGORIES" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="TABLE_COST" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="TABLE_MAINTENANCE" xml:space="preserve">
+    <value>Maintenance</value>
+  </data>
   <data name="TABLE_TAG" xml:space="preserve">
     <value>Tag</value>
+  </data>
+  <data name="TABLE_TOTAL_COST" xml:space="preserve">
+    <value>Total Cost</value>
+  </data>
+  <data name="TRAIN_DIALOG_TITLE_1" xml:space="preserve">
+    <value>Train </value>
+  </data>
+  <data name="TRAIN_DIALOG_TITLE_2" xml:space="preserve">
+    <value> detail view</value>
   </data>
 </root>
