@@ -214,6 +214,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string SEARCH_PLACEHOLDER {
+            get {
+                return ResourceManager.GetString("SEARCH_PLACEHOLDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There has been an error on the server.
         /// </summary>
         public static string SERVER_PROBLEMS {

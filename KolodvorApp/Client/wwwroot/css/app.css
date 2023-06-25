@@ -15,10 +15,15 @@
     --gray: #808080;
     --white: #ffffff;
     --light-gray: #f4f4f4;
-}   
+}
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Poppins';
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .content {

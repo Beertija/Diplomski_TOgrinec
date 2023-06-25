@@ -6,8 +6,8 @@ namespace KolodvorApp.Client.Shared;
 public abstract class PageBase : ComponentBase
 {
     [Inject]
-    public ISnackbar _snackbar { get; set; }
+    public ISnackbar Snackbar { get; set; } = null!;
 
     [Inject]
-    public NavigationManager _navigation { get; set; }
+    public NavigationManager Navigation { get; set; } = null!;
 }

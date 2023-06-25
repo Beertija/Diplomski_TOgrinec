@@ -7,6 +7,20 @@
 @inject ITrainService _trainService
 @inject IDialogService _dialogService
 
+<style>
+    .mud-input-control > .mud-input-control-input-container > div.mud-input.mud-input-text {
+        margin-top: 0;
+    }
+
+    .mud-input.mud-input-underline:before {
+        border-bottom: 1px, solid, var(--white);
+    }
+
+    .search .mud-icon-root.mud-svg-icon {
+        fill: var(--white);
+    }
+</style>
+
 <MudText Typo="Typo.h4" Style="color: var(--primary-color)">@localizer["PAGE_TITLE_TRAIN_OVERVIEW"]</MudText>
 <br />
 
@@ -15,7 +29,7 @@
         <col style="width: 20%;" />
         <col style="width: 20%;" />
         <col style="width: 40%;" />
-        <col style="width: 10%;" />
+        <col style="width: 13%;" />
     </ColGroup>
 
     <HeaderContent>
@@ -26,7 +40,11 @@
             <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Capacity)">@localizer["TABLE_CAPACITY"]</MudTableSortLabel>
         </MudTh>
         <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_CATEGORIES"]</MudTh>
-        <MudTh Style="background-color: var(--primary-color)" />
+        <MudTh Style="background-color: var(--primary-color)">
+            <MudFocusTrap Class="search">
+                <MudTextField Style="color: var(--white); font-weight: 600;" @bind-Value="_searchString" Immediate="true" Clearable="true" Placeholder=@localizer["SEARCH_PLACEHOLDER"] Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Class="mt-0" />
+            </MudFocusTrap>
+        </MudTh>
     </HeaderContent>
 
     <RowTemplate>
@@ -92,37 +110,37 @@
                 {
                     case "Vagoni drugog razreda":
                         b.OpenComponent<MudIcon>(nestedSeq++);
-                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Style", "fill: var(--secondary-color); margin-right: 1.5em;");
                         b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.LooksTwo);
                         b.CloseComponent();
                         break;
                     case "Vagoni prvog razreda":
                         b.OpenComponent<MudIcon>(nestedSeq++);
-                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Style", "fill: var(--secondary-color); margin-right: 1.5em;");
                         b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.LooksOne);
                         b.CloseComponent();
                         break;
                     case "Vagoni za prijevoz bicikla":
                         b.OpenComponent<MudIcon>(nestedSeq++);
-                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Style", "fill: var(--secondary-color); margin-right: 1.5em;");
                         b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.PedalBike);
                         b.CloseComponent();
                         break;
                     case "Putnički vlak":
                         b.OpenComponent<MudIcon>(nestedSeq++);
-                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Style", "fill: var(--secondary-color); margin-right: 1.5em;");
                         b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.Train);
                         b.CloseComponent();
                         break;
                     case "Brzi vlak":
                         b.OpenComponent<MudIcon>(nestedSeq++);
-                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Style", "fill: var(--secondary-color); margin-right: 1.5em;");
                         b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.DirectionsRailway);
                         b.CloseComponent();
                         break;
                     case "Vagon s mjestima za osobe s invaliditetom":
                         b.OpenComponent<MudIcon>(nestedSeq++);
-                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Style", "fill: var(--secondary-color); margin-right: 1.5em;");
                         b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.Accessible);
                         b.CloseComponent();
                         break;

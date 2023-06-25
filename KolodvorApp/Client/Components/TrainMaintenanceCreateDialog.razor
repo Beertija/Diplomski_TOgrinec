@@ -44,7 +44,7 @@
     [Parameter, EditorRequired]
     public Guid TrainId { get; init; }
 
-    private TrainMaintenanceDto _model { get; set; } = new TrainMaintenanceDto();
+    private TrainMaintenanceDto _model { get; set; } = new();
 
     private bool Validate() => string.IsNullOrWhiteSpace(_model.Maintenance);
 
@@ -54,10 +54,17 @@
     {
         _model.TrainId = TrainId;
         var response = await _trainMaintenanceService.CreateOrUpdateTrainMaintenance(_model);
-        var content = await response.Content.ReadFromJsonAsync<TrainMaintenanceDto>();
 
-        if (response.IsSuccessStatusCode) _snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_CREATED"], Severity.Success);
-        else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
-        MudDialog!.Close(content);
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadFromJsonAsync<TrainMaintenanceDto>();
+            Snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_CREATED"], Severity.Success);
+            MudDialog!.Close(content);
+        }
+        else
+        {
+            Snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
+            MudDialog!.Cancel();
+        }
     }
 }

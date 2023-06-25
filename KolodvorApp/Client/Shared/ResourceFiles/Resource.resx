@@ -168,6 +168,9 @@
   <data name="REQURED_MAINTENANCE" xml:space="preserve">
     <value>Train maintenance is required</value>
   </data>
+  <data name="SEARCH_PLACEHOLDER" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="SERVER_PROBLEMS" xml:space="preserve">
     <value>There has been an error on the server</value>
   </data>

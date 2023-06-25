@@ -1,7 +1,6 @@
 ﻿@using KolodvorApp.Client.HttpServices;
 @using KolodvorApp.Shared.DTOs;
 
-
 @inject ITrainMaintenanceService _trainMaintenanceService
 @inject IDialogService _dialogService
 
@@ -90,7 +89,7 @@
                 FullWidth = true
             };
 
-        var dialog = _dialogService.Show<TrainMaintenanceDialog>("", parameters, options);
+        var dialog = _dialogService.Show<TrainMaintenanceCreateDialog>("", parameters, options);
         var result = (TrainMaintenanceDto)(await dialog.Result).Data;
         if (result is not null)
         {
@@ -119,10 +118,10 @@
 
         if (response.IsSuccessStatusCode)
         {
-            _snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_DELETED"], Severity.Success);
+            Snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_DELETED"], Severity.Success);
             TrainData.Maintenances!.Remove(trainMaintenance);
             StateHasChanged();
         }
-        else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
+        else Snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
     }
 }
