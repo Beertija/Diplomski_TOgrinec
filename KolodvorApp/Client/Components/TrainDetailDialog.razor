@@ -1,5 +1,6 @@
 ﻿@using KolodvorApp.Client.HttpServices;
-@using KolodvorApp.Shared.DTOs
+@using KolodvorApp.Shared.DTOs;
+
 
 @inject ITrainMaintenanceService _trainMaintenanceService
 @inject IDialogService _dialogService
@@ -100,6 +101,20 @@
 
     private async Task Delete(TrainMaintenanceDto trainMaintenance)
     {
+        var parameters = new DialogParameters { ["Message"] = localizer["ARE_YOU_SURE"] + $""" "{trainMaintenance.Maintenance}"? """};
+
+        var options = new DialogOptions()
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.ExtraSmall,
+                FullWidth = true
+            };
+
+        var dialog = _dialogService.Show<AreYouSureDialog>("", parameters, options);
+        var result = (await dialog.Result).Data;
+
+        if (result is null) return;
+
         var response = await _trainMaintenanceService.DeleteTrainMaintenance(trainMaintenance.Id!.Value);
 
         if (response.IsSuccessStatusCode)

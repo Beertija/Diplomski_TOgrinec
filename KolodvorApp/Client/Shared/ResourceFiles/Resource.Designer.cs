@@ -79,6 +79,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete.
+        /// </summary>
+        public static string ARE_YOU_SURE {
+            get {
+                return ResourceManager.GetString("ARE_YOU_SURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string CANCEL {

@@ -123,6 +123,9 @@
   <data name="APP_TITLE" xml:space="preserve">
     <value>KolodvorApp</value>
   </data>
+  <data name="ARE_YOU_SURE" xml:space="preserve">
+    <value>Are you sure you want to delete</value>
+  </data>
   <data name="CANCEL" xml:space="preserve">
     <value>Cancel</value>
   </data>
