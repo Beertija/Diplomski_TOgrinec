@@ -8,5 +8,5 @@ public class RouteDto
 
     public Guid TrainId { get; set; }
 
-    public List<RouteStationDto> RouteStations { get; set; } = new List<RouteStationDto>();
+    public List<RouteStationDto> RouteStations { get; set; } = new();
 }

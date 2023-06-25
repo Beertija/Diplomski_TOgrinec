@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ADD" xml:space="preserve">
+    <value>ADD</value>
+  </data>
   <data name="ADD_MAINTENANCE" xml:space="preserve">
     <value>Add new train maintenance</value>
+  </data>
+  <data name="ADD_TRAIN" xml:space="preserve">
+    <value>Add a new train</value>
   </data>
   <data name="APP_TITLE" xml:space="preserve">
     <value>KolodvorApp</value>
@@ -129,14 +135,26 @@
   <data name="CANCEL" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="DELETE" xml:space="preserve">
+    <value>DELETE</value>
+  </data>
   <data name="DELETE_BUTTON" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="INPUT_CAPACITY" xml:space="preserve">
+    <value>Input train capacity</value>
+  </data>
+  <data name="INPUT_CATEGORIES" xml:space="preserve">
+    <value>Input train categories</value>
   </data>
   <data name="INPUT_COST" xml:space="preserve">
     <value>Input cost</value>
   </data>
   <data name="INPUT_MAINTENANCE" xml:space="preserve">
     <value>Input train maintenance</value>
+  </data>
+  <data name="INPUT_TAG" xml:space="preserve">
+    <value>Input train tag</value>
   </data>
   <data name="INVALID_COST" xml:space="preserve">
     <value>Cost cannot be lower or equal 0 euros</value>
@@ -165,8 +183,17 @@
   <data name="PAGE_TITLE_TRAIN_OVERVIEW" xml:space="preserve">
     <value>TRAIN OVERVIEW</value>
   </data>
+  <data name="PLACEHOLDER_CATEGORIES" xml:space="preserve">
+    <value>Train category</value>
+  </data>
+  <data name="REQURED_CATEGORIES" xml:space="preserve">
+    <value>Train categories are required</value>
+  </data>
   <data name="REQURED_MAINTENANCE" xml:space="preserve">
     <value>Train maintenance is required</value>
+  </data>
+  <data name="REQURED_TAG" xml:space="preserve">
+    <value>Train tag is required</value>
   </data>
   <data name="SEARCH_PLACEHOLDER" xml:space="preserve">
     <value>Search</value>
@@ -209,5 +236,20 @@
   </data>
   <data name="TRAIN_OPEN_DETAIL" xml:space="preserve">
     <value>VIEW DETAILS</value>
+  </data>
+  <data name="TRAIN_SUCCESSFUL_CREATED" xml:space="preserve">
+    <value>A new train was successfuly created</value>
+  </data>
+  <data name="TRAIN_SUCCESSFUL_DELETED" xml:space="preserve">
+    <value>Train was successfuly deleted</value>
+  </data>
+  <data name="TRAIN_SUCCESSFUL_UPDATED" xml:space="preserve">
+    <value>Train was successfuly updated</value>
+  </data>
+  <data name="UPDATE" xml:space="preserve">
+    <value>UPDATE</value>
+  </data>
+  <data name="UPDATE_TRAIN" xml:space="preserve">
+    <value>Update train</value>
   </data>
 </root>

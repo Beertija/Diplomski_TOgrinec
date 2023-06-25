@@ -1,0 +1,112 @@
+﻿@using KolodvorApp.Client.HttpServices;
+@using KolodvorApp.Shared.DTOs;
+@using System.Net;
+
+@inject ITrainService _trainService
+
+@inherits PageBase
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h5" Style="color: var(--primary-color)">@(_isUpdate ? $"{localizer["UPDATE_TRAIN"]} {Model!.Tag}" : localizer["ADD_TRAIN"])</MudText>
+        </TitleContent>
+        <DialogContent>
+            <EditForm Model="Model">
+                <span style="font-weight: 600">@localizer["INPUT_TAG"]</span>
+                <MudTextField T="string"
+                          InputType="InputType.Number"
+                          Required="true"
+                          RequiredError=@localizer["REQURED_TAG"]
+                          Variant="Variant.Outlined"
+                          @bind-Value="Model!.Tag" />
+                <br />
+                <span style="font-weight: 600">@localizer["INPUT_CAPACITY"]</span>
+                <MudNumericField T="int"
+                             Min="0"
+                             HideSpinButtons="true"
+                             Variant="Variant.Outlined"
+                             @bind-Value="Model.Capacity" />
+                <br />
+                <span style="font-weight: 600">@localizer["INPUT_CATEGORIES"]</span>
+                <MudSelect T="TrainCategoryDto"
+                       SelectedValues=@SelectedCategories
+                       SelectedValuesChanged="SelectionChanged"
+                       Placeholder=@localizer["PLACEHOLDER_CATEGORIES"]
+                       Required="true"
+                       RequiredError=@localizer["REQURED_CATEGORIES"]
+                       MultiSelection="true"
+                       AnchorOrigin="Origin.BottomCenter">
+                    @foreach (var category in TrainCategories)
+                {
+                    <MudSelectItem Value="category">@category.Name</MudSelectItem>
+                }
+            </MudSelect>
+            <br />
+            <MudButton OnClick="Cancel">@localizer["CANCEL"]</MudButton>
+            <MudButton Class="btn-primary" Variant="Variant.Filled" OnClick="Submit" Disabled="@Validate()">@localizer["SUBMIT"]</MudButton>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    public MudDialogInstance? MudDialog { get; set; }
+
+    [Parameter, EditorRequired]
+    public List<TrainCategoryDto> TrainCategories { get; init; } = new();
+
+    [Parameter]
+    public List<TrainCategoryDto> SelectedCategories { get; set; } = new();
+
+    [Parameter]
+    public TrainDto? Model { get; set; }
+
+    private bool _isUpdate = false;
+
+    protected override void OnInitialized()
+    {
+        if (Model is not null)
+        {
+            _isUpdate = true;
+        }
+        else
+        {
+            Model = new();
+        }
+
+        base.OnInitialized();
+    }
+
+    private void SelectionChanged(IEnumerable<TrainCategoryDto> selectedItems) => SelectedCategories = selectedItems.ToList();
+
+    private bool Validate() => string.IsNullOrWhiteSpace(Model!.Tag);
+
+    private void Cancel() => MudDialog!.Cancel();
+
+    private async Task Submit()
+    {
+        Model!.Categories = SelectedCategories.Select(category => new ContainsDto()
+            {
+                TrainCategoryId = category.Id!.Value
+            }).ToList();
+
+        var response = await _trainService.CreateOrUpdateTrain(Model);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadFromJsonAsync<TrainDto>();
+            if (_isUpdate) Snackbar.Add(localizer["TRAIN_SUCCESSFUL_UPDATED"], Severity.Success);
+            else Snackbar.Add(localizer["TRAIN_SUCCESSFUL_CREATED"], Severity.Success);
+            MudDialog!.Close(content);
+        }
+        else if (response.StatusCode == HttpStatusCode.BadRequest)
+        {
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            Snackbar.Add(errorMessage, Severity.Warning);
+        }
+        else
+        {
+            Snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Error);
+        }
+    }
+}

@@ -61,11 +61,29 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ADD.
+        /// </summary>
+        public static string ADD {
+            get {
+                return ResourceManager.GetString("ADD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new train maintenance.
         /// </summary>
         public static string ADD_MAINTENANCE {
             get {
                 return ResourceManager.GetString("ADD_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a new train.
+        /// </summary>
+        public static string ADD_TRAIN {
+            get {
+                return ResourceManager.GetString("ADD_TRAIN", resourceCulture);
             }
         }
         
@@ -97,11 +115,38 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DELETE.
+        /// </summary>
+        public static string DELETE {
+            get {
+                return ResourceManager.GetString("DELETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string DELETE_BUTTON {
             get {
                 return ResourceManager.GetString("DELETE_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input train capacity.
+        /// </summary>
+        public static string INPUT_CAPACITY {
+            get {
+                return ResourceManager.GetString("INPUT_CAPACITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input train categories.
+        /// </summary>
+        public static string INPUT_CATEGORIES {
+            get {
+                return ResourceManager.GetString("INPUT_CATEGORIES", resourceCulture);
             }
         }
         
@@ -120,6 +165,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string INPUT_MAINTENANCE {
             get {
                 return ResourceManager.GetString("INPUT_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input train tag.
+        /// </summary>
+        public static string INPUT_TAG {
+            get {
+                return ResourceManager.GetString("INPUT_TAG", resourceCulture);
             }
         }
         
@@ -205,11 +259,38 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Train category.
+        /// </summary>
+        public static string PLACEHOLDER_CATEGORIES {
+            get {
+                return ResourceManager.GetString("PLACEHOLDER_CATEGORIES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Train categories are required.
+        /// </summary>
+        public static string REQURED_CATEGORIES {
+            get {
+                return ResourceManager.GetString("REQURED_CATEGORIES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Train maintenance is required.
         /// </summary>
         public static string REQURED_MAINTENANCE {
             get {
                 return ResourceManager.GetString("REQURED_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Train tag is required.
+        /// </summary>
+        public static string REQURED_TAG {
+            get {
+                return ResourceManager.GetString("REQURED_TAG", resourceCulture);
             }
         }
         
@@ -336,6 +417,51 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string TRAIN_OPEN_DETAIL {
             get {
                 return ResourceManager.GetString("TRAIN_OPEN_DETAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new train was successfuly created.
+        /// </summary>
+        public static string TRAIN_SUCCESSFUL_CREATED {
+            get {
+                return ResourceManager.GetString("TRAIN_SUCCESSFUL_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Train was successfuly deleted.
+        /// </summary>
+        public static string TRAIN_SUCCESSFUL_DELETED {
+            get {
+                return ResourceManager.GetString("TRAIN_SUCCESSFUL_DELETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Train was successfuly updated.
+        /// </summary>
+        public static string TRAIN_SUCCESSFUL_UPDATED {
+            get {
+                return ResourceManager.GetString("TRAIN_SUCCESSFUL_UPDATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UPDATE.
+        /// </summary>
+        public static string UPDATE {
+            get {
+                return ResourceManager.GetString("UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update train.
+        /// </summary>
+        public static string UPDATE_TRAIN {
+            get {
+                return ResourceManager.GetString("UPDATE_TRAIN", resourceCulture);
             }
         }
     }

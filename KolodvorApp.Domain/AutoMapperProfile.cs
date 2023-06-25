@@ -22,7 +22,13 @@ public class AutoMapperProfile : Profile
                 TrainId = model.TrainId,
                 TrainCategoryId = model.TrainCategoryId,
             })))
-            .ReverseMap();
+            .ReverseMap()
+            .ForMember(dest => dest.Categories,
+            opt => opt.MapFrom(src => src.Categories.Select(model => new Contains
+            {
+                TrainCategoryId = model.TrainCategoryId,
+            })));
+        CreateMap<Train, Train>();
 
         CreateMap<TrainMaintenance, TrainMaintenanceDto>().ReverseMap();
         CreateMap<TrainCategory, TrainCategoryDto>().ReverseMap();

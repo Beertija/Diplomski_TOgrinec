@@ -4,9 +4,9 @@ public class ContainsDto
 {
     public Guid TrainId { get; set; }
 
-    public TrainDto Train { get; set; } = null!;
+    public TrainDto? Train { get; set; }
 
     public Guid TrainCategoryId { get; set; }
 
-    public TrainCategoryDto TrainCategory { get; set; } = null!;
+    public TrainCategoryDto? TrainCategory { get; set; }
 }

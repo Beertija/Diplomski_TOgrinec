@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using KolodvorApp.Domain.Entities;
 using KolodvorApp.Shared.DTOs;
+using System.Reflection;
 
 namespace KolodvorApp.Domain.Services;
 
@@ -63,16 +64,17 @@ public class TrainService : ITrainService
         {
             try
             {
-                await _repository.GetAsync(train.Id);
+                var entity = await _repository.GetAsync(train.Id);
+                _mapper.Map(train, entity);
+                train = await _repository.UpdateAsync(entity);
             }
             catch (KeyNotFoundException)
             {
                 throw new InvalidOperationException("Tried to update an non-existing entity.");
             }
-            train = await _repository.UpdateAsync(train);
         }
 
-        return _mapper.Map<TrainDto>(train);
+        return await GetAsync(train.Id, false);
     }
 
     public async Task DeleteAsync(Guid id)
