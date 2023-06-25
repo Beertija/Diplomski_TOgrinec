@@ -1,0 +1,151 @@
+﻿@page "/trains-page"
+
+@using KolodvorApp.Client.Components;
+@using KolodvorApp.Client.HttpServices;
+@using KolodvorApp.Shared.DTOs;
+
+@inject ITrainService _trainService
+@inject IDialogService _dialogService
+
+<MudText Typo="Typo.h4" Style="color: var(--primary-color)">@localizer["PAGE_TITLE_TRAIN_OVERVIEW"]</MudText>
+<br />
+
+<MudTable Items="TrainList" FixedHeader="true" Striped="true" Hover="true" Dense="true" Virtualize="true" Breakpoint="Breakpoint.Sm" Filter="new Func<TrainDto, bool>(FilterFunc)">
+    <ColGroup>
+        <col style="width: 20%;" />
+        <col style="width: 20%;" />
+        <col style="width: 40%;" />
+        <col style="width: 10%;" />
+    </ColGroup>
+
+    <HeaderContent>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
+            <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Tag)">@localizer["TABLE_TAG"]</MudTableSortLabel>
+        </MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
+            <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Capacity)">@localizer["TABLE_CAPACITY"]</MudTableSortLabel>
+        </MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_CATEGORIES"]</MudTh>
+        <MudTh Style="background-color: var(--primary-color)" />
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd Style="font-size: 16px">@context.Tag</MudTd>
+        <MudTd Style="font-size: 16px">@context.Capacity</MudTd>
+        <MudTd>@IconDisplay(context.Categories)</MudTd>
+        <MudTd Class="mr-3" Style="text-align: right">
+            <MudButtonGroup Variant="Variant.Filled" OverrideStyles="false">
+                <MudTooltip Text=@localizer["OPEN_TRAIN_DETAILS"]>
+                    <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="@((e) => OpenTrainDetail(context))">
+                        <span class="mr-3" style="white-space: nowrap">@localizer["TRAIN_OPEN_DETAIL"]</span>
+                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.OpenInNew" />
+                    </MudButton>
+                </MudTooltip>
+            </MudButtonGroup>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[] { 5, 10 }" />
+    </PagerContent>
+</MudTable>
+
+@code {
+
+    #region General Summary
+
+    private IEnumerable<TrainDto> TrainList = new List<TrainDto>();
+
+    private TrainDto previewTrain { get; set; } = null!;
+
+    #endregion
+
+    private string? _searchString { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        TrainList = await _trainService.GetAll();
+    }
+
+    private bool FilterFunc(TrainDto element) => FilterFunction(element, _searchString);
+
+    private bool FilterFunction(TrainDto element, string? searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString) ||
+            element.Tag.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        return false;
+    }
+
+    private RenderFragment IconDisplay(List<ContainsDto> categories) => builder =>
+    {
+        int seq = 0;
+        foreach (var category in categories)
+        {
+            builder.OpenComponent<MudTooltip>(seq++);
+            builder.AddAttribute(seq++, "Text", category.TrainCategory.Name);
+            builder.AddAttribute(seq++, "ChildContent", new RenderFragment(b =>
+            {
+                int nestedSeq = 0;
+                switch (category.TrainCategory.Name)
+                {
+                    case "Vagoni drugog razreda":
+                        b.OpenComponent<MudIcon>(nestedSeq++);
+                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.LooksTwo);
+                        b.CloseComponent();
+                        break;
+                    case "Vagoni prvog razreda":
+                        b.OpenComponent<MudIcon>(nestedSeq++);
+                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.LooksOne);
+                        b.CloseComponent();
+                        break;
+                    case "Vagoni za prijevoz bicikla":
+                        b.OpenComponent<MudIcon>(nestedSeq++);
+                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.PedalBike);
+                        b.CloseComponent();
+                        break;
+                    case "Putnički vlak":
+                        b.OpenComponent<MudIcon>(nestedSeq++);
+                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.Train);
+                        b.CloseComponent();
+                        break;
+                    case "Brzi vlak":
+                        b.OpenComponent<MudIcon>(nestedSeq++);
+                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.DirectionsRailway);
+                        b.CloseComponent();
+                        break;
+                    case "Vagon s mjestima za osobe s invaliditetom":
+                        b.OpenComponent<MudIcon>(nestedSeq++);
+                        b.AddAttribute(nestedSeq++, "Style", "color: var(--secondary-color); margin-right: 1.5em;");
+                        b.AddAttribute(nestedSeq++, "Icon", Icons.Material.Filled.Accessible);
+                        b.CloseComponent();
+                        break;
+                }
+            }));
+            builder.CloseComponent();
+        }
+    };
+
+    private async Task OpenTrainDetail(TrainDto train)
+    {
+        previewTrain = await _trainService.GetTrainByIdWithMaintenances(train.Id!.Value);
+        var parameters = new DialogParameters();
+        parameters.Add("TrainData", previewTrain);
+
+        var options = new DialogOptions()
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.Small,
+                FullWidth = true
+            };
+
+        var dialog = _dialogService.Show<TrainDetailDialog>("", parameters, options);
+        var result = await dialog.Result;
+    }
+}

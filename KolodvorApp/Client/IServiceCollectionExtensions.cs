@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+﻿using KolodvorApp.Client.HttpServices;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor;
 using MudBlazor.Services;
 
@@ -20,18 +21,19 @@ public static class IServiceCollectionExtensions
 
     private static void InitializeHttpClient(IServiceCollection services, IWebAssemblyHostEnvironment hostEnvironment)
     {
-        services.AddHttpClient("KolodvorApp.ServerAPI", (serviceProvider, client) =>
+        services.AddHttpClient("KolodvorApp.Server", (serviceProvider, client) =>
         {
             client.BaseAddress = new Uri(hostEnvironment.BaseAddress);
         });
 
         // Supply HttpClient instances that include access tokens when making requests to the server project
-        services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("KolodvorApp.ServerAPI"));
+        services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("KolodvorApp.Server"));
     }
 
     private static void InitializeServices(IServiceCollection services)
     {
-        //TODO: add services
+        services.AddScoped<ITrainService, TrainService>();
+        services.AddScoped<ITrainMaintenanceService, TrainMainenanceService>();
     }
 
     private static void InitializeMudServices(IServiceCollection services)
