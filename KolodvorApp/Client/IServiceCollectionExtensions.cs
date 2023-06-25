@@ -33,6 +33,7 @@ public static class IServiceCollectionExtensions
     private static void InitializeServices(IServiceCollection services)
     {
         services.AddScoped<ITrainService, TrainService>();
+        services.AddScoped<ITrainMaintenanceService, TrainMainenanceService>();
     }
 
     private static void InitializeMudServices(IServiceCollection services)

@@ -65,6 +65,15 @@ a {
         background-color: var(--warning-color-darken) !important;
     }
 
+.btn-error {
+    background-color: var(--error-color) !important;
+    color: var(--white) !important;
+}
+
+    .btn-error:hover, .btn-error-active {
+        background-color: var(--error-color-darken) !important;
+    }
+
 .btn-info {
     background-color: var(--info-color) !important;
     color: var(--white) !important;

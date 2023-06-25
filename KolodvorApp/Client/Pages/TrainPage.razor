@@ -7,8 +7,6 @@
 @inject ITrainService _trainService
 @inject IDialogService _dialogService
 
-@inherits PageBase
-
 <MudText Typo="Typo.h4" Style="color: var(--primary-color)">@localizer["PAGE_TITLE_TRAIN_OVERVIEW"]</MudText>
 <br />
 
@@ -16,8 +14,8 @@
     <ColGroup>
         <col style="width: 20%;" />
         <col style="width: 20%;" />
-        <col style="width: 50%;" />
-        <col style="width: 5%;" />
+        <col style="width: 40%;" />
+        <col style="width: 10%;" />
     </ColGroup>
 
     <HeaderContent>
@@ -27,19 +25,20 @@
         <MudTh Style="background-color: var(--primary-color); color: var(--white);">
             <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Capacity)">@localizer["TABLE_CAPACITY"]</MudTableSortLabel>
         </MudTh>
-        <MudTh Style="background-color: var(--primary-color); color: var(--white);">@localizer["TABLE_CATEGORIES"]</MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_CATEGORIES"]</MudTh>
         <MudTh Style="background-color: var(--primary-color)" />
     </HeaderContent>
 
     <RowTemplate>
-        <MudTd>@context.Tag</MudTd>
-        <MudTd>@context.Capacity</MudTd>
+        <MudTd Style="font-size: 16px">@context.Tag</MudTd>
+        <MudTd Style="font-size: 16px">@context.Capacity</MudTd>
         <MudTd>@IconDisplay(context.Categories)</MudTd>
-        <MudTd>
+        <MudTd Class="mr-3" Style="text-align: right">
             <MudButtonGroup Variant="Variant.Filled" OverrideStyles="false">
                 <MudTooltip Text=@localizer["OPEN_TRAIN_DETAILS"]>
                     <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="@((e) => OpenTrainDetail(context))">
-                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.OpenInNew"></MudIcon>
+                        <span class="mr-3" style="white-space: nowrap">@localizer["TRAIN_OPEN_DETAIL"]</span>
+                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.OpenInNew" />
                     </MudButton>
                 </MudTooltip>
             </MudButtonGroup>

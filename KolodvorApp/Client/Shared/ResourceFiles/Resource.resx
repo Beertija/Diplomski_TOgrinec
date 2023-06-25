@@ -117,8 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ADD_MAINTENANCE" xml:space="preserve">
+    <value>Add new train maintenance</value>
+  </data>
   <data name="APP_TITLE" xml:space="preserve">
     <value>KolodvorApp</value>
+  </data>
+  <data name="CANCEL" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DELETE_BUTTON" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="INPUT_COST" xml:space="preserve">
+    <value>Input cost</value>
+  </data>
+  <data name="INPUT_MAINTENANCE" xml:space="preserve">
+    <value>Input train maintenance</value>
+  </data>
+  <data name="INVALID_COST" xml:space="preserve">
+    <value>Cost cannot be lower or equal 0 euros</value>
+  </data>
+  <data name="LABEL_COST" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="LABEL_MAINTENANCE" xml:space="preserve">
+    <value>Train maintenance</value>
+  </data>
+  <data name="MAINTENANCE_DIALOG_TITLE" xml:space="preserve">
+    <value>Add new maintenance for the train</value>
   </data>
   <data name="NAV_MENU_FETCH_DATA" xml:space="preserve">
     <value>Fetch Data</value>
@@ -134,6 +161,15 @@
   </data>
   <data name="PAGE_TITLE_TRAIN_OVERVIEW" xml:space="preserve">
     <value>TRAIN OVERVIEW</value>
+  </data>
+  <data name="REQURED_MAINTENANCE" xml:space="preserve">
+    <value>Train maintenance is required</value>
+  </data>
+  <data name="SERVER_PROBLEMS" xml:space="preserve">
+    <value>There has been an error on the server</value>
+  </data>
+  <data name="SUBMIT" xml:space="preserve">
+    <value>Submit</value>
   </data>
   <data name="TABLE_CAPACITY" xml:space="preserve">
     <value>Capacity</value>
@@ -158,5 +194,14 @@
   </data>
   <data name="TRAIN_DIALOG_TITLE_2" xml:space="preserve">
     <value> detail view</value>
+  </data>
+  <data name="TRAIN_MAINTENANCE_SUCCESSFUL_CREATED" xml:space="preserve">
+    <value>A new train maintenance was successfuly created</value>
+  </data>
+  <data name="TRAIN_MAINTENANCE_SUCCESSFUL_DELETED" xml:space="preserve">
+    <value>Train maintenance was successfuly deleted</value>
+  </data>
+  <data name="TRAIN_OPEN_DETAIL" xml:space="preserve">
+    <value>VIEW DETAILS</value>
   </data>
 </root>
