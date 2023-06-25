@@ -8,5 +8,5 @@ public class TrainMaintenance : BaseEntity
 
     public Guid TrainId { get; set; }
 
-    public virtual Train Train { get; set; }
+    public virtual Train Train { get; set; } = null!;
 }

@@ -1,0 +1,113 @@
+﻿@using KolodvorApp.Client.HttpServices;
+@using KolodvorApp.Shared.DTOs
+
+@inject ITrainMaintenanceService _trainMaintenanceService
+@inject IDialogService _dialogService
+
+@inherits PageBase
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h5" Style="color: var(--primary-color)">@localizer["TRAIN_DIALOG_TITLE_1"] @TrainData.Tag @localizer["TRAIN_DIALOG_TITLE_2"]</MudText>
+    </TitleContent>
+    <DialogContent>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span>@localizer["TABLE_CAPACITY"]: @TrainData.Capacity</span>
+            <MudTooltip Text=@localizer["ADD_MAINTENANCE"]>
+                <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="AddNewMaintenance">
+                    <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Add" />
+                </MudButton>
+            </MudTooltip>
+        </div>
+        <br />
+        <MudTable Items="TrainData.Maintenances" NoRecordsContent="NoRecords" FixedHeader="true" FixedFooter="true" Hover="true" Breakpoint="Breakpoint.Sm" RowsPerPage="4" CustomFooter="true">
+            <ColGroup>
+                <col style="width: 40%;" />
+                <col style="width: 40%;" />
+                <col style="width: 10%;" />
+            </ColGroup>
+            <HeaderContent>
+                <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_MAINTENANCE"]</MudTh>
+                <MudTh Style="background-color: var(--primary-color); color: var(--white); text-align: right; font-weight: 600;">@localizer["TABLE_COST"]</MudTh>
+                <MudTh Style="background-color: var(--primary-color)" />
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd Style="font-weight: 400">@context.Maintenance</MudTd>
+                <MudTd Style="text-align: right; font-weight: 400;">@context.Cost.DisplayDecimal() €</MudTd>
+                <MudTd Class="mr-3" Style="text-align: right">
+                    <MudButtonGroup Variant="Variant.Filled" OverrideStyles="false">
+                        <MudTooltip Text=@localizer["DELETE_BUTTON"]>
+                            <MudButton Variant="Variant.Filled" Class="btn-error" OnClick="@((e) => Delete(context))">
+                                <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Delete" />
+                            </MudButton>
+                        </MudTooltip>
+                    </MudButtonGroup>
+                </MudTd>
+            </RowTemplate>
+            <FooterContent>
+                @if (TrainData.Maintenances!.Count > 0)
+                {
+                    <MudTFootRow>
+                        <MudTd colspan="3" Style="text-align: right; font-weight: 400; font-weight: bold;">@localizer["TABLE_TOTAL_COST"]: @TotalCost.DisplayDecimal() €</MudTd>
+                    </MudTFootRow>
+                }
+            </FooterContent>
+            <PagerContent>
+                @if (TrainData.Maintenances!.Count > 0)
+                {
+                    <MudTablePager HideRowsPerPage="true" />
+                }
+            </PagerContent>
+        </MudTable>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    public MudDialogInstance? MudDialog { get; set; }
+
+    [Parameter, EditorRequired]
+    public TrainDto TrainData { get; set; } = null!;
+
+    private decimal TotalCost => TrainData.Maintenances?.Sum(x => x.Cost) ?? 0;
+
+    private RenderFragment NoRecords => builder =>
+    {
+        builder.AddMarkupContent(1, "<span style=\"color: var(--primary-color)\"><i>No records found</i></span>");
+    };
+
+    private async Task AddNewMaintenance()
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("TrainTag", TrainData.Tag);
+        parameters.Add("TrainId", TrainData.Id);
+
+        var options = new DialogOptions()
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.ExtraSmall,
+                FullWidth = true
+            };
+
+        var dialog = _dialogService.Show<TrainMaintenanceDialog>("", parameters, options);
+        var result = (TrainMaintenanceDto)(await dialog.Result).Data;
+        if (result is not null)
+        {
+            TrainData.Maintenances!.Add(result);
+            StateHasChanged();
+        }
+    }
+
+    private async Task Delete(TrainMaintenanceDto trainMaintenance)
+    {
+        var response = await _trainMaintenanceService.DeleteTrainMaintenance(trainMaintenance.Id!.Value);
+
+        if (response.IsSuccessStatusCode)
+        {
+            _snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_DELETED"], Severity.Success);
+            TrainData.Maintenances!.Remove(trainMaintenance);
+            StateHasChanged();
+        }
+        else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
+    }
+}

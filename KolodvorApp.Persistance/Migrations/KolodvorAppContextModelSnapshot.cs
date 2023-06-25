@@ -22,6 +22,125 @@ namespace KolodvorApp.Persistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.Contains", b =>
+                {
+                    b.Property<Guid>("TrainId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TrainCategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("TrainId", "TrainCategoryId");
+
+                    b.HasIndex("TrainCategoryId");
+
+                    b.ToTable("Contains", (string)null);
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.Route", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDaily")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<Guid>("TrainId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainId");
+
+                    b.ToTable("Routes", (string)null);
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.RouteStation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Arrival")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Cost")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Departure")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("EndStationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("RouteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StartStationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EndStationId");
+
+                    b.HasIndex("RouteId");
+
+                    b.HasIndex("StartStationId", "EndStationId", "RouteId", "Order")
+                        .IsUnique();
+
+                    b.ToTable("RouteStations", (string)null);
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.Station", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Stations", (string)null);
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.Ticket", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Cost")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("EndStation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StartStation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Tickets", (string)null);
+                });
+
             modelBuilder.Entity("KolodvorApp.Domain.Entities.Train", b =>
                 {
                     b.Property<Guid>("Id")
@@ -42,6 +161,21 @@ namespace KolodvorApp.Persistance.Migrations
                         .IsUnique();
 
                     b.ToTable("Trains", (string)null);
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.TrainCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TrainCategories", (string)null);
                 });
 
             modelBuilder.Entity("KolodvorApp.Domain.Entities.TrainMaintenance", b =>
@@ -68,6 +202,105 @@ namespace KolodvorApp.Persistance.Migrations
                     b.ToTable("TrainMaintenances", (string)null);
                 });
 
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Role")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.Contains", b =>
+                {
+                    b.HasOne("KolodvorApp.Domain.Entities.TrainCategory", "TrainCategory")
+                        .WithMany("Contains")
+                        .HasForeignKey("TrainCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KolodvorApp.Domain.Entities.Train", "Train")
+                        .WithMany("Categories")
+                        .HasForeignKey("TrainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Train");
+
+                    b.Navigation("TrainCategory");
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.Route", b =>
+                {
+                    b.HasOne("KolodvorApp.Domain.Entities.Train", "Train")
+                        .WithMany("Routes")
+                        .HasForeignKey("TrainId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Train");
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.RouteStation", b =>
+                {
+                    b.HasOne("KolodvorApp.Domain.Entities.Station", "EndStation")
+                        .WithMany("EndRouteStations")
+                        .HasForeignKey("EndStationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("KolodvorApp.Domain.Entities.Route", "Route")
+                        .WithMany("RouteStations")
+                        .HasForeignKey("RouteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KolodvorApp.Domain.Entities.Station", "StartStation")
+                        .WithMany("StartRouteStations")
+                        .HasForeignKey("StartStationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("EndStation");
+
+                    b.Navigation("Route");
+
+                    b.Navigation("StartStation");
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.Ticket", b =>
+                {
+                    b.HasOne("KolodvorApp.Domain.Entities.User", "User")
+                        .WithMany("Tickets")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("KolodvorApp.Domain.Entities.TrainMaintenance", b =>
                 {
                     b.HasOne("KolodvorApp.Domain.Entities.Train", "Train")
@@ -79,9 +312,35 @@ namespace KolodvorApp.Persistance.Migrations
                     b.Navigation("Train");
                 });
 
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.Route", b =>
+                {
+                    b.Navigation("RouteStations");
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.Station", b =>
+                {
+                    b.Navigation("EndRouteStations");
+
+                    b.Navigation("StartRouteStations");
+                });
+
             modelBuilder.Entity("KolodvorApp.Domain.Entities.Train", b =>
                 {
+                    b.Navigation("Categories");
+
                     b.Navigation("Maintenances");
+
+                    b.Navigation("Routes");
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.TrainCategory", b =>
+                {
+                    b.Navigation("Contains");
+                });
+
+            modelBuilder.Entity("KolodvorApp.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }

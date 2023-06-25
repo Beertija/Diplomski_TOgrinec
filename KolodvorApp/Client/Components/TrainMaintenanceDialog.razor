@@ -1,0 +1,63 @@
+﻿@using KolodvorApp.Client.HttpServices;
+@using KolodvorApp.Shared.DTOs;
+
+@inject ITrainMaintenanceService _trainMaintenanceService
+
+@inherits PageBase
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h5" Style="color: var(--primary-color)">@localizer["MAINTENANCE_DIALOG_TITLE"] @TrainTag</MudText>
+    </TitleContent>
+    <DialogContent>
+        <EditForm Model="_model">
+            <span style="font-weight: 600">@localizer["INPUT_MAINTENANCE"]</span>
+            <MudTextField T="string"
+                          Required="true"
+                          RequiredError=@localizer["REQURED_MAINTENANCE"]
+                          Variant="Variant.Outlined"
+                          @bind-Value="_model.Maintenance" />
+            <br />
+            <span style="font-weight: 600">@localizer["INPUT_COST"]</span>
+            <MudNumericField T="decimal"
+                             Min="0"
+                             Format="F2"
+                             HideSpinButtons="true"
+                             Adornment="Adornment.Start"
+                             AdornmentText="EUR "
+                             Variant="Variant.Outlined"
+                             @bind-Value="_model.Cost" />
+            <br />
+            <MudButton OnClick="Cancel">@localizer["CANCEL"]</MudButton>
+            <MudButton Class="btn-primary" Variant="Variant.Filled" OnClick="Submit" Disabled="@Validate()">@localizer["SUBMIT"]</MudButton>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    public MudDialogInstance? MudDialog { get; set; }
+
+    [Parameter, EditorRequired]
+    public string TrainTag { get; init; } = null!;
+
+    [Parameter, EditorRequired]
+    public Guid TrainId { get; init; }
+
+    private TrainMaintenanceDto _model { get; set; } = new TrainMaintenanceDto();
+
+    private bool Validate() => string.IsNullOrWhiteSpace(_model.Maintenance);
+
+    private void Cancel() => MudDialog!.Cancel();
+
+    private async Task Submit()
+    {
+        _model.TrainId = TrainId;
+        var response = await _trainMaintenanceService.CreateOrUpdateTrainMaintenance(_model);
+        var content = await response.Content.ReadFromJsonAsync<TrainMaintenanceDto>();
+
+        if (response.IsSuccessStatusCode) _snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_CREATED"], Severity.Success);
+        else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
+        MudDialog!.Close(content);
+    }
+}

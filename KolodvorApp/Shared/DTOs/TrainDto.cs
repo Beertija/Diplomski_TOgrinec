@@ -9,4 +9,6 @@ public class TrainDto
     public int Capacity { get; set; }
 
     public List<TrainMaintenanceDto>? Maintenances { get; set; }
+
+    public List<ContainsDto> Categories { get; set; } = new List<ContainsDto>();
 }
