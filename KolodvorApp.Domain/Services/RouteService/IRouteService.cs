@@ -7,4 +7,6 @@ public interface IRouteService
     List<RouteDto> GetAll();
 
     List<RouteStationDto> GetAllRouteStations();
+
+    Task DeleteAsync(Guid id);
 }

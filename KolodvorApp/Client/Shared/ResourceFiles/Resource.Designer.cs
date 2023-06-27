@@ -349,6 +349,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Route was successfuly deleted.
+        /// </summary>
+        public static string ROUTE_SUCCESSFUL_DELETED {
+            get {
+                return ResourceManager.GetString("ROUTE_SUCCESSFUL_DELETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string SEARCH_PLACEHOLDER {

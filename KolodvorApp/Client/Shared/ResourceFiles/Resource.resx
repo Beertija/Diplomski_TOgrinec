@@ -213,6 +213,9 @@
   <data name="REQURED_TAG" xml:space="preserve">
     <value>Train tag is required</value>
   </data>
+  <data name="ROUTE_SUCCESSFUL_DELETED" xml:space="preserve">
+    <value>Route was successfuly deleted</value>
+  </data>
   <data name="SEARCH_PLACEHOLDER" xml:space="preserve">
     <value>Search</value>
   </data>

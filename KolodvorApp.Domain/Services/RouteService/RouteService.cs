@@ -28,4 +28,9 @@ public class RouteService : IRouteService
         var routeList = _routeStationrepository.GetAll();
         return _mapper.Map<List<RouteStationDto>>(routeList);
     }
+
+    public async Task DeleteAsync(Guid id)
+    {
+        await _repository.DeleteAsync(id);
+    }
 }

@@ -154,14 +154,14 @@
 
         if (result is null) return;
 
-        //var response = await _routeService.DeleteTrain(train.Id);
+        var response = await _routeService.DeleteRoute(route.Id);
 
-        //if (response.IsSuccessStatusCode)
-        //{
-        //    _snackbar.Add(localizer["TRAIN_SUCCESSFUL_UPDATED"], Severity.Success);
-        //    routeList.Remove(train);
-        //    StateHasChanged();
-        //}
-        //else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
+        if (response.IsSuccessStatusCode)
+        {
+            _snackbar.Add(localizer["ROUTE_SUCCESSFUL_DELETED"], Severity.Success);
+            routeList.Remove(route);
+            StateHasChanged();
+        }
+        else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
     }
 }

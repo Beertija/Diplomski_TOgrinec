@@ -30,4 +30,22 @@ public class RoutesController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync(Guid id)
+    {
+        try
+        {
+            await _service.DeleteAsync(id);
+            return NoContent();
+        }
+        catch (KeyNotFoundException)
+        {
+            return BadRequest($"Route {id} does not exist.");
+        }
+        catch (Exception)
+        {
+            return Conflict("There's an error on the server.");
+        }
+    }
 }

@@ -233,7 +233,7 @@
 
         if (response.IsSuccessStatusCode)
         {
-            _snackbar.Add(localizer["TRAIN_SUCCESSFUL_UPDATED"], Severity.Success);
+            _snackbar.Add(localizer["TRAIN_SUCCESSFUL_DELETED"], Severity.Success);
             trainList.Remove(train);
             StateHasChanged();
         }
