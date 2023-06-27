@@ -214,15 +214,6 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fetch Data.
-        /// </summary>
-        public static string NAV_MENU_FETCH_DATA {
-            get {
-                return ResourceManager.GetString("NAV_MENU_FETCH_DATA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string NAV_MENU_HOME {

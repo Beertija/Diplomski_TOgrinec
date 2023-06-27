@@ -2,8 +2,7 @@
 @using KolodvorApp.Shared.DTOs;
 
 @inject ITrainMaintenanceService _trainMaintenanceService
-
-@inherits PageBase
+@inject ISnackbar _snackbar
 
 <MudDialog>
     <TitleContent>
@@ -58,12 +57,12 @@
         if (response.IsSuccessStatusCode)
         {
             var content = await response.Content.ReadFromJsonAsync<TrainMaintenanceDto>();
-            Snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_CREATED"], Severity.Success);
+            _snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_CREATED"], Severity.Success);
             MudDialog!.Close(content);
         }
         else
         {
-            Snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
+            _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
             MudDialog!.Cancel();
         }
     }

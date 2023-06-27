@@ -6,8 +6,7 @@
 
 @inject ITrainService _trainService
 @inject IDialogService _dialogService
-
-@inherits PageBase
+@inject ISnackbar _snackbar
 
 <style>
     .mud-input-control > .mud-input-control-input-container > div.mud-input.mud-input-text {
@@ -234,10 +233,10 @@
 
         if (response.IsSuccessStatusCode)
         {
-            Snackbar.Add(localizer["TRAIN_SUCCESSFUL_UPDATED"], Severity.Success);
+            _snackbar.Add(localizer["TRAIN_SUCCESSFUL_UPDATED"], Severity.Success);
             trainList.Remove(train);
             StateHasChanged();
         }
-        else Snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
+        else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
     }
 }

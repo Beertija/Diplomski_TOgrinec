@@ -3,8 +3,7 @@
 
 @inject ITrainMaintenanceService _trainMaintenanceService
 @inject IDialogService _dialogService
-
-@inherits PageBase
+@inject ISnackbar _snackbar
 
 <MudDialog>
     <TitleContent>
@@ -118,10 +117,10 @@
 
         if (response.IsSuccessStatusCode)
         {
-            Snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_DELETED"], Severity.Success);
+            _snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_DELETED"], Severity.Success);
             TrainData.Maintenances!.Remove(trainMaintenance);
             StateHasChanged();
         }
-        else Snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
+        else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
     }
 }

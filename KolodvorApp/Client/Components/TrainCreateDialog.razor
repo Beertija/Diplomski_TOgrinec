@@ -3,8 +3,7 @@
 @using System.Net;
 
 @inject ITrainService _trainService
-
-@inherits PageBase
+@inject ISnackbar _snackbar
 
 <MudDialog>
     <TitleContent>
@@ -95,18 +94,18 @@
         if (response.IsSuccessStatusCode)
         {
             var content = await response.Content.ReadFromJsonAsync<TrainDto>();
-            if (_isUpdate) Snackbar.Add(localizer["TRAIN_SUCCESSFUL_UPDATED"], Severity.Success);
-            else Snackbar.Add(localizer["TRAIN_SUCCESSFUL_CREATED"], Severity.Success);
+            if (_isUpdate) _snackbar.Add(localizer["TRAIN_SUCCESSFUL_UPDATED"], Severity.Success);
+            else _snackbar.Add(localizer["TRAIN_SUCCESSFUL_CREATED"], Severity.Success);
             MudDialog!.Close(content);
         }
         else if (response.StatusCode == HttpStatusCode.BadRequest)
         {
             var errorMessage = await response.Content.ReadAsStringAsync();
-            Snackbar.Add(errorMessage, Severity.Warning);
+            _snackbar.Add(errorMessage, Severity.Warning);
         }
         else
         {
-            Snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Error);
+            _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Error);
         }
     }
 }

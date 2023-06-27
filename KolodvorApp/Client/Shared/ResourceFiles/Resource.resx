@@ -168,9 +168,6 @@
   <data name="MAINTENANCE_DIALOG_TITLE" xml:space="preserve">
     <value>Add new maintenance for the train</value>
   </data>
-  <data name="NAV_MENU_FETCH_DATA" xml:space="preserve">
-    <value>Fetch Data</value>
-  </data>
   <data name="NAV_MENU_HOME" xml:space="preserve">
     <value>Home</value>
   </data>
