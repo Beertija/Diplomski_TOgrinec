@@ -5,6 +5,7 @@
 @using KolodvorApp.Shared.DTOs;
 
 @inject IRouteService _routeService
+@inject IStationService _stationService
 @inject IDialogService _dialogService
 @inject ISnackbar _snackbar
 
@@ -89,6 +90,8 @@
 
     private List<RouteDto> routeList = new();
 
+    private List<StationDto> stationsList = new();
+
     #endregion
 
     protected override async Task OnInitializedAsync()
@@ -96,6 +99,7 @@
         await base.OnInitializedAsync();
 
         routeList = await _routeService.GetAll();
+        stationsList = await _stationService.GetAll();
     }
 
     private async Task AddNewRoute()

@@ -165,13 +165,8 @@
 
     private async Task UpdateTrain(TrainDto train)
     {
-        var selectedCategories = trainCategoriesList
-                .Where(category => train.Categories.Any(cat => cat.TrainCategoryId == category.Id))
-                .ToList();
-
         var parameters = new DialogParameters();
         parameters.Add("TrainCategories", trainCategoriesList);
-        parameters.Add("SelectedCategories", selectedCategories);
         parameters.Add("Model", train);
 
         var result = await TrainAddOrUpdateDialog(parameters);

@@ -28,12 +28,11 @@
                 <br />
                 <span style="font-weight: 600">@localizer["INPUT_CATEGORIES"]</span>
                 <MudSelect T="TrainCategoryDto"
-                       SelectedValues=@SelectedCategories
-                       SelectedValuesChanged="SelectionChanged"
+                       MultiSelection="true"
+                       @bind-SelectedValues="_selectedCategories"
                        Placeholder=@localizer["PLACEHOLDER_CATEGORIES"]
                        Required="true"
                        RequiredError=@localizer["REQURED_CATEGORIES"]
-                       MultiSelection="true"
                        AnchorOrigin="Origin.BottomCenter">
                     @foreach (var category in TrainCategories)
                 {
@@ -55,28 +54,28 @@
     public List<TrainCategoryDto> TrainCategories { get; init; } = new();
 
     [Parameter]
-    public List<TrainCategoryDto> SelectedCategories { get; set; } = new();
-
-    [Parameter]
     public TrainDto? Model { get; set; }
+
+    private IEnumerable<TrainCategoryDto> _selectedCategories { get; set; } = new HashSet<TrainCategoryDto>();
 
     private bool _isUpdate = false;
 
     protected override void OnInitialized()
     {
+        base.OnInitialized();
+
         if (Model is not null)
         {
             _isUpdate = true;
+            _selectedCategories = TrainCategories
+            .Where(category => Model.Categories.Any(cat => cat.TrainCategoryId == category.Id))
+            .ToList();
         }
         else
         {
             Model = new();
         }
-
-        base.OnInitialized();
     }
-
-    private void SelectionChanged(IEnumerable<TrainCategoryDto> selectedItems) => SelectedCategories = selectedItems.ToList();
 
     private bool Validate() => string.IsNullOrWhiteSpace(Model!.Tag);
 
@@ -84,7 +83,7 @@
 
     private async Task Submit()
     {
-        Model!.Categories = SelectedCategories.Select(category => new ContainsDto()
+        Model!.Categories = _selectedCategories.Select(category => new ContainsDto()
             {
                 TrainCategoryId = category.Id!.Value
             }).ToList();
