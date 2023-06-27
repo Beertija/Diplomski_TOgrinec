@@ -47,6 +47,9 @@ public class AutoMapperProfile : Profile
                 EndStationId = model.EndStationId,
                 Order = model.Order
             })))
+            .ForMember(dest => dest.TrainTag, opt => opt.MapFrom(src => src.Train.Tag))
+            .ForMember(dest => dest.StartStation, opt => opt.MapFrom(src => src.RouteStations.OrderBy(x => x.Order).First().StartStation.Name))
+            .ForMember(dest => dest.EndStation, opt => opt.MapFrom(src => src.RouteStations.OrderBy(x => x.Order).Last().EndStation.Name))
             .ReverseMap();
     }
 }

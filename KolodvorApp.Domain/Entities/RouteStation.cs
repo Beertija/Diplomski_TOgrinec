@@ -20,11 +20,11 @@ public class RouteStation : BaseEntity
 
     public Guid StartStationId { get; set; }
 
-    public Station StartStation { get; set; } = null!;
+    public virtual Station StartStation { get; set; } = null!;
 
     public Guid EndStationId { get; set; }
 
-    public Station EndStation { get; set; } = null!;
+    public virtual Station EndStation { get; set; } = null!;
 
     public Guid RouteId { get; set; }
 

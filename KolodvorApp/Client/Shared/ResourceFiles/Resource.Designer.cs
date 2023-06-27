@@ -79,6 +79,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a new route.
+        /// </summary>
+        public static string ADD_ROUTE {
+            get {
+                return ResourceManager.GetString("ADD_ROUTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a new train.
         /// </summary>
         public static string ADD_TRAIN {
@@ -187,6 +196,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Irregular train.
+        /// </summary>
+        public static string IRREGULAR {
+            get {
+                return ResourceManager.GetString("IRREGULAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cost.
         /// </summary>
         public static string LABEL_COST {
@@ -223,6 +241,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Route Overview.
+        /// </summary>
+        public static string NAV_MENU_ROUTES {
+            get {
+                return ResourceManager.GetString("NAV_MENU_ROUTES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Train Overview.
         /// </summary>
         public static string NAV_MENU_TRAINS {
@@ -232,11 +259,38 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VIEW DETAILS.
+        /// </summary>
+        public static string OPEN_DETAIL {
+            get {
+                return ResourceManager.GetString("OPEN_DETAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open route details.
+        /// </summary>
+        public static string OPEN_ROUTE_DETAILS {
+            get {
+                return ResourceManager.GetString("OPEN_ROUTE_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open train details.
         /// </summary>
         public static string OPEN_TRAIN_DETAILS {
             get {
                 return ResourceManager.GetString("OPEN_TRAIN_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ROUTE OVERVIEW.
+        /// </summary>
+        public static string PAGE_TITLE_ROUTE_OVERVIEW {
+            get {
+                return ResourceManager.GetString("PAGE_TITLE_ROUTE_OVERVIEW", resourceCulture);
             }
         }
         
@@ -255,6 +309,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string PLACEHOLDER_CATEGORIES {
             get {
                 return ResourceManager.GetString("PLACEHOLDER_CATEGORIES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regular train.
+        /// </summary>
+        public static string REGULAR {
+            get {
+                return ResourceManager.GetString("REGULAR", resourceCulture);
             }
         }
         
@@ -340,6 +403,24 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Regularity of a train.
+        /// </summary>
+        public static string TABLE_DAILY_ROUTE {
+            get {
+                return ResourceManager.GetString("TABLE_DAILY_ROUTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End station.
+        /// </summary>
+        public static string TABLE_END_STATION {
+            get {
+                return ResourceManager.GetString("TABLE_END_STATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maintenance.
         /// </summary>
         public static string TABLE_MAINTENANCE {
@@ -349,11 +430,11 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tag.
+        ///   Looks up a localized string similar to Start station.
         /// </summary>
-        public static string TABLE_TAG {
+        public static string TABLE_START_STATION {
             get {
-                return ResourceManager.GetString("TABLE_TAG", resourceCulture);
+                return ResourceManager.GetString("TABLE_START_STATION", resourceCulture);
             }
         }
         
@@ -363,6 +444,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string TABLE_TOTAL_COST {
             get {
                 return ResourceManager.GetString("TABLE_TOTAL_COST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Train tag.
+        /// </summary>
+        public static string TABLE_TRAIN_TAG {
+            get {
+                return ResourceManager.GetString("TABLE_TRAIN_TAG", resourceCulture);
             }
         }
         
@@ -399,15 +489,6 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string TRAIN_MAINTENANCE_SUCCESSFUL_DELETED {
             get {
                 return ResourceManager.GetString("TRAIN_MAINTENANCE_SUCCESSFUL_DELETED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VIEW DETAILS.
-        /// </summary>
-        public static string TRAIN_OPEN_DETAIL {
-            get {
-                return ResourceManager.GetString("TRAIN_OPEN_DETAIL", resourceCulture);
             }
         }
         

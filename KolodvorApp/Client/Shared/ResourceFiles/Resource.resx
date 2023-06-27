@@ -123,6 +123,9 @@
   <data name="ADD_MAINTENANCE" xml:space="preserve">
     <value>Add new train maintenance</value>
   </data>
+  <data name="ADD_ROUTE" xml:space="preserve">
+    <value>Add a new route</value>
+  </data>
   <data name="ADD_TRAIN" xml:space="preserve">
     <value>Add a new train</value>
   </data>
@@ -159,6 +162,9 @@
   <data name="INVALID_COST" xml:space="preserve">
     <value>Cost cannot be lower or equal 0 euros</value>
   </data>
+  <data name="IRREGULAR" xml:space="preserve">
+    <value>Irregular train</value>
+  </data>
   <data name="LABEL_COST" xml:space="preserve">
     <value>Cost</value>
   </data>
@@ -171,17 +177,32 @@
   <data name="NAV_MENU_HOME" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="NAV_MENU_ROUTES" xml:space="preserve">
+    <value>Route Overview</value>
+  </data>
   <data name="NAV_MENU_TRAINS" xml:space="preserve">
     <value>Train Overview</value>
   </data>
+  <data name="OPEN_DETAIL" xml:space="preserve">
+    <value>VIEW DETAILS</value>
+  </data>
+  <data name="OPEN_ROUTE_DETAILS" xml:space="preserve">
+    <value>Open route details</value>
+  </data>
   <data name="OPEN_TRAIN_DETAILS" xml:space="preserve">
     <value>Open train details</value>
+  </data>
+  <data name="PAGE_TITLE_ROUTE_OVERVIEW" xml:space="preserve">
+    <value>ROUTE OVERVIEW</value>
   </data>
   <data name="PAGE_TITLE_TRAIN_OVERVIEW" xml:space="preserve">
     <value>TRAIN OVERVIEW</value>
   </data>
   <data name="PLACEHOLDER_CATEGORIES" xml:space="preserve">
     <value>Train category</value>
+  </data>
+  <data name="REGULAR" xml:space="preserve">
+    <value>Regular train</value>
   </data>
   <data name="REQURED_CATEGORIES" xml:space="preserve">
     <value>Train categories are required</value>
@@ -210,14 +231,23 @@
   <data name="TABLE_COST" xml:space="preserve">
     <value>Cost</value>
   </data>
+  <data name="TABLE_DAILY_ROUTE" xml:space="preserve">
+    <value>Regularity of a train</value>
+  </data>
+  <data name="TABLE_END_STATION" xml:space="preserve">
+    <value>End station</value>
+  </data>
   <data name="TABLE_MAINTENANCE" xml:space="preserve">
     <value>Maintenance</value>
   </data>
-  <data name="TABLE_TAG" xml:space="preserve">
-    <value>Tag</value>
+  <data name="TABLE_START_STATION" xml:space="preserve">
+    <value>Start station</value>
   </data>
   <data name="TABLE_TOTAL_COST" xml:space="preserve">
     <value>Total Cost</value>
+  </data>
+  <data name="TABLE_TRAIN_TAG" xml:space="preserve">
+    <value>Train tag</value>
   </data>
   <data name="TRAIN_DIALOG_TITLE_1" xml:space="preserve">
     <value>Train </value>
@@ -230,9 +260,6 @@
   </data>
   <data name="TRAIN_MAINTENANCE_SUCCESSFUL_DELETED" xml:space="preserve">
     <value>Train maintenance was successfuly deleted</value>
-  </data>
-  <data name="TRAIN_OPEN_DETAIL" xml:space="preserve">
-    <value>VIEW DETAILS</value>
   </data>
   <data name="TRAIN_SUCCESSFUL_CREATED" xml:space="preserve">
     <value>A new train was successfuly created</value>

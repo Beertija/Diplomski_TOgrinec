@@ -34,6 +34,7 @@ public static class IServiceCollectionExtensions
     {
         services.AddScoped<ITrainService, TrainService>();
         services.AddScoped<ITrainMaintenanceService, TrainMainenanceService>();
+        services.AddScoped<IRouteService, RouteService>();
     }
 
     private static void InitializeMudServices(IServiceCollection services)
