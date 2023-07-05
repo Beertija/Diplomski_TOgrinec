@@ -29,6 +29,7 @@ public class AutoMapperProfile : Profile
                 TrainCategoryId = model.TrainCategoryId,
             })));
         CreateMap<Train, Train>();
+        CreateMap<Train, TrainSelectorDto>();
 
         CreateMap<TrainMaintenance, TrainMaintenanceDto>().ReverseMap();
         CreateMap<TrainCategory, TrainCategoryDto>().ReverseMap();

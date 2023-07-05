@@ -25,6 +25,14 @@ public class TrainsController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet("selector")]
+    public ActionResult<List<TrainSelectorDto>> GetAllTrainsForSelect()
+    {
+        var result = _service.GetAllTrainsForSelect();
+
+        return Ok(result);
+    }
+
     [HttpGet("categories")]
     public ActionResult<List<TrainCategoryDto>> GetAllCategories()
     {
