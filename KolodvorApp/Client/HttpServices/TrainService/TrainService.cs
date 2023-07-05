@@ -18,6 +18,11 @@ public class TrainService : ITrainService
         return await _http.GetFromJsonAsync<List<TrainDto>>(RequestUri);
     }
 
+    public async Task<List<TrainSelectorDto>> GetAllTrainsForSelect()
+    {
+        return await _http.GetFromJsonAsync<List<TrainSelectorDto>>($"{RequestUri}/selector");
+    }
+
     public async Task<List<TrainCategoryDto>> GetAllCategories()
     {
         return await _http.GetFromJsonAsync<List<TrainCategoryDto>>($"{RequestUri}/categories");

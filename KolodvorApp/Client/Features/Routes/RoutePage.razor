@@ -1,27 +1,14 @@
 ﻿@page "/routes-page"
 
-@using KolodvorApp.Client.Components;
-@using KolodvorApp.Client.HttpServices;
-@using KolodvorApp.Shared.DTOs;
+@using KolodvorApp.Client.Features.Routes.Components
+@using KolodvorApp.Client.HttpServices
+@using KolodvorApp.Shared.DTOs
 
 @inject IRouteService _routeService
 @inject IStationService _stationService
+@inject ITrainService _trainService
 @inject IDialogService _dialogService
 @inject ISnackbar _snackbar
-
-<style>
-    .mud-input-control > .mud-input-control-input-container > div.mud-input.mud-input-text {
-        margin-top: 0;
-    }
-
-    .mud-input.mud-input-underline:before {
-        border-bottom: 1px, solid, var(--white);
-    }
-
-    .search .mud-icon-root.mud-svg-icon {
-        fill: var(--white);
-    }
-</style>
 
 <MudText Typo="Typo.h4" Style="color: var(--primary-color)">@localizer["PAGE_TITLE_ROUTE_OVERVIEW"]</MudText>
 <br />
@@ -65,9 +52,9 @@
         <MudTd Class="mr-3" Style="text-align: right">
             <MudButtonGroup Variant="Variant.Filled" OverrideStyles="false">
                     <MudTooltip Text=@localizer["OPEN_ROUTE_DETAILS"]>
-                    <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="@((e) => OpenTrainDetail(context))">
-                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.OpenInNew" />
-                            <span class="ml-3" style="white-space: nowrap">@localizer["OPEN_DETAIL"]</span>
+                        <MudButton Variant="Variant.Filled" Class="btn-warning" OnClick="@((e) => UpdateRoute(context))">
+                            <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Update" />
+                            <span class="ml-3" style="white-space: nowrap">@localizer["UPDATE"]</span>
                     </MudButton>
                 </MudTooltip>
                 <MudTooltip Text=@localizer["DELETE_BUTTON"]>
@@ -92,6 +79,8 @@
 
     private List<StationDto> stationsList = new();
 
+    private List<TrainSelectorDto> trainsList = new();
+
     #endregion
 
     protected override async Task OnInitializedAsync()
@@ -100,11 +89,14 @@
 
         routeList = await _routeService.GetAll();
         stationsList = await _stationService.GetAll();
+        trainsList = await _trainService.GetAllTrainsForSelect();
     }
 
     private async Task AddNewRoute()
     {
         var parameters = new DialogParameters();
+        parameters.Add("TrainsList", trainsList);
+        parameters.Add("StationsList", stationsList);
 
         var result = await RouteAddOrUpdateDialog(parameters);
         if (result is not null)
@@ -119,27 +111,28 @@
         var options = new DialogOptions()
             {
                 CloseButton = true,
-                MaxWidth = MaxWidth.Small,
+                MaxWidth = MaxWidth.Medium,
                 FullWidth = true
             };
 
-        var dialog = _dialogService.Show<TrainCreateDialog>("", parameters, options);
+        var dialog = _dialogService.Show<RouteCreateDialog>("", parameters, options);
         return (RouteDto)(await dialog.Result).Data;
     }
 
-    private async Task OpenTrainDetail(RouteDto route)
+    private async Task UpdateRoute(RouteDto route)
     {
         var parameters = new DialogParameters();
+        parameters.Add("TrainsList", trainsList);
+        parameters.Add("StationsList", stationsList);
+        parameters.Add("Model", route);
 
-        var options = new DialogOptions()
-            {
-                CloseButton = true,
-                MaxWidth = MaxWidth.Small,
-                FullWidth = true
-            };
-
-        var dialog = _dialogService.Show<TrainDetailDialog>("", parameters, options);
-        var result = await dialog.Result;
+        var result = await RouteAddOrUpdateDialog(parameters);
+        if (result is not null)
+        {
+            routeList.Remove(route);
+            routeList.Add(result);
+            StateHasChanged();
+        }
     }
 
     private async Task Delete(RouteDto route)
