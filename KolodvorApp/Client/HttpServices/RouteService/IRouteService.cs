@@ -6,5 +6,7 @@ public interface IRouteService
 {
     Task<List<RouteDto>> GetAll();
 
+    Task<HttpResponseMessage> CreateOrUpdateRoute(RouteDto route);
+
     Task<HttpResponseMessage> DeleteRoute(Guid routeId);
 }

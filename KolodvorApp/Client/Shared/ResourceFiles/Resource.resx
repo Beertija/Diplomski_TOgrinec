@@ -126,6 +126,9 @@
   <data name="ADD_ROUTE" xml:space="preserve">
     <value>Add a new route</value>
   </data>
+  <data name="ADD_ROUTE_STATION" xml:space="preserve">
+    <value>Add a new route station</value>
+  </data>
   <data name="ADD_TRAIN" xml:space="preserve">
     <value>Add a new train</value>
   </data>
@@ -138,32 +141,53 @@
   <data name="CANCEL" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="CAPACITY" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
   <data name="DELETE" xml:space="preserve">
     <value>DELETE</value>
   </data>
   <data name="DELETE_BUTTON" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="INPUT_ARRIVAL_TIME" xml:space="preserve">
+    <value>Input arrival time</value>
+  </data>
   <data name="INPUT_CAPACITY" xml:space="preserve">
     <value>Input train capacity</value>
   </data>
   <data name="INPUT_CATEGORIES" xml:space="preserve">
-    <value>Input train categories</value>
+    <value>Select train categories</value>
   </data>
   <data name="INPUT_COST" xml:space="preserve">
     <value>Input cost</value>
   </data>
+  <data name="INPUT_DEPARTURE_TIME" xml:space="preserve">
+    <value>Input departure time</value>
+  </data>
+  <data name="INPUT_END_STATION" xml:space="preserve">
+    <value>Input end station</value>
+  </data>
+  <data name="INPUT_ISDAILY" xml:space="preserve">
+    <value>Select route regularity</value>
+  </data>
   <data name="INPUT_MAINTENANCE" xml:space="preserve">
     <value>Input train maintenance</value>
   </data>
+  <data name="INPUT_START_STATION" xml:space="preserve">
+    <value>Input start station</value>
+  </data>
   <data name="INPUT_TAG" xml:space="preserve">
     <value>Input train tag</value>
+  </data>
+  <data name="INPUT_TRAIN" xml:space="preserve">
+    <value>Select a train</value>
   </data>
   <data name="INVALID_COST" xml:space="preserve">
     <value>Cost cannot be lower or equal 0 euros</value>
   </data>
   <data name="IRREGULAR" xml:space="preserve">
-    <value>Irregular train</value>
+    <value>Irregular</value>
   </data>
   <data name="LABEL_COST" xml:space="preserve">
     <value>Cost</value>
@@ -201,8 +225,11 @@
   <data name="PLACEHOLDER_CATEGORIES" xml:space="preserve">
     <value>Train category</value>
   </data>
+  <data name="PLACEHOLDER_TRAIN" xml:space="preserve">
+    <value>Train</value>
+  </data>
   <data name="REGULAR" xml:space="preserve">
-    <value>Regular train</value>
+    <value>Regular</value>
   </data>
   <data name="REQURED_CATEGORIES" xml:space="preserve">
     <value>Train categories are required</value>
@@ -213,8 +240,17 @@
   <data name="REQURED_TAG" xml:space="preserve">
     <value>Train tag is required</value>
   </data>
+  <data name="REQURED_TRAIN" xml:space="preserve">
+    <value>Train is required</value>
+  </data>
+  <data name="ROUTE_SUCCESSFUL_CREATED" xml:space="preserve">
+    <value>A new route was successfuly created</value>
+  </data>
   <data name="ROUTE_SUCCESSFUL_DELETED" xml:space="preserve">
     <value>Route was successfuly deleted</value>
+  </data>
+  <data name="ROUTE_SUCCESSFUL_UPDATED" xml:space="preserve">
+    <value>Route was successfuly updated</value>
   </data>
   <data name="SEARCH_PLACEHOLDER" xml:space="preserve">
     <value>Search</value>
@@ -275,6 +311,9 @@
   </data>
   <data name="UPDATE" xml:space="preserve">
     <value>UPDATE</value>
+  </data>
+  <data name="UPDATE_ROUTE" xml:space="preserve">
+    <value>Update route</value>
   </data>
   <data name="UPDATE_TRAIN" xml:space="preserve">
     <value>Update train</value>

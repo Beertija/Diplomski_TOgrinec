@@ -31,6 +31,24 @@ public class RoutesController : ControllerBase
         return Ok(result);
     }
 
+    [HttpPost]
+    public async Task<ActionResult<RouteDto>> CreateOrUpdateAsync([FromBody] RouteDto routeDto)
+    {
+        try
+        {
+            var result = await _service.CreateOrUpdateAsync(routeDto);
+            return Ok(result);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return Conflict("There's an error on the server.");
+        }
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(Guid id)
     {

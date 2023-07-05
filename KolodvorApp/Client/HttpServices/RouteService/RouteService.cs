@@ -18,6 +18,11 @@ public class RouteService : IRouteService
         return await _http.GetFromJsonAsync<List<RouteDto>>(RequestUri);
     }
 
+    public async Task<HttpResponseMessage> CreateOrUpdateRoute(RouteDto route)
+    {
+        return await _http.PostAsJsonAsync(RequestUri, route);
+    }
+
     public async Task<HttpResponseMessage> DeleteRoute(Guid routeId)
     {
         return await _http.DeleteAsync($"{RequestUri}/{routeId}");

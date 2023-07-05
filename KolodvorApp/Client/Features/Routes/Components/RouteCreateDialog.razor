@@ -1,0 +1,199 @@
+﻿@using KolodvorApp.Client.Features.Routes.Models
+@using KolodvorApp.Client.HttpServices
+@using KolodvorApp.Shared.DTOs
+@using System.Net
+
+@inject IRouteService _routeService
+@inject ISnackbar _snackbar
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h5" Style="color: var(--primary-color)">@(_isUpdate ? $"{localizer["UPDATE_ROUTE"]} {_model.RouteStations.First().StartStation.Name}-{_model.RouteStations.Last().EndStation.Name}" : localizer["ADD_ROUTE"])</MudText>
+        </TitleContent>
+        <DialogContent>
+            <EditForm Model="_model">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_TRAIN"]</span>
+                        <MudSelect T="TrainSelectorDto"
+                               @bind-Value="_model.Train"
+                               Style="min-width: 230px"
+                               Placeholder=@localizer["PLACEHOLDER_TRAIN"]
+                               Required="true"
+                               RequiredError=@localizer["REQURED_TRAIN"]
+                               AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var train in TrainsList)
+                        {
+                            <MudSelectItem Value="train">@train.Tag (@localizer["CAPACITY"]: @train.Capacity)</MudSelectItem>
+                        }
+                    </MudSelect>
+                </div>
+                <div>
+                    <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_ISDAILY"]</span>
+                    <MudRadioGroup T="bool" @bind-SelectedOption="_model.IsDaily">
+                        <MudRadio Option="true">@localizer["REGULAR"]</MudRadio>
+                        <MudRadio Option="false">@localizer["IRREGULAR"]</MudRadio>
+                    </MudRadioGroup>
+                </div>
+            </div>
+            <br />
+
+            <MudPaper Elevation="3" Height="400px" Style="overflow:auto; padding-bottom: 8px;">
+                @RenderRouteStationComponents()
+                <MudContainer Style="display: flex; justify-content: center; margin-top: 4px;">
+                    <MudTooltip Text=@localizer["ADD_ROUTE_STATION"]>
+                        <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="AddNewRouteStation">
+                            <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Add" />
+                            <span class="ml-2" style="white-space: nowrap">@localizer["ADD"]</span>
+                        </MudButton>
+                    </MudTooltip>
+                </MudContainer>
+            </MudPaper>
+            <br />
+            <MudButton OnClick="Cancel">@localizer["CANCEL"]</MudButton>
+            <MudButton Class="btn-primary" Variant="Variant.Filled" OnClick="Submit" Disabled=@Validate()>@localizer["SUBMIT"]</MudButton>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    public MudDialogInstance? MudDialog { get; set; }
+
+    [Parameter, EditorRequired]
+    public List<TrainSelectorDto> TrainsList { get; init; } = new();
+
+    [Parameter, EditorRequired]
+    public List<StationDto> StationsList { get; init; } = new();
+
+    [Parameter]
+    public RouteDto? Model { get; set; }
+
+    private int _routeCounter = 1;
+
+    private bool _isUpdate = false;
+
+    private RouteModel _model { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (Model is not null)
+        {
+            _isUpdate = true;
+            _model.Id = Model.Id;
+            _model.IsDaily = Model.IsDaily;
+            _model.Train = TrainsList.Single(x => x.Id == Model.TrainId);
+            _model.RouteStations = Model.RouteStations.Select(routeStation => new RouteStationModel
+                {
+                    Cost = routeStation.Cost,
+                    Order = routeStation.Order,
+                    ArrivalTime = routeStation.ArrivalTime,
+                    DepartureTime = routeStation.DepartureTime,
+                    StartStation = StationsList.Single(x => x.Id == routeStation.StartStationId),
+                    EndStation = StationsList.Single(x => x.Id == routeStation.EndStationId)
+                }).ToList();
+        }
+    }
+
+    private RenderFragment RenderRouteStationComponents() => builder =>
+    {
+        int seq = 0;
+        _routeCounter = 1;
+        foreach (var routeStation in _model.RouteStations)
+        {
+            builder.OpenComponent(seq++, typeof(RouteStationComponent));
+            builder.AddAttribute(seq++, "StationsList", StationsList);
+            builder.AddAttribute(seq++, "Model", routeStation);
+            builder.AddAttribute(seq++, "OnDelete", EventCallback.Factory.Create<RouteStationModel>(this, Delete));
+            builder.CloseComponent();
+            _routeCounter++;
+        }
+    };
+
+    private bool Validate()
+    {
+        if (_model.Train is null) return true;
+        if (_model.RouteStations.Count < 1) return true;
+
+        for (int i = 0; i < _model.RouteStations.Count; i++)
+        {
+            var current = _model.RouteStations[i];
+            var previous = i > 0 ? _model.RouteStations[i - 1] : null;
+            var next = i < _model.RouteStations.Count - 1 ? _model.RouteStations[i + 1] : null;
+
+            if (current.StartStation is null || current.EndStation is null) return true;
+            if (current.StartStation == current.EndStation) return true;
+            if (current.StartTime is null
+                || current.EndTime is null
+                || current.StartTime > current.EndTime)
+                return true;
+            if (current.Cost <= 0m) return true;
+
+            // Check if the current RouteStation's StartStation is the same as the previous RouteStation's EndStation
+            if (previous != null && current.StartStation != previous.EndStation) return true;
+
+            // Check if the current RouteStation's EndStation is the same as the next RouteStation's StartStation
+            if (next != null && current.EndStation != next.StartStation) return true;
+        }
+        return false;
+    }
+
+
+    private void AddNewRouteStation()
+    {
+        var newRouteStation = new RouteStationModel
+            {
+                Order = _routeCounter
+            };
+        _model.RouteStations.Add(newRouteStation);
+    }
+
+    private void Delete(RouteStationModel model)
+    {
+        _model.RouteStations.Remove(model);
+        StateHasChanged();
+    }
+
+    private void Cancel() => MudDialog!.Cancel();
+
+    private async Task Submit()
+    {
+        var requestModel = new RouteDto
+            {
+                IsDaily = _model.IsDaily,
+                TrainId = _model.Train.Id,
+                RouteStations = _model.RouteStations.Select(routeStation => new RouteStationDto
+                {
+                    Cost = routeStation.Cost,
+                    Order = routeStation.Order,
+                    ArrivalTime = routeStation.ArrivalTime!.Value,
+                    DepartureTime = routeStation.DepartureTime!.Value,
+                    StartStationId = routeStation.StartStation.Id,
+                    EndStationId = routeStation.EndStation.Id
+                }).ToList()
+            };
+
+        if (_isUpdate) requestModel.Id = Model!.Id;
+
+        var response = await _routeService.CreateOrUpdateRoute(requestModel);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadFromJsonAsync<RouteDto>();
+            if (_isUpdate) _snackbar.Add(localizer["ROUTE_SUCCESSFUL_UPDATED"], Severity.Success);
+            else _snackbar.Add(localizer["ROUTE_SUCCESSFUL_CREATED"], Severity.Success);
+            MudDialog!.Close(content);
+        }
+        else if (response.StatusCode == HttpStatusCode.BadRequest)
+        {
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            _snackbar.Add(errorMessage, Severity.Warning);
+        }
+        else
+        {
+            _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Error);
+        }
+    }
+}

@@ -88,6 +88,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a new route station.
+        /// </summary>
+        public static string ADD_ROUTE_STATION {
+            get {
+                return ResourceManager.GetString("ADD_ROUTE_STATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a new train.
         /// </summary>
         public static string ADD_TRAIN {
@@ -124,6 +133,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Capacity.
+        /// </summary>
+        public static string CAPACITY {
+            get {
+                return ResourceManager.GetString("CAPACITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DELETE.
         /// </summary>
         public static string DELETE {
@@ -142,6 +160,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input arrival time.
+        /// </summary>
+        public static string INPUT_ARRIVAL_TIME {
+            get {
+                return ResourceManager.GetString("INPUT_ARRIVAL_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input train capacity.
         /// </summary>
         public static string INPUT_CAPACITY {
@@ -151,7 +178,7 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Input train categories.
+        ///   Looks up a localized string similar to Select train categories.
         /// </summary>
         public static string INPUT_CATEGORIES {
             get {
@@ -169,11 +196,47 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input departure time.
+        /// </summary>
+        public static string INPUT_DEPARTURE_TIME {
+            get {
+                return ResourceManager.GetString("INPUT_DEPARTURE_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input end station.
+        /// </summary>
+        public static string INPUT_END_STATION {
+            get {
+                return ResourceManager.GetString("INPUT_END_STATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select route regularity.
+        /// </summary>
+        public static string INPUT_ISDAILY {
+            get {
+                return ResourceManager.GetString("INPUT_ISDAILY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input train maintenance.
         /// </summary>
         public static string INPUT_MAINTENANCE {
             get {
                 return ResourceManager.GetString("INPUT_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input start station.
+        /// </summary>
+        public static string INPUT_START_STATION {
+            get {
+                return ResourceManager.GetString("INPUT_START_STATION", resourceCulture);
             }
         }
         
@@ -187,6 +250,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a train.
+        /// </summary>
+        public static string INPUT_TRAIN {
+            get {
+                return ResourceManager.GetString("INPUT_TRAIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cost cannot be lower or equal 0 euros.
         /// </summary>
         public static string INVALID_COST {
@@ -196,7 +268,7 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Irregular train.
+        ///   Looks up a localized string similar to Irregular.
         /// </summary>
         public static string IRREGULAR {
             get {
@@ -313,7 +385,16 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Regular train.
+        ///   Looks up a localized string similar to Train.
+        /// </summary>
+        public static string PLACEHOLDER_TRAIN {
+            get {
+                return ResourceManager.GetString("PLACEHOLDER_TRAIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regular.
         /// </summary>
         public static string REGULAR {
             get {
@@ -349,11 +430,38 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Train is required.
+        /// </summary>
+        public static string REQURED_TRAIN {
+            get {
+                return ResourceManager.GetString("REQURED_TRAIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new route was successfuly created.
+        /// </summary>
+        public static string ROUTE_SUCCESSFUL_CREATED {
+            get {
+                return ResourceManager.GetString("ROUTE_SUCCESSFUL_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Route was successfuly deleted.
         /// </summary>
         public static string ROUTE_SUCCESSFUL_DELETED {
             get {
                 return ResourceManager.GetString("ROUTE_SUCCESSFUL_DELETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Route was successfuly updated.
+        /// </summary>
+        public static string ROUTE_SUCCESSFUL_UPDATED {
+            get {
+                return ResourceManager.GetString("ROUTE_SUCCESSFUL_UPDATED", resourceCulture);
             }
         }
         
@@ -534,6 +642,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string UPDATE {
             get {
                 return ResourceManager.GetString("UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update route.
+        /// </summary>
+        public static string UPDATE_ROUTE {
+            get {
+                return ResourceManager.GetString("UPDATE_ROUTE", resourceCulture);
             }
         }
         

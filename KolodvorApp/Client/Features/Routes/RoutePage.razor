@@ -32,13 +32,13 @@
 
     <HeaderContent>
         <MudTh Style="background-color: var(--primary-color); color: var(--white);">
-            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.StartStation)">@localizer["TABLE_START_STATION"]</MudTableSortLabel>
+            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.StartStation!)">@localizer["TABLE_START_STATION"]</MudTableSortLabel>
         </MudTh>
         <MudTh Style="background-color: var(--primary-color); color: var(--white);">
-            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.EndStation)">@localizer["TABLE_END_STATION"]</MudTableSortLabel>
+            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.EndStation!)">@localizer["TABLE_END_STATION"]</MudTableSortLabel>
         </MudTh>
         <MudTh Style="background-color: var(--primary-color); color: var(--white);">
-            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.TrainTag)">@localizer["TABLE_TRAIN_TAG"]</MudTableSortLabel>
+            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.TrainTag!)">@localizer["TABLE_TRAIN_TAG"]</MudTableSortLabel>
             </MudTh>
         <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_DAILY_ROUTE"]</MudTh>
         <MudTh Style="background-color: var(--primary-color)" />
@@ -151,7 +151,7 @@
 
         if (result is null) return;
 
-        var response = await _routeService.DeleteRoute(route.Id);
+        var response = await _routeService.DeleteRoute(route.Id!.Value);
 
         if (response.IsSuccessStatusCode)
         {
