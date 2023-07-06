@@ -1,6 +1,6 @@
-﻿@using KolodvorApp.Client.HttpServices;
-@using KolodvorApp.Shared.DTOs;
-@using System.Net;
+﻿@using KolodvorApp.Client.HttpServices
+@using KolodvorApp.Shared.DTOs
+@using System.Net
 
 @inject ITrainService _trainService
 @inject ISnackbar _snackbar
@@ -11,7 +11,7 @@
         </TitleContent>
         <DialogContent>
             <EditForm Model="Model">
-                <span style="font-weight: 600">@localizer["INPUT_TAG"]</span>
+                <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_TAG"]</span>
                 <MudTextField T="string"
                           InputType="InputType.Number"
                           Required="true"
@@ -19,21 +19,20 @@
                           Variant="Variant.Outlined"
                           @bind-Value="Model!.Tag" />
                 <br />
-                <span style="font-weight: 600">@localizer["INPUT_CAPACITY"]</span>
+                <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_CAPACITY"]</span>
                 <MudNumericField T="int"
                              Min="0"
                              HideSpinButtons="true"
                              Variant="Variant.Outlined"
                              @bind-Value="Model.Capacity" />
                 <br />
-                <span style="font-weight: 600">@localizer["INPUT_CATEGORIES"]</span>
+                <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_CATEGORIES"]</span>
                 <MudSelect T="TrainCategoryDto"
-                       SelectedValues=@SelectedCategories
-                       SelectedValuesChanged="SelectionChanged"
+                       MultiSelection="true"
+                       @bind-SelectedValues="_selectedCategories"
                        Placeholder=@localizer["PLACEHOLDER_CATEGORIES"]
                        Required="true"
                        RequiredError=@localizer["REQURED_CATEGORIES"]
-                       MultiSelection="true"
                        AnchorOrigin="Origin.BottomCenter">
                     @foreach (var category in TrainCategories)
                 {
@@ -42,7 +41,7 @@
             </MudSelect>
             <br />
             <MudButton OnClick="Cancel">@localizer["CANCEL"]</MudButton>
-            <MudButton Class="btn-primary" Variant="Variant.Filled" OnClick="Submit" Disabled="@Validate()">@localizer["SUBMIT"]</MudButton>
+            <MudButton Class="btn-primary" Variant="Variant.Filled" OnClick="Submit" Disabled=@Validate()>@localizer["SUBMIT"]</MudButton>
         </EditForm>
     </DialogContent>
 </MudDialog>
@@ -55,28 +54,28 @@
     public List<TrainCategoryDto> TrainCategories { get; init; } = new();
 
     [Parameter]
-    public List<TrainCategoryDto> SelectedCategories { get; set; } = new();
-
-    [Parameter]
     public TrainDto? Model { get; set; }
+
+    private IEnumerable<TrainCategoryDto> _selectedCategories { get; set; } = new HashSet<TrainCategoryDto>();
 
     private bool _isUpdate = false;
 
     protected override void OnInitialized()
     {
+        base.OnInitialized();
+
         if (Model is not null)
         {
             _isUpdate = true;
+            _selectedCategories = TrainCategories
+            .Where(category => Model.Categories.Any(cat => cat.TrainCategoryId == category.Id))
+            .ToList();
         }
         else
         {
             Model = new();
         }
-
-        base.OnInitialized();
     }
-
-    private void SelectionChanged(IEnumerable<TrainCategoryDto> selectedItems) => SelectedCategories = selectedItems.ToList();
 
     private bool Validate() => string.IsNullOrWhiteSpace(Model!.Tag);
 
@@ -84,7 +83,7 @@
 
     private async Task Submit()
     {
-        Model!.Categories = SelectedCategories.Select(category => new ContainsDto()
+        Model!.Categories = _selectedCategories.Select(category => new ContainsDto()
             {
                 TrainCategoryId = category.Id!.Value
             }).ToList();

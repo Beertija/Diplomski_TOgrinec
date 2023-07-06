@@ -36,6 +36,12 @@ public class TrainService : ITrainService
         return modelList;
     }
 
+    public List<TrainSelectorDto> GetAllTrainsForSelect()
+    {
+        var trainList = _repository.GetAll();
+        return _mapper.Map<List<TrainSelectorDto>>(trainList);
+    }
+
     public async Task<TrainDto> GetAsync(Guid id, bool includeMaintaining)
     {
         var train = (includeMaintaining

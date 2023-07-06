@@ -6,6 +6,8 @@ public interface ITrainService
 {
     Task<List<TrainDto>> GetAll();
 
+    Task<List<TrainSelectorDto>> GetAllTrainsForSelect();
+
     Task<List<TrainCategoryDto>> GetAllCategories();
 
     Task<TrainDto> GetTrainByIdWithMaintenances(Guid trainId);

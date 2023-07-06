@@ -1,8 +1,8 @@
 ﻿@page "/trains-page"
 
-@using KolodvorApp.Client.Components;
-@using KolodvorApp.Client.HttpServices;
-@using KolodvorApp.Shared.DTOs;
+@using KolodvorApp.Client.Features.Trains.Components
+@using KolodvorApp.Client.HttpServices
+@using KolodvorApp.Shared.DTOs
 
 @inject ITrainService _trainService
 @inject IDialogService _dialogService
@@ -43,7 +43,7 @@
 
     <HeaderContent>
         <MudTh Style="background-color: var(--primary-color); color: var(--white);">
-            <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Tag)">@localizer["TABLE_TAG"]</MudTableSortLabel>
+            <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Tag)">@localizer["TABLE_TRAIN_TAG"]</MudTableSortLabel>
         </MudTh>
         <MudTh Style="background-color: var(--primary-color); color: var(--white);">
             <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Capacity)">@localizer["TABLE_CAPACITY"]</MudTableSortLabel>
@@ -65,7 +65,7 @@
                 <MudTooltip Text=@localizer["OPEN_TRAIN_DETAILS"]>
                     <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="@((e) => OpenTrainDetail(context))">
                         <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.OpenInNew" />
-                        <span class="ml-3" style="white-space: nowrap">@localizer["TRAIN_OPEN_DETAIL"]</span>
+                        <span class="ml-3" style="white-space: nowrap">@localizer["OPEN_DETAIL"]</span>
                     </MudButton>
                 </MudTooltip>
                 <MudTooltip Text=@localizer["UPDATE_TRAIN"]>
@@ -92,9 +92,9 @@
 
     #region General Summary
 
-    private List<TrainDto> trainList = new List<TrainDto>();
+    private List<TrainDto> trainList = new();
 
-    private List<TrainCategoryDto> trainCategoriesList = new List<TrainCategoryDto>();
+    private List<TrainCategoryDto> trainCategoriesList = new();
 
     #endregion
 
@@ -165,13 +165,8 @@
 
     private async Task UpdateTrain(TrainDto train)
     {
-        var selectedCategories = trainCategoriesList
-                .Where(category => train.Categories.Any(cat => cat.TrainCategoryId == category.Id))
-                .ToList();
-
         var parameters = new DialogParameters();
         parameters.Add("TrainCategories", trainCategoriesList);
-        parameters.Add("SelectedCategories", selectedCategories);
         parameters.Add("Model", train);
 
         var result = await TrainAddOrUpdateDialog(parameters);
@@ -233,7 +228,7 @@
 
         if (response.IsSuccessStatusCode)
         {
-            _snackbar.Add(localizer["TRAIN_SUCCESSFUL_UPDATED"], Severity.Success);
+            _snackbar.Add(localizer["TRAIN_SUCCESSFUL_DELETED"], Severity.Success);
             trainList.Remove(train);
             StateHasChanged();
         }
