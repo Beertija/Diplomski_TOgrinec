@@ -1,0 +1,12 @@
+﻿::deep .mud-icon-button {
+    padding: 0px;
+}
+
+::deep .mud-input-adornment-end {
+    margin-left: 0px;
+    margin-inline-start: 0px;
+}
+
+::deep .mud-input > input.mud-input-root, div.mud-input-slot.mud-input-root {
+    width: 150px;
+}

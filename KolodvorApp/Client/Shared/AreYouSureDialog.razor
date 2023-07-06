@@ -1,0 +1,29 @@
+﻿<MudDialog Style="overflow-y: hidden">
+    <TitleContent>
+        <div style="max-width: 90%;">
+            <MudText Typo="Typo.h6" Style="color: var(--primary-color)">@Message</MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <MudGrid Justify="Justify.Center">
+            <MudItem>
+                <MudButton Class="btn-error" Variant="Variant.Outlined" OnClick="Confirm">@localizer["YES"]</MudButton>
+            </MudItem>
+            <MudItem>
+                <MudButton Class="btn-primary-outline ml-3" OnClick="Cancel" Variant="Variant.Filled">@localizer["NO"]</MudButton>
+            </MudItem>
+        </MudGrid>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    public MudDialogInstance? MudDialog { get; set; }
+
+    [Parameter, EditorRequired]
+    public string Message { get; set; } = null!;
+
+    private void Cancel() => MudDialog!.Cancel();
+
+    private void Confirm() => MudDialog!.Close(true);
+}

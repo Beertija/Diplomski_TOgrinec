@@ -89,13 +89,25 @@ public sealed class KolodvorAppContext : DbContext
 
             b.Property(x => x.Name)
                 .IsRequired();
+
+            b.HasMany(x => x.StartRouteStations)
+                .WithOne(x => x.StartStation)
+                .HasForeignKey(x => x.StartStationId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
+
+            b.HasMany(x => x.EndRouteStations)
+                .WithOne(x => x.EndStation)
+                .HasForeignKey(x => x.EndStationId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
         });
 
         modelBuilder.Entity<RouteStation>(b =>
         {
             b.ToTable("RouteStations");
 
-            b.HasIndex(x => new { x.StartStationId, x.EndStationId, x.RouteId, x.Order})
+            b.HasIndex(x => new { x.StartStationId, x.EndStationId, x.RouteId, x.Order })
                 .IsUnique();
 
             b.Property(x => x.Order)
@@ -115,17 +127,11 @@ public sealed class KolodvorAppContext : DbContext
 
             b.Ignore(x => x.DepartureTime);
 
-            b.HasOne(x => x.StartStation)
-                .WithMany(x => x.StartRouteStations)
-                .HasForeignKey(x => x.StartStationId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
-            
-            b.HasOne(x => x.EndStation)
-                .WithMany(x => x.EndRouteStations)
-                .HasForeignKey(x => x.EndStationId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
+            b.Navigation(x => x.StartStation)
+                .AutoInclude();
+
+            b.Navigation(x => x.EndStation)
+                .AutoInclude();
 
             b.HasOne(x => x.Route)
                 .WithMany(x => x.RouteStations)
@@ -143,6 +149,9 @@ public sealed class KolodvorAppContext : DbContext
                 .IsRequired();
 
             b.Navigation(x => x.RouteStations)
+                .AutoInclude();
+
+            b.Navigation(x => x.Train)
                 .AutoInclude();
 
             b.HasOne(x => x.Train)
@@ -164,7 +173,7 @@ public sealed class KolodvorAppContext : DbContext
 
             b.Property(x => x.Password)
                 .IsRequired();
-            
+
             b.Property(x => x.Email)
                 .IsRequired();
 

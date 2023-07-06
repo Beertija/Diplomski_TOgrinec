@@ -9,16 +9,34 @@ namespace KolodvorApp.Server.Controllers;
 public class TrainsController : ControllerBase
 {
     private readonly ITrainService _service;
+    private readonly ITrainCategoryService _trainCategoryService;
 
-    public TrainsController(ITrainService service)
+    public TrainsController(ITrainService service, ITrainCategoryService trainCategoryService)
     {
         _service = service;
+        _trainCategoryService = trainCategoryService;
     }
 
     [HttpGet]
     public ActionResult<List<TrainDto>> GetAll()
     {
         var result = _service.GetAll();
+
+        return Ok(result);
+    }
+
+    [HttpGet("selector")]
+    public ActionResult<List<TrainSelectorDto>> GetAllTrainsForSelect()
+    {
+        var result = _service.GetAllTrainsForSelect();
+
+        return Ok(result);
+    }
+
+    [HttpGet("categories")]
+    public ActionResult<List<TrainCategoryDto>> GetAllCategories()
+    {
+        var result = _trainCategoryService.GetAll();
 
         return Ok(result);
     }

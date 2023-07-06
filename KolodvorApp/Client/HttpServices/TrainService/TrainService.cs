@@ -18,8 +18,28 @@ public class TrainService : ITrainService
         return await _http.GetFromJsonAsync<List<TrainDto>>(RequestUri);
     }
 
+    public async Task<List<TrainSelectorDto>> GetAllTrainsForSelect()
+    {
+        return await _http.GetFromJsonAsync<List<TrainSelectorDto>>($"{RequestUri}/selector");
+    }
+
+    public async Task<List<TrainCategoryDto>> GetAllCategories()
+    {
+        return await _http.GetFromJsonAsync<List<TrainCategoryDto>>($"{RequestUri}/categories");
+    }
+
     public async Task<TrainDto> GetTrainByIdWithMaintenances(Guid trainId)
     {
         return await _http.GetFromJsonAsync<TrainDto>($"{RequestUri}/{trainId}/{true}");
+    }
+
+    public async Task<HttpResponseMessage> CreateOrUpdateTrain(TrainDto train)
+    {
+        return await _http.PostAsJsonAsync(RequestUri, train);
+    }
+
+    public async Task<HttpResponseMessage> DeleteTrain(Guid trainId)
+    {
+        return await _http.DeleteAsync($"{RequestUri}/{trainId}");
     }
 }

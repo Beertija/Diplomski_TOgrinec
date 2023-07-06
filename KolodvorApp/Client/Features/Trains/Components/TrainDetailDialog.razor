@@ -1,10 +1,9 @@
-﻿@using KolodvorApp.Client.HttpServices;
+﻿@using KolodvorApp.Client.HttpServices
 @using KolodvorApp.Shared.DTOs
 
 @inject ITrainMaintenanceService _trainMaintenanceService
 @inject IDialogService _dialogService
-
-@inherits PageBase
+@inject ISnackbar _snackbar
 
 <MudDialog>
     <TitleContent>
@@ -12,7 +11,7 @@
     </TitleContent>
     <DialogContent>
         <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span>@localizer["TABLE_CAPACITY"]: @TrainData.Capacity</span>
+            <span style="color: var(--secondary-color)">@localizer["TABLE_CAPACITY"]: @TrainData.Capacity</span>
             <MudTooltip Text=@localizer["ADD_MAINTENANCE"]>
                 <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="AddNewMaintenance">
                     <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Add" />
@@ -89,7 +88,7 @@
                 FullWidth = true
             };
 
-        var dialog = _dialogService.Show<TrainMaintenanceDialog>("", parameters, options);
+        var dialog = _dialogService.Show<TrainMaintenanceCreateDialog>("", parameters, options);
         var result = (TrainMaintenanceDto)(await dialog.Result).Data;
         if (result is not null)
         {
@@ -100,6 +99,20 @@
 
     private async Task Delete(TrainMaintenanceDto trainMaintenance)
     {
+        var parameters = new DialogParameters { ["Message"] = localizer["ARE_YOU_SURE"] + $""" "{trainMaintenance.Maintenance}"? """};
+
+        var options = new DialogOptions()
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.ExtraSmall,
+                FullWidth = true
+            };
+
+        var dialog = _dialogService.Show<AreYouSureDialog>("", parameters, options);
+        var result = (await dialog.Result).Data;
+
+        if (result is null) return;
+
         var response = await _trainMaintenanceService.DeleteTrainMaintenance(trainMaintenance.Id!.Value);
 
         if (response.IsSuccessStatusCode)

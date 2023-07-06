@@ -1,0 +1,164 @@
+﻿@page "/routes-page"
+
+@using KolodvorApp.Client.Features.Routes.Components
+@using KolodvorApp.Client.HttpServices
+@using KolodvorApp.Shared.DTOs
+
+@inject IRouteService _routeService
+@inject IStationService _stationService
+@inject ITrainService _trainService
+@inject IDialogService _dialogService
+@inject ISnackbar _snackbar
+
+<MudText Typo="Typo.h4" Style="color: var(--primary-color)">@localizer["PAGE_TITLE_ROUTE_OVERVIEW"]</MudText>
+<br />
+
+<MudTooltip Text=@localizer["ADD_ROUTE"]>
+    <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="AddNewRoute">
+        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Add" />
+        <span class="ml-2" style="white-space: nowrap">@localizer["ADD"]</span>
+    </MudButton>
+</MudTooltip>
+<br />
+<br />
+
+<MudTable Items="routeList" FixedHeader="true" Striped="true" Hover="true" Dense="true" Virtualize="true" Breakpoint="Breakpoint.Sm">
+    <ColGroup>
+        <col style="width: 30%;" />
+        <col style="width: 30%;" />
+        <col style="width: 20%;" />
+        <col style="width: 20%;" />
+    </ColGroup>
+
+    <HeaderContent>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
+            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.StartStation!)">@localizer["TABLE_START_STATION"]</MudTableSortLabel>
+        </MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
+            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.EndStation!)">@localizer["TABLE_END_STATION"]</MudTableSortLabel>
+        </MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
+            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.TrainTag!)">@localizer["TABLE_TRAIN_TAG"]</MudTableSortLabel>
+            </MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_DAILY_ROUTE"]</MudTh>
+        <MudTh Style="background-color: var(--primary-color)" />
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd Style="font-size: 16px">@context.StartStation</MudTd>
+        <MudTd Style="font-size: 16px">@context.EndStation</MudTd>
+        <MudTd Style="font-size: 16px">@context.TrainTag</MudTd>
+        <MudTd Style="font-size: 16px">@(context.IsDaily ? localizer["REGULAR"] : localizer["IRREGULAR"])</MudTd>
+        <MudTd Class="mr-3" Style="text-align: right">
+            <MudButtonGroup Variant="Variant.Filled" OverrideStyles="false">
+                    <MudTooltip Text=@localizer["OPEN_ROUTE_DETAILS"]>
+                        <MudButton Variant="Variant.Filled" Class="btn-warning" OnClick="@((e) => UpdateRoute(context))">
+                            <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Update" />
+                            <span class="ml-3" style="white-space: nowrap">@localizer["UPDATE"]</span>
+                    </MudButton>
+                </MudTooltip>
+                <MudTooltip Text=@localizer["DELETE_BUTTON"]>
+                    <MudButton Variant="Variant.Filled" Class="btn-error" OnClick="@((e) => Delete(context))">
+                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Delete" />
+                        <span class="ml-3" style="white-space: nowrap">@localizer["DELETE"]</span>
+                    </MudButton>
+                </MudTooltip>
+            </MudButtonGroup>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[] { 5, 10 }" />
+    </PagerContent>
+</MudTable>
+
+@code {
+
+    #region General Summary
+
+    private List<RouteDto> routeList = new();
+
+    private List<StationDto> stationsList = new();
+
+    private List<TrainSelectorDto> trainsList = new();
+
+    #endregion
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        routeList = await _routeService.GetAll();
+        stationsList = await _stationService.GetAll();
+        trainsList = await _trainService.GetAllTrainsForSelect();
+    }
+
+    private async Task AddNewRoute()
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("TrainsList", trainsList);
+        parameters.Add("StationsList", stationsList);
+
+        var result = await RouteAddOrUpdateDialog(parameters);
+        if (result is not null)
+        {
+            routeList.Add(result);
+            StateHasChanged();
+        }
+    }
+
+    private async Task<RouteDto> RouteAddOrUpdateDialog(DialogParameters parameters)
+    {
+        var options = new DialogOptions()
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.Medium,
+                FullWidth = true
+            };
+
+        var dialog = _dialogService.Show<RouteCreateDialog>("", parameters, options);
+        return (RouteDto)(await dialog.Result).Data;
+    }
+
+    private async Task UpdateRoute(RouteDto route)
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("TrainsList", trainsList);
+        parameters.Add("StationsList", stationsList);
+        parameters.Add("Model", route);
+
+        var result = await RouteAddOrUpdateDialog(parameters);
+        if (result is not null)
+        {
+            routeList.Remove(route);
+            routeList.Add(result);
+            StateHasChanged();
+        }
+    }
+
+    private async Task Delete(RouteDto route)
+    {
+        var parameters = new DialogParameters { ["Message"] = localizer["ARE_YOU_SURE"] + $""" "{route.StartStation}-{route.EndStation}"? """ };
+
+        var options = new DialogOptions()
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.ExtraSmall,
+                FullWidth = true
+            };
+
+        var dialog = _dialogService.Show<AreYouSureDialog>("", parameters, options);
+        var result = (await dialog.Result).Data;
+
+        if (result is null) return;
+
+        var response = await _routeService.DeleteRoute(route.Id!.Value);
+
+        if (response.IsSuccessStatusCode)
+        {
+            _snackbar.Add(localizer["ROUTE_SUCCESSFUL_DELETED"], Severity.Success);
+            routeList.Remove(route);
+            StateHasChanged();
+        }
+        else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
+    }
+}

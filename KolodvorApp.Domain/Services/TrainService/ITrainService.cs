@@ -6,6 +6,8 @@ public interface ITrainService
 {
     List<TrainDto> GetAll();
 
+    List<TrainSelectorDto> GetAllTrainsForSelect();
+
     Task<TrainDto> GetAsync(Guid id, bool includeMaintaining);
 
     Task<TrainDto> CreateOrUpdateAsync(TrainDto trainDto);

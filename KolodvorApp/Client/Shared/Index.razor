@@ -2,7 +2,7 @@
 
 @namespace KolodvorApp.Client.Shared
 
-@inherits PageBase
+@inject NavigationManager _navigation
 
 @code{
     protected override void OnInitialized() => _navigation.NavigateTo("/home");

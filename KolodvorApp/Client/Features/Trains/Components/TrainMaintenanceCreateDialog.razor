@@ -1,9 +1,8 @@
-﻿@using KolodvorApp.Client.HttpServices;
-@using KolodvorApp.Shared.DTOs;
+﻿@using KolodvorApp.Client.HttpServices
+@using KolodvorApp.Shared.DTOs
 
 @inject ITrainMaintenanceService _trainMaintenanceService
-
-@inherits PageBase
+@inject ISnackbar _snackbar
 
 <MudDialog>
     <TitleContent>
@@ -11,14 +10,14 @@
     </TitleContent>
     <DialogContent>
         <EditForm Model="_model">
-            <span style="font-weight: 600">@localizer["INPUT_MAINTENANCE"]</span>
+            <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_MAINTENANCE"]</span>
             <MudTextField T="string"
                           Required="true"
                           RequiredError=@localizer["REQURED_MAINTENANCE"]
                           Variant="Variant.Outlined"
                           @bind-Value="_model.Maintenance" />
             <br />
-            <span style="font-weight: 600">@localizer["INPUT_COST"]</span>
+            <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_COST"]</span>
             <MudNumericField T="decimal"
                              Min="0"
                              Format="F2"
@@ -29,7 +28,7 @@
                              @bind-Value="_model.Cost" />
             <br />
             <MudButton OnClick="Cancel">@localizer["CANCEL"]</MudButton>
-            <MudButton Class="btn-primary" Variant="Variant.Filled" OnClick="Submit" Disabled="@Validate()">@localizer["SUBMIT"]</MudButton>
+            <MudButton Class="btn-primary" Variant="Variant.Filled" OnClick="Submit" Disabled=@Validate()>@localizer["SUBMIT"]</MudButton>
         </EditForm>
     </DialogContent>
 </MudDialog>
@@ -44,7 +43,7 @@
     [Parameter, EditorRequired]
     public Guid TrainId { get; init; }
 
-    private TrainMaintenanceDto _model { get; set; } = new TrainMaintenanceDto();
+    private TrainMaintenanceDto _model { get; set; } = new();
 
     private bool Validate() => string.IsNullOrWhiteSpace(_model.Maintenance);
 
@@ -54,10 +53,17 @@
     {
         _model.TrainId = TrainId;
         var response = await _trainMaintenanceService.CreateOrUpdateTrainMaintenance(_model);
-        var content = await response.Content.ReadFromJsonAsync<TrainMaintenanceDto>();
 
-        if (response.IsSuccessStatusCode) _snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_CREATED"], Severity.Success);
-        else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
-        MudDialog!.Close(content);
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadFromJsonAsync<TrainMaintenanceDto>();
+            _snackbar.Add(localizer["TRAIN_MAINTENANCE_SUCCESSFUL_CREATED"], Severity.Success);
+            MudDialog!.Close(content);
+        }
+        else
+        {
+            _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
+            MudDialog!.Cancel();
+        }
     }
 }
