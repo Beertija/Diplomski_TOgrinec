@@ -1,7 +1,106 @@
 ﻿@page "/home"
 
-<h3>Home</h3>
+@using KolodvorApp.Client.HttpServices
+@using KolodvorApp.Shared.DTOs
+
+@inject IStationService _stationService
+
+<MudText Typo="Typo.h4" Style="color: var(--primary-color)">@localizer["PAGE_TITLE_HOME"]</MudText>
+<br />
+
+<MudPaper Elevation="3" Style="display: inline-block; padding: 8px;">
+    <EditForm Model="_model">
+        <div style="display: flex">
+            <div class="mr-8">
+                <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_START_STATION"]</span>
+                <MudAutocomplete T="StationDto"
+                                 @bind-Value="_model.StartStation"
+                                 Placeholder=@localizer["START_STATION"]
+                                 AnchorOrigin="Origin.BottomCenter"
+                                 Style="width: 230px"
+                                 SearchFunc="SortStations"
+                                 ToStringFunc="@(x => x == null ? null : $"{x.Name}")"
+                                 MaxItems="null" />
+            </div>
+
+            <div class="mr-8" style="display: flex; justify-content: center; align-items: center;">
+                <MudTooltip Text=@localizer["SWAP_BUTTON"]>
+                    <MudButton Variant="Variant.Filled" Class="btn-secondary" OnClick="SwapStations">
+                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.SwapHoriz" />
+                    </MudButton>
+                </MudTooltip>
+            </div>
+
+            <div>
+                <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_END_STATION"]</span>
+                <MudAutocomplete T="StationDto"
+                                 @bind-Value="_model.EndStation"
+                                 Placeholder=@localizer["END_STATION"]
+                                 AnchorOrigin="Origin.BottomCenter"
+                                 Style="width: 230px"
+                                 SearchFunc="SortStations"
+                                 ToStringFunc="@(x => x == null ? null : $"{x.Name}")"
+                                 MaxItems="null" />
+            </div>
+        </div>
+
+        <div style="display: flex; margin-top: 10px;">
+            <div class="mr-8">
+                <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_DATE"]</span>
+                <MudDatePicker @bind-Date="_model.Date"
+                               Style="width: 230px"
+                               DateFormat="dd.MM.yyyy." />
+            </div>
+
+            <div style="display: flex; justify-content: center; align-items: center; margin-left: 110px;">
+                <MudButton Class="btn-primary" Variant="Variant.Filled" OnClick="Submit" Disabled=@Validate() style="margin-left: auto;">@localizer["SEARCH"]</MudButton>
+            </div>
+        </div>
+    </EditForm>
+</MudPaper>
+
 
 @code {
 
+    #region General Summary
+
+    private List<StationDto> stationsList = new();
+
+    #endregion
+
+    private RouteSearchDto _model { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        stationsList = await _stationService.GetAll();
+    }
+
+    private async Task<IEnumerable<StationDto>> SortStations(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return stationsList;
+        else
+            return stationsList.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase)).ToList();
+    }
+
+    private void SwapStations()
+    {
+        var station = _model.EndStation;
+        _model.EndStation = _model.StartStation;
+        _model.StartStation = station;
+    }
+
+    private bool Validate()
+    {
+        if (_model.StartStation is null || _model.EndStation is null) return true;
+        if (_model.StartStation == _model.EndStation) return true;
+        return false;
+    }
+
+    private void Submit()
+    {
+
+    }
 }

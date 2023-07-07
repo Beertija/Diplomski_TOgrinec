@@ -150,6 +150,9 @@
   <data name="DELETE_BUTTON" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="END_STATION" xml:space="preserve">
+    <value>Rasinja</value>
+  </data>
   <data name="INPUT_ARRIVAL_TIME" xml:space="preserve">
     <value>Input arrival time</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="INPUT_COST" xml:space="preserve">
     <value>Input cost</value>
+  </data>
+  <data name="INPUT_DATE" xml:space="preserve">
+    <value>Input wanted date</value>
   </data>
   <data name="INPUT_DEPARTURE_TIME" xml:space="preserve">
     <value>Input departure time</value>
@@ -216,6 +222,9 @@
   <data name="OPEN_TRAIN_DETAILS" xml:space="preserve">
     <value>Open train details</value>
   </data>
+  <data name="PAGE_TITLE_HOME" xml:space="preserve">
+    <value>SEARCH A ROUTE</value>
+  </data>
   <data name="PAGE_TITLE_ROUTE_OVERVIEW" xml:space="preserve">
     <value>ROUTE OVERVIEW</value>
   </data>
@@ -252,14 +261,23 @@
   <data name="ROUTE_SUCCESSFUL_UPDATED" xml:space="preserve">
     <value>Route was successfuly updated</value>
   </data>
+  <data name="SEARCH" xml:space="preserve">
+    <value>SEARCH</value>
+  </data>
   <data name="SEARCH_PLACEHOLDER" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="SERVER_PROBLEMS" xml:space="preserve">
     <value>There has been an error on the server</value>
   </data>
+  <data name="START_STATION" xml:space="preserve">
+    <value>Koprivnica</value>
+  </data>
   <data name="SUBMIT" xml:space="preserve">
     <value>Submit</value>
+  </data>
+  <data name="SWAP_BUTTON" xml:space="preserve">
+    <value>Swap stations</value>
   </data>
   <data name="TABLE_CAPACITY" xml:space="preserve">
     <value>Capacity</value>

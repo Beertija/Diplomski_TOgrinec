@@ -9,14 +9,14 @@ public class RouteService : IRouteService
     private readonly IMapper _mapper;
     private readonly IRepository<Route> _repository;
     private readonly IRepository<RouteStation> _routeStationRepository;
-    private readonly IRepository<Train> _trainRepository;
+    private readonly ITrainService _trainService;
 
-    public RouteService(IMapper mapper, IRepository<Route> repository, IRepository<RouteStation> routeStationrepository, IRepository<Train> trainRepository)
+    public RouteService(IMapper mapper, IRepository<Route> repository, IRepository<RouteStation> routeStationrepository, ITrainService trainService)
     {
         _mapper = mapper;
         _repository = repository;
         _routeStationRepository = routeStationrepository;
-        _trainRepository = trainRepository;
+        _trainService = trainService;
     }
 
     public List<RouteDto> GetAll()
@@ -45,7 +45,7 @@ public class RouteService : IRouteService
             {
                 var entity = await _repository.GetAsync(route.Id);
                 _mapper.Map(route, entity);
-                entity.Train = await _trainRepository.GetAsync(route.TrainId);
+                entity.Train = await _trainService.GetSpecificAsync(route.TrainId);
                 route = await _repository.UpdateAsync(entity);
             }
             catch (KeyNotFoundException)

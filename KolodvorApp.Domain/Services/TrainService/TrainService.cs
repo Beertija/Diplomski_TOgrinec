@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using KolodvorApp.Domain.Entities;
 using KolodvorApp.Shared.DTOs;
-using System.Reflection;
 
 namespace KolodvorApp.Domain.Services;
 
@@ -56,6 +55,11 @@ public class TrainService : ITrainService
         }
 
         return model;
+    }
+
+    public async Task<Train> GetSpecificAsync(Guid id)
+    {
+        return await _repository.GetAsync(id);
     }
 
     public async Task<TrainDto> CreateOrUpdateAsync(TrainDto trainDto)
