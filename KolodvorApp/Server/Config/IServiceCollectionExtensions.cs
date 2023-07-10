@@ -56,6 +56,7 @@ public static class IServiceCollectionExtensions
         services.AddScoped<ITrainCategoryService, TrainCategoryService>();
         services.AddScoped<IStationService, StationService>();
         services.AddScoped<IRouteService, RouteService>();
+        services.AddScoped<IRouteCalculatorService, RouteCalculatorService>();
 
         return services;
     }

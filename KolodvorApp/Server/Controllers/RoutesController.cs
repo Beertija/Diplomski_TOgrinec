@@ -9,10 +9,12 @@ namespace KolodvorApp.Server.Controllers;
 public class RoutesController : ControllerBase
 {
     private readonly IRouteService _service;
+    private readonly IRouteCalculatorService _routeCalculatorService;
 
-    public RoutesController(IRouteService service)
+    public RoutesController(IRouteService service, IRouteCalculatorService routeCalculatorService)
     {
         _service = service;
+        _routeCalculatorService = routeCalculatorService;
     }
 
     [HttpGet]
@@ -47,6 +49,13 @@ public class RoutesController : ControllerBase
         {
             return Conflict("There's an error on the server.");
         }
+    }
+
+    [HttpPost("search")]
+    public ActionResult<List<MergedRoutesDto>> SearchRoutes([FromBody] RouteSearchDto searchInfo)
+    {
+        var result = _routeCalculatorService.FindTravelPaths(searchInfo);
+        return Ok(result);
     }
 
     [HttpDelete("{id}")]

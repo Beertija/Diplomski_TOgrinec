@@ -9,4 +9,6 @@ public interface IRouteService
     Task<HttpResponseMessage> CreateOrUpdateRoute(RouteDto route);
 
     Task<HttpResponseMessage> DeleteRoute(Guid routeId);
+
+    Task<HttpResponseMessage> SearchRoutes(RouteSearchDto searchInfo);
 }

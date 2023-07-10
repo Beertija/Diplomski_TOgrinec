@@ -4,6 +4,7 @@
 @using KolodvorApp.Shared.DTOs
 
 @inject IStationService _stationService
+@inject IRouteService _routeService
 
 <MudText Typo="Typo.h4" Style="color: var(--primary-color)">@localizer["PAGE_TITLE_HOME"]</MudText>
 <br />
@@ -99,8 +100,12 @@
         return false;
     }
 
-    private void Submit()
+    private async Task Submit()
     {
-
+        var response = await _routeService.SearchRoutes(_model);
+        if (response.IsSuccessStatusCode)
+        {
+            StateHasChanged();
+        }
     }
 }
