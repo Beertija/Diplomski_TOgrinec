@@ -25,14 +25,6 @@ public class RoutesController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("route-stations")]
-    public ActionResult<List<RouteStationDto>> GetAllRouteStations()
-    {
-        var result = _service.GetAllRouteStations();
-
-        return Ok(result);
-    }
-
     [HttpPost]
     public async Task<ActionResult<RouteDto>> CreateOrUpdateAsync([FromBody] RouteDto routeDto)
     {

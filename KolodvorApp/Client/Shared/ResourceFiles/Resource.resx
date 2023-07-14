@@ -216,6 +216,9 @@
   <data name="NAV_MENU_TRAINS" xml:space="preserve">
     <value>Train Overview</value>
   </data>
+  <data name="NAV_MENU_USERS" xml:space="preserve">
+    <value>User management</value>
+  </data>
   <data name="NO_ROUTE_FOUND" xml:space="preserve">
     <value>There are no routes available for</value>
   </data>

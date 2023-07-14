@@ -36,14 +36,6 @@ public class Repository<TEntity> : IRepository<TEntity>, IDisposable
             propertySelectors);
     }
 
-    public IEnumerable<object> WithDeepDetails(params Expression<Func<object, object>>[] propertySelectors)
-    {
-        return Repository<TEntity>.IncludeDetails(
-            GetDbSet().AsQueryable(),
-            propertySelectors[0],
-            propertySelectors[1]);
-    }
-
     public async Task<TEntity> InsertAsync([NotNull] TEntity entity)
     {
         var savedEntity = (await GetDbSet().AddAsync(entity)).Entity;
@@ -89,16 +81,6 @@ public class Repository<TEntity> : IRepository<TEntity>, IDisposable
         }
 
         return query;
-    }
-
-    private static IEnumerable<object> IncludeDetails(
-        IQueryable<TEntity> query,
-        Expression<Func<object, object>> rootPropertySelector,
-        Expression<Func<object, object>> detailPropertySelector)
-    {
-        var includableQuery = query.Include(rootPropertySelector).ThenInclude(detailPropertySelector).ToList();
-
-        return includableQuery;
     }
 
     public void Dispose()

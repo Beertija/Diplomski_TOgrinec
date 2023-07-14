@@ -8,14 +8,12 @@ public class RouteService : IRouteService
 {
     private readonly IMapper _mapper;
     private readonly IRepository<Route> _repository;
-    private readonly IRepository<RouteStation> _routeStationRepository;
     private readonly ITrainService _trainService;
 
-    public RouteService(IMapper mapper, IRepository<Route> repository, IRepository<RouteStation> routeStationrepository, ITrainService trainService)
+    public RouteService(IMapper mapper, IRepository<Route> repository, ITrainService trainService)
     {
         _mapper = mapper;
         _repository = repository;
-        _routeStationRepository = routeStationrepository;
         _trainService = trainService;
     }
 
@@ -23,12 +21,6 @@ public class RouteService : IRouteService
     {
         var routeList = _repository.GetAll();
         return _mapper.Map<List<RouteDto>>(routeList);
-    }
-
-    public List<RouteStationDto> GetAllRouteStations()
-    {
-        var routeList = _routeStationRepository.GetAll();
-        return _mapper.Map<List<RouteStationDto>>(routeList);
     }
 
     public async Task<RouteDto> CreateOrUpdateAsync(RouteDto routeDto)

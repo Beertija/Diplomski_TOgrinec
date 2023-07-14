@@ -22,22 +22,4 @@ public class StationsController : ControllerBase
 
         return Ok(result);
     }
-
-    [HttpGet("{id}")]
-    public async Task<ActionResult<List<StationDto>>> GetAsync(Guid id)
-    {
-        try
-        {
-            var result = await _service.GetAsync(id);
-            return Ok(result);
-        }
-        catch (KeyNotFoundException)
-        {
-            return BadRequest($"Station {id} does not exist.");
-        }
-        catch (Exception)
-        {
-            return Conflict("There's an error on the server.");
-        }
-    }
 }

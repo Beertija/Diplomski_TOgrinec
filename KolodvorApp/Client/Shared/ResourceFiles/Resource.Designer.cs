@@ -358,6 +358,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User management.
+        /// </summary>
+        public static string NAV_MENU_USERS {
+            get {
+                return ResourceManager.GetString("NAV_MENU_USERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no routes available for.
         /// </summary>
         public static string NO_ROUTE_FOUND {
