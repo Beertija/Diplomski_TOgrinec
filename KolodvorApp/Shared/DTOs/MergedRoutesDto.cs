@@ -23,9 +23,11 @@ public class MergedRoutesDto
         }
     }
 
+    public bool ShowDetails { get; set; } = false;
+
     public string TrainTag => TrainTags.First();
 
-    public int Boardings => TrainTags.Count - 1;
+    public int Transfers => TrainTags.Distinct().ToList().Count - 1;
 
     public decimal Cost
     {
@@ -34,7 +36,7 @@ public class MergedRoutesDto
             var total = RouteStations.Sum(x => x.Cost);
             var discount = (decimal)(0.04 * RouteStations.Count);
             if (discount > 0.7m) discount = 0.7m;
-            return total * discount;
+            return total * (1 - discount);
         }
     }
 
@@ -42,5 +44,18 @@ public class MergedRoutesDto
 
     public List<RouteStationDto> RouteStations { get; set; } = new();
 
-    public Dictionary<Guid, Guid> TrainRoutesConnections { get; set; } = new();
+    public Dictionary<Guid, string> RouteStationTrainConnection
+    {
+        get
+        {
+            var routeStationTrainConnection = new Dictionary<Guid, string>();
+
+            for (int i = 0; i < RouteStations.Count; i++)
+            {
+                routeStationTrainConnection[RouteStations[i].Id] = TrainTags[i];
+            }
+
+            return routeStationTrainConnection;
+        }
+    }
 }

@@ -16,53 +16,80 @@ public class RouteCalculatorService : IRouteCalculatorService
         var routes = _routeService.GetAll();
         var filteredRoutes = IsRouteAvailable(routes, (DateTime)routeSearch.Date!);
         var routeSegments = PrepareRouteSegments(filteredRoutes);
-        var travelPaths = new List<MergedRoutesDto>();
+
+        // Initialize priority queue
+        var queue = new PriorityQueue<RouteSegmentDto, double>();
+        // Maps each node to its minimum cost to reach from start station
+        var dist = new Dictionary<StationDto, double>();
+        // Maps each node to its previous node in the optimal path from start
+        var prev = new Dictionary<StationDto, RouteSegmentDto>();
 
         foreach (var segment in routeSegments)
         {
             if (segment.RouteStation.StartStation!.Id == routeSearch.StartStation.Id)
             {
-                var currentPath = new List<RouteSegmentDto>();
-                DepthFirstSearch(segment, routeSearch.EndStation, currentPath, travelPaths, routeSegments);
+                // Initialize start station's cost to reach as 0 and enqueue it
+                dist[segment.RouteStation.StartStation] = 0;
+                queue.Enqueue(segment, 0);
             }
         }
 
-        return travelPaths;
-    }
-
-    private static void DepthFirstSearch(RouteSegmentDto currentSegment, StationDto endStation, List<RouteSegmentDto> currentPath, List<MergedRoutesDto> travelPaths, List<RouteSegmentDto> routeSegments)
-    {
-        currentPath.Add(currentSegment);
-
-        if (currentSegment.RouteStation.EndStation!.Id == endStation.Id)
+        while (queue.Count > 0)
         {
-            var mergedRoute = new MergedRoutesDto();
-            foreach (var routeSegment in currentPath)
+            var currentSegment = queue.Dequeue();
+
+            foreach (var nextSegment in GetNextSegments(routeSegments, currentSegment.RouteStation))
             {
-                mergedRoute.TrainTags.Add(routeSegment.Route.TrainTag!);
-                mergedRoute.RouteStations.Add(routeSegment.RouteStation);
-            }
-            travelPaths.Add(mergedRoute);
-        }
-        else
-        {
-            foreach (var nextSegment in GetNextSegments(routeSegments, currentSegment.RouteStation.EndStation))
-            {
-                if (currentPath.All(x => x.Route == nextSegment.Route))
+                if (!prev.ContainsKey(nextSegment.RouteStation.StartStation!)
+                    || currentSegment.RouteStation.DepartureTime <= nextSegment.RouteStation.ArrivalTime)
                 {
-                    DepthFirstSearch(nextSegment, endStation, currentPath, travelPaths, routeSegments);
+                    // Update the cost to reach the next station
+                    var alt = dist[currentSegment.RouteStation.StartStation!]
+                                + (nextSegment.RouteStation.ArrivalTime - currentSegment.RouteStation.DepartureTime).TotalMinutes;
+
+                    if (!dist.ContainsKey(nextSegment.RouteStation.StartStation!) || alt < dist[nextSegment.RouteStation.StartStation!])
+                    {
+                        dist[nextSegment.RouteStation.StartStation!] = alt;
+                        prev[nextSegment.RouteStation.StartStation!] = currentSegment;
+                        queue.Enqueue(nextSegment, alt);
+                    }
                 }
             }
         }
 
-        currentPath.RemoveAt(currentPath.Count - 1);
+        // Construct all the paths
+        var travelPaths = new List<MergedRoutesDto>();
+        foreach (var targetSegment in routeSegments.Where(segment => segment.RouteStation.EndStation!.Id == routeSearch.EndStation.Id))
+        {
+            var path = new List<RouteSegmentDto>();
+            var current = targetSegment;
+
+            // Go backwards from the target to the source to construct the path
+            while (current != null)
+            {
+                path.Add(current);
+                prev.TryGetValue(current.RouteStation.StartStation!, out current);
+            }
+
+            var routeStations = path.Select(x => x.RouteStation).OrderBy(station => station.ArrivalTime).ToList();
+            if (routeStations.First().StartStation!.Name == routeSearch.StartStation.Name && routeStations.Last().EndStation!.Name == routeSearch.EndStation.Name)
+            {
+                travelPaths.Add(new MergedRoutesDto
+                {
+                    RouteStations = routeStations,
+                    TrainTags = path.Select(x => x.Route.TrainTag!).ToList()
+                });
+            }
+        }
+
+        return travelPaths.Where(path => path.Duration <= TimeSpan.FromHours(18)).ToList();
     }
+
 
     private static List<RouteDto> IsRouteAvailable(List<RouteDto> routes, DateTime dateOfTravel)
     {
-        return routes.Where(route => route.IsDaily 
-            || !(dateOfTravel.DayOfWeek == DayOfWeek.Saturday || dateOfTravel.DayOfWeek == DayOfWeek.Sunday))
-            .ToList();
+        return routes.Where(route => route.IsDaily
+            || !(dateOfTravel.DayOfWeek == DayOfWeek.Saturday || dateOfTravel.DayOfWeek == DayOfWeek.Sunday)).ToList();
     }
 
     private static List<RouteSegmentDto> PrepareRouteSegments(List<RouteDto> filteredRoutes)
@@ -84,8 +111,11 @@ public class RouteCalculatorService : IRouteCalculatorService
         return routeSegments;
     }
 
-    private static List<RouteSegmentDto> GetNextSegments(List<RouteSegmentDto> routeSegments, StationDto endStation)
+    private static List<RouteSegmentDto> GetNextSegments(List<RouteSegmentDto> routeSegments, RouteStationDto endStation)
     {
-        return routeSegments.Where(x => x.RouteStation.StartStationId == endStation.Id).ToList();
+        return routeSegments
+            .Where(x => x.RouteStation.StartStationId == endStation.EndStation!.Id
+                && x.RouteStation.DepartureTime >= endStation.ArrivalTime)
+            .ToList();
     }
 }

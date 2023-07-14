@@ -75,6 +75,8 @@
     {
         if (string.IsNullOrEmpty(value))
             return StationsList;
+        else if (StationsList.Any(x => x.Name == value))
+            return StationsList;
         else
             return StationsList.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase)).ToList();
     }

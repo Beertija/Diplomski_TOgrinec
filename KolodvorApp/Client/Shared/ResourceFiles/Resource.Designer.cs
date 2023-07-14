@@ -142,6 +142,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close route details.
+        /// </summary>
+        public static string CLOSE_ROUTE_DETAILS {
+            get {
+                return ResourceManager.GetString("CLOSE_ROUTE_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DELETE.
         /// </summary>
         public static string DELETE {
@@ -345,6 +354,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string NAV_MENU_TRAINS {
             get {
                 return ResourceManager.GetString("NAV_MENU_TRAINS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no routes available for.
+        /// </summary>
+        public static string NO_ROUTE_FOUND {
+            get {
+                return ResourceManager.GetString("NO_ROUTE_FOUND", resourceCulture);
             }
         }
         
@@ -583,11 +601,29 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        public static string TABLE_DURATION {
+            get {
+                return ResourceManager.GetString("TABLE_DURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End station.
         /// </summary>
         public static string TABLE_END_STATION {
             get {
                 return ResourceManager.GetString("TABLE_END_STATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arrival.
+        /// </summary>
+        public static string TABLE_END_TIME {
+            get {
+                return ResourceManager.GetString("TABLE_END_TIME", resourceCulture);
             }
         }
         
@@ -610,6 +646,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Departure.
+        /// </summary>
+        public static string TABLE_START_TIME {
+            get {
+                return ResourceManager.GetString("TABLE_START_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total Cost.
         /// </summary>
         public static string TABLE_TOTAL_COST {
@@ -624,6 +669,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string TABLE_TRAIN_TAG {
             get {
                 return ResourceManager.GetString("TABLE_TRAIN_TAG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfers.
+        /// </summary>
+        public static string TABLE_TRANSFERS {
+            get {
+                return ResourceManager.GetString("TABLE_TRANSFERS", resourceCulture);
             }
         }
         
