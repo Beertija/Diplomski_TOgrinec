@@ -142,6 +142,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close route details.
+        /// </summary>
+        public static string CLOSE_ROUTE_DETAILS {
+            get {
+                return ResourceManager.GetString("CLOSE_ROUTE_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DELETE.
         /// </summary>
         public static string DELETE {
@@ -156,6 +165,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string DELETE_BUTTON {
             get {
                 return ResourceManager.GetString("DELETE_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rasinja.
+        /// </summary>
+        public static string END_STATION {
+            get {
+                return ResourceManager.GetString("END_STATION", resourceCulture);
             }
         }
         
@@ -192,6 +210,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string INPUT_COST {
             get {
                 return ResourceManager.GetString("INPUT_COST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input wanted date.
+        /// </summary>
+        public static string INPUT_DATE {
+            get {
+                return ResourceManager.GetString("INPUT_DATE", resourceCulture);
             }
         }
         
@@ -331,6 +358,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no routes available for.
+        /// </summary>
+        public static string NO_ROUTE_FOUND {
+            get {
+                return ResourceManager.GetString("NO_ROUTE_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VIEW DETAILS.
         /// </summary>
         public static string OPEN_DETAIL {
@@ -354,6 +390,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string OPEN_TRAIN_DETAILS {
             get {
                 return ResourceManager.GetString("OPEN_TRAIN_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SEARCH A ROUTE.
+        /// </summary>
+        public static string PAGE_TITLE_HOME {
+            get {
+                return ResourceManager.GetString("PAGE_TITLE_HOME", resourceCulture);
             }
         }
         
@@ -466,6 +511,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SEARCH.
+        /// </summary>
+        public static string SEARCH {
+            get {
+                return ResourceManager.GetString("SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string SEARCH_PLACEHOLDER {
@@ -484,11 +538,29 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Koprivnica.
+        /// </summary>
+        public static string START_STATION {
+            get {
+                return ResourceManager.GetString("START_STATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
         public static string SUBMIT {
             get {
                 return ResourceManager.GetString("SUBMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swap stations.
+        /// </summary>
+        public static string SWAP_BUTTON {
+            get {
+                return ResourceManager.GetString("SWAP_BUTTON", resourceCulture);
             }
         }
         
@@ -529,11 +601,29 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        public static string TABLE_DURATION {
+            get {
+                return ResourceManager.GetString("TABLE_DURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End station.
         /// </summary>
         public static string TABLE_END_STATION {
             get {
                 return ResourceManager.GetString("TABLE_END_STATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arrival.
+        /// </summary>
+        public static string TABLE_END_TIME {
+            get {
+                return ResourceManager.GetString("TABLE_END_TIME", resourceCulture);
             }
         }
         
@@ -556,6 +646,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Departure.
+        /// </summary>
+        public static string TABLE_START_TIME {
+            get {
+                return ResourceManager.GetString("TABLE_START_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total Cost.
         /// </summary>
         public static string TABLE_TOTAL_COST {
@@ -570,6 +669,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string TABLE_TRAIN_TAG {
             get {
                 return ResourceManager.GetString("TABLE_TRAIN_TAG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfers.
+        /// </summary>
+        public static string TABLE_TRANSFERS {
+            get {
+                return ResourceManager.GetString("TABLE_TRANSFERS", resourceCulture);
             }
         }
         

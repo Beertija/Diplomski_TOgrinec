@@ -15,8 +15,8 @@ public class RouteStationModel
 
     public TimeSpan? StartTime
     {
-        get { return ArrivalTime?.ToTimeSpan(); }
-        set { ArrivalTime = value.HasValue ? TimeOnly.FromTimeSpan(value.Value) : null; }
+        get { return DepartureTime?.ToTimeSpan(); }
+        set { DepartureTime = value.HasValue ? TimeOnly.FromTimeSpan(value.Value) : null; }
     }
 
     [property: JsonConverter(typeof(TimeOnlyConverter))]
@@ -24,8 +24,8 @@ public class RouteStationModel
 
     public TimeSpan? EndTime
     {
-        get { return DepartureTime?.ToTimeSpan(); }
-        set { DepartureTime = value.HasValue ? TimeOnly.FromTimeSpan(value.Value) : null; }
+        get { return ArrivalTime?.ToTimeSpan(); }
+        set { ArrivalTime = value.HasValue ? TimeOnly.FromTimeSpan(value.Value) : null; }
     }
 
     public StationDto StartStation { get; set; } = null!;

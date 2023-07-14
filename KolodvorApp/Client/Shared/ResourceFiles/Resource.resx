@@ -144,11 +144,17 @@
   <data name="CAPACITY" xml:space="preserve">
     <value>Capacity</value>
   </data>
+  <data name="CLOSE_ROUTE_DETAILS" xml:space="preserve">
+    <value>Close route details</value>
+  </data>
   <data name="DELETE" xml:space="preserve">
     <value>DELETE</value>
   </data>
   <data name="DELETE_BUTTON" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="END_STATION" xml:space="preserve">
+    <value>Rasinja</value>
   </data>
   <data name="INPUT_ARRIVAL_TIME" xml:space="preserve">
     <value>Input arrival time</value>
@@ -161,6 +167,9 @@
   </data>
   <data name="INPUT_COST" xml:space="preserve">
     <value>Input cost</value>
+  </data>
+  <data name="INPUT_DATE" xml:space="preserve">
+    <value>Input wanted date</value>
   </data>
   <data name="INPUT_DEPARTURE_TIME" xml:space="preserve">
     <value>Input departure time</value>
@@ -207,6 +216,9 @@
   <data name="NAV_MENU_TRAINS" xml:space="preserve">
     <value>Train Overview</value>
   </data>
+  <data name="NO_ROUTE_FOUND" xml:space="preserve">
+    <value>There are no routes available for</value>
+  </data>
   <data name="OPEN_DETAIL" xml:space="preserve">
     <value>VIEW DETAILS</value>
   </data>
@@ -215,6 +227,9 @@
   </data>
   <data name="OPEN_TRAIN_DETAILS" xml:space="preserve">
     <value>Open train details</value>
+  </data>
+  <data name="PAGE_TITLE_HOME" xml:space="preserve">
+    <value>SEARCH A ROUTE</value>
   </data>
   <data name="PAGE_TITLE_ROUTE_OVERVIEW" xml:space="preserve">
     <value>ROUTE OVERVIEW</value>
@@ -252,14 +267,23 @@
   <data name="ROUTE_SUCCESSFUL_UPDATED" xml:space="preserve">
     <value>Route was successfuly updated</value>
   </data>
+  <data name="SEARCH" xml:space="preserve">
+    <value>SEARCH</value>
+  </data>
   <data name="SEARCH_PLACEHOLDER" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="SERVER_PROBLEMS" xml:space="preserve">
     <value>There has been an error on the server</value>
   </data>
+  <data name="START_STATION" xml:space="preserve">
+    <value>Koprivnica</value>
+  </data>
   <data name="SUBMIT" xml:space="preserve">
     <value>Submit</value>
+  </data>
+  <data name="SWAP_BUTTON" xml:space="preserve">
+    <value>Swap stations</value>
   </data>
   <data name="TABLE_CAPACITY" xml:space="preserve">
     <value>Capacity</value>
@@ -273,8 +297,14 @@
   <data name="TABLE_DAILY_ROUTE" xml:space="preserve">
     <value>Regularity of a train</value>
   </data>
+  <data name="TABLE_DURATION" xml:space="preserve">
+    <value>Duration</value>
+  </data>
   <data name="TABLE_END_STATION" xml:space="preserve">
     <value>End station</value>
+  </data>
+  <data name="TABLE_END_TIME" xml:space="preserve">
+    <value>Arrival</value>
   </data>
   <data name="TABLE_MAINTENANCE" xml:space="preserve">
     <value>Maintenance</value>
@@ -282,11 +312,17 @@
   <data name="TABLE_START_STATION" xml:space="preserve">
     <value>Start station</value>
   </data>
+  <data name="TABLE_START_TIME" xml:space="preserve">
+    <value>Departure</value>
+  </data>
   <data name="TABLE_TOTAL_COST" xml:space="preserve">
     <value>Total Cost</value>
   </data>
   <data name="TABLE_TRAIN_TAG" xml:space="preserve">
     <value>Train tag</value>
+  </data>
+  <data name="TABLE_TRANSFERS" xml:space="preserve">
+    <value>Transfers</value>
   </data>
   <data name="TRAIN_DIALOG_TITLE_1" xml:space="preserve">
     <value>Train </value>
