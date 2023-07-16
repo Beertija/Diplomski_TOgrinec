@@ -1,0 +1,42 @@
+﻿@using KolodvorApp.Shared.DTOs
+
+<MudPaper Elevation="0" Style="display: inline-block; width: 40vw;">
+    <MudTable Items="UsersList" FixedHeader="true" FixedFooter="true" Hover="true" Breakpoint="Breakpoint.Sm">
+        <ColGroup>
+            <col style="width: 40%;" />
+            <col style="width: 40%;" />
+            <col style="width: 10%;" />
+        </ColGroup>
+        <HeaderContent>
+            <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_NAME"]</MudTh>
+            <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_EMAIL"]</MudTh>
+            <MudTh Style="background-color: var(--primary-color)" />
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd Style="font-weight: 400">@context.Name</MudTd>
+            <MudTd Style="font-weight: 400">@context.Email</MudTd>
+            <MudTd Class="mr-3" Style="text-align: right">
+                <MudButtonGroup Variant="Variant.Filled" OverrideStyles="false">
+                    <MudTooltip Text=@localizer["PROMOTE_BUTTON"]>
+                        <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="@((e) => PromoteToEmployee(context))">
+                            <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.TrendingUp" />
+                            <span class="ml-3" style="white-space: nowrap">@localizer["PROMOTE"]</span>
+                        </MudButton>
+                    </MudTooltip>
+                </MudButtonGroup>
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[] { 10, 15 }" />
+        </PagerContent>
+    </MudTable>
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired]
+    public List<UserDto> UsersList { get; init; } = new();
+
+    private void PromoteToEmployee(UserDto user)
+    {
+    }
+}

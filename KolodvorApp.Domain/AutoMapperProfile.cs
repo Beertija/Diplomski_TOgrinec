@@ -75,5 +75,7 @@ public class AutoMapperProfile : Profile
                 Order = model.Order
             })));
         CreateMap<Route, Route>();
+
+        CreateMap<User, UserDto>();
     }
 }

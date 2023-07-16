@@ -1,7 +1,27 @@
 ﻿@page "/users-page"
 
-<h3>UsersPage</h3>
+@using KolodvorApp.Client.Features.Users.Components
+@using KolodvorApp.Client.HttpServices
+@using KolodvorApp.Shared.DTOs
+
+@inject IUserService _userService
+
+<MudText Typo="Typo.h4" Style="color: var(--primary-color)">@localizer["PAGE_TITLE_USER_MANAGEMENT"]</MudText>
+<br />
+
+<UsersTable UsersList="_usersList" />
 
 @code {
+    #region General summary
 
+    private List<UserDto> _usersList { get; set; } = new();
+
+    #endregion
+
+    protected override async Task OnInitializedAsync()
+    {
+        _usersList = await _userService.GetAllEmployees();
+
+        await base.OnInitializedAsync();
+    }
 }

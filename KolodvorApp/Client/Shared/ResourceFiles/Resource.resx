@@ -240,11 +240,20 @@
   <data name="PAGE_TITLE_TRAIN_OVERVIEW" xml:space="preserve">
     <value>TRAIN OVERVIEW</value>
   </data>
+  <data name="PAGE_TITLE_USER_MANAGEMENT" xml:space="preserve">
+    <value>USER MANAGEMENT</value>
+  </data>
   <data name="PLACEHOLDER_CATEGORIES" xml:space="preserve">
     <value>Train category</value>
   </data>
   <data name="PLACEHOLDER_TRAIN" xml:space="preserve">
     <value>Train</value>
+  </data>
+  <data name="PROMOTE" xml:space="preserve">
+    <value>Promote</value>
+  </data>
+  <data name="PROMOTE_BUTTON" xml:space="preserve">
+    <value>Promote to employee</value>
   </data>
   <data name="REGULAR" xml:space="preserve">
     <value>Regular</value>
@@ -303,6 +312,9 @@
   <data name="TABLE_DURATION" xml:space="preserve">
     <value>Duration</value>
   </data>
+  <data name="TABLE_EMAIL" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="TABLE_END_STATION" xml:space="preserve">
     <value>End station</value>
   </data>
@@ -311,6 +323,9 @@
   </data>
   <data name="TABLE_MAINTENANCE" xml:space="preserve">
     <value>Maintenance</value>
+  </data>
+  <data name="TABLE_NAME" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="TABLE_START_STATION" xml:space="preserve">
     <value>Start station</value>

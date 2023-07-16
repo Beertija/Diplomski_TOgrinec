@@ -430,6 +430,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to USER MANAGEMENT.
+        /// </summary>
+        public static string PAGE_TITLE_USER_MANAGEMENT {
+            get {
+                return ResourceManager.GetString("PAGE_TITLE_USER_MANAGEMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Train category.
         /// </summary>
         public static string PLACEHOLDER_CATEGORIES {
@@ -444,6 +453,24 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string PLACEHOLDER_TRAIN {
             get {
                 return ResourceManager.GetString("PLACEHOLDER_TRAIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promote.
+        /// </summary>
+        public static string PROMOTE {
+            get {
+                return ResourceManager.GetString("PROMOTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promote to employee.
+        /// </summary>
+        public static string PROMOTE_BUTTON {
+            get {
+                return ResourceManager.GetString("PROMOTE_BUTTON", resourceCulture);
             }
         }
         
@@ -619,6 +646,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string TABLE_EMAIL {
+            get {
+                return ResourceManager.GetString("TABLE_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End station.
         /// </summary>
         public static string TABLE_END_STATION {
@@ -642,6 +678,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string TABLE_MAINTENANCE {
             get {
                 return ResourceManager.GetString("TABLE_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string TABLE_NAME {
+            get {
+                return ResourceManager.GetString("TABLE_NAME", resourceCulture);
             }
         }
         
