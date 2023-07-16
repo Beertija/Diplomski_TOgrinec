@@ -68,7 +68,7 @@
     [Parameter, EditorRequired]
     public RouteStationModel Model { get; set; } = new();
 
-    [Parameter]
+    [Parameter, EditorRequired]
     public EventCallback<RouteStationModel> OnDelete { get; set; }
 
     private async Task<IEnumerable<StationDto>> SortStations(string value)

@@ -34,129 +34,24 @@
 <br />
 <br />
 
-<MudTable Items="trainList" FixedHeader="true" Striped="true" Hover="true" Dense="true" Virtualize="true" Breakpoint="Breakpoint.Sm" Filter="new Func<TrainDto, bool>(FilterFunc)">
-    <ColGroup>
-        <col style="width: 20%;" />
-        <col style="width: 20%;" />
-        <col style="width: 40%;" />
-    </ColGroup>
-
-    <HeaderContent>
-        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
-            <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Tag)">@localizer["TABLE_TRAIN_TAG"]</MudTableSortLabel>
-        </MudTh>
-        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
-            <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Capacity)">@localizer["TABLE_CAPACITY"]</MudTableSortLabel>
-        </MudTh>
-        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_CATEGORIES"]</MudTh>
-        <MudTh Style="background-color: var(--primary-color)">
-            <MudFocusTrap Class="search">
-                <MudTextField Style="color: var(--white); font-weight: 600;" @bind-Value="_searchString" Immediate="true" Clearable="true" Placeholder=@localizer["SEARCH_PLACEHOLDER"] Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Class="mt-0" />
-            </MudFocusTrap>
-        </MudTh>
-    </HeaderContent>
-
-    <RowTemplate>
-        <MudTd Style="font-size: 16px">@context.Tag</MudTd>
-        <MudTd Style="font-size: 16px">@context.Capacity</MudTd>
-        <MudTd>@RenderTrainCategoryIcons.IconDisplay(context.Categories)</MudTd>
-        <MudTd Class="mr-3" Style="text-align: right">
-            <MudButtonGroup Variant="Variant.Filled" OverrideStyles="false">
-                <MudTooltip Text=@localizer["OPEN_TRAIN_DETAILS"]>
-                    <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="@((e) => OpenTrainDetail(context))">
-                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.OpenInNew" />
-                        <span class="ml-3" style="white-space: nowrap">@localizer["OPEN_DETAIL"]</span>
-                    </MudButton>
-                </MudTooltip>
-                <MudTooltip Text=@localizer["UPDATE_TRAIN"]>
-                    <MudButton Variant="Variant.Filled" Class="btn-warning" OnClick="@((e) => UpdateTrain(context))">
-                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Update" />
-                        <span class="ml-3" style="white-space: nowrap">@localizer["UPDATE"]</span>
-                    </MudButton>
-                </MudTooltip>
-                <MudTooltip Text=@localizer["DELETE_BUTTON"]>
-                    <MudButton Variant="Variant.Filled" Class="btn-error" OnClick="@((e) => Delete(context))">
-                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Delete" />
-                        <span class="ml-3" style="white-space: nowrap">@localizer["DELETE"]</span>
-                    </MudButton>
-                </MudTooltip>
-            </MudButtonGroup>
-        </MudTd>
-    </RowTemplate>
-    <PagerContent>
-        <MudTablePager PageSizeOptions="new int[] { 5, 10 }" />
-    </PagerContent>
-</MudTable>
+<TrainsTable TrainList="_trainList" OpenTrainDetail="OpenTrainDetail" UpdateTrain="UpdateTrain" DeleteTrain="DeleteTrain" />
 
 @code {
 
     #region General Summary
 
-    private List<TrainDto> trainList = new();
+    private List<TrainDto> _trainList = new();
 
-    private List<TrainCategoryDto> trainCategoriesList = new();
+    private List<TrainCategoryDto> _trainCategoriesList = new();
 
     #endregion
-
-    private string? _searchString { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
 
-        trainList = await _trainService.GetAll();
-        trainCategoriesList = await _trainService.GetAllCategories();
-    }
-
-    private bool FilterFunc(TrainDto element) => FilterFunction(element, _searchString);
-
-    private bool FilterFunction(TrainDto element, string? searchString)
-    {
-        if (string.IsNullOrWhiteSpace(searchString) ||
-            element.Tag.Contains(searchString, StringComparison.OrdinalIgnoreCase))
-            return true;
-        return false;
-    }
-
-    private async Task AddNewTrain()
-    {
-        var parameters = new DialogParameters();
-        parameters.Add("TrainCategories", trainCategoriesList);
-
-        var result = await TrainAddOrUpdateDialog(parameters);
-        if (result is not null)
-        {
-            trainList.Add(result);
-            StateHasChanged();
-        }
-    }
-
-    private async Task UpdateTrain(TrainDto train)
-    {
-        var parameters = new DialogParameters();
-        parameters.Add("TrainCategories", trainCategoriesList);
-        parameters.Add("Model", train);
-
-        var result = await TrainAddOrUpdateDialog(parameters);
-        if (result is not null)
-        {
-            trainList.Remove(train);
-            trainList.Add(result);
-            StateHasChanged();
-        }
-    }
-
-    private async Task<TrainDto> TrainAddOrUpdateDialog(DialogParameters parameters)
-    {
-        var options = new DialogOptions()
-            {
-                CloseButton = true,
-                MaxWidth = MaxWidth.Small,
-                FullWidth = true
-            };
-
-        var dialog = _dialogService.Show<TrainCreateDialog>("", parameters, options);
-        return (TrainDto)(await dialog.Result).Data;
+        _trainList = await _trainService.GetAll();
+        _trainCategoriesList = await _trainService.GetAllCategories();
     }
 
     private async Task OpenTrainDetail(TrainDto train)
@@ -176,7 +71,48 @@
         var result = await dialog.Result;
     }
 
-    private async Task Delete(TrainDto train)
+    private async Task AddNewTrain()
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("TrainCategories", _trainCategoriesList);
+
+        var result = await TrainAddOrUpdateDialog(parameters);
+        if (result is not null)
+        {
+            _trainList.Add(result);
+            StateHasChanged();
+        }
+    }
+
+    private async Task UpdateTrain(TrainDto train)
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("TrainCategories", _trainCategoriesList);
+        parameters.Add("Model", train);
+
+        var result = await TrainAddOrUpdateDialog(parameters);
+        if (result is not null)
+        {
+            _trainList.Remove(train);
+            _trainList.Add(result);
+            StateHasChanged();
+        }
+    }
+
+    private async Task<TrainDto> TrainAddOrUpdateDialog(DialogParameters parameters)
+    {
+        var options = new DialogOptions()
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.Small,
+                FullWidth = true
+            };
+
+        var dialog = _dialogService.Show<TrainCreateDialog>("", parameters, options);
+        return (TrainDto)(await dialog.Result).Data;
+    }
+
+    private async Task DeleteTrain(TrainDto train)
     {
         var parameters = new DialogParameters { ["Message"] = localizer["ARE_YOU_SURE"] + $""" "{train.Tag}"? """ };
 
@@ -197,7 +133,7 @@
         if (response.IsSuccessStatusCode)
         {
             _snackbar.Add(localizer["TRAIN_SUCCESSFUL_DELETED"], Severity.Success);
-            trainList.Remove(train);
+            _trainList.Remove(train);
             StateHasChanged();
         }
         else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);

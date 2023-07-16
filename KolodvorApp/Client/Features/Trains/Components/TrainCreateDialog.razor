@@ -102,9 +102,6 @@
             var errorMessage = await response.Content.ReadAsStringAsync();
             _snackbar.Add(errorMessage, Severity.Warning);
         }
-        else
-        {
-            _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Error);
-        }
+        else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Error);
     }
 }

@@ -1,0 +1,67 @@
+﻿@using KolodvorApp.Shared.DTOs
+
+<MudTable Items="RouteList" FixedHeader="true" Striped="true" Hover="true" Dense="true" Virtualize="true" Breakpoint="Breakpoint.Sm">
+    <ColGroup>
+        <col style="width: 30%;" />
+        <col style="width: 30%;" />
+        <col style="width: 20%;" />
+        <col style="width: 20%;" />
+    </ColGroup>
+
+    <HeaderContent>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
+            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.StartStation!)">@localizer["TABLE_START_STATION"]</MudTableSortLabel>
+        </MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
+            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.EndStation!)">@localizer["TABLE_END_STATION"]</MudTableSortLabel>
+        </MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
+            <MudTableSortLabel SortBy="new Func<RouteDto, object>(x => x.TrainTag!)">@localizer["TABLE_TRAIN_TAG"]</MudTableSortLabel>
+        </MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_DAILY_ROUTE"]</MudTh>
+        <MudTh Style="background-color: var(--primary-color)" />
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd Style="font-size: 16px">@context.StartStation</MudTd>
+        <MudTd Style="font-size: 16px">@context.EndStation</MudTd>
+        <MudTd Style="font-size: 16px">@context.TrainTag</MudTd>
+        <MudTd Style="font-size: 16px">@(context.IsDaily ? localizer["REGULAR"] : localizer["IRREGULAR"])</MudTd>
+            <MudTd Class="mr-3" Style="text-align: right">
+                <MudButtonGroup Variant="Variant.Filled" OverrideStyles="false">
+                    <MudTooltip Text=@localizer["OPEN_ROUTE_DETAILS"]>
+                        <MudButton Variant="Variant.Filled" Class="btn-warning" OnClick="@((e) => OnUpdateRoute(context))">
+                            <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Update" />
+                            <span class="ml-3" style="white-space: nowrap">@localizer["UPDATE"]</span>
+                        </MudButton>
+                    </MudTooltip>
+                    <MudTooltip Text=@localizer["DELETE_BUTTON"]>
+                        <MudButton Variant="Variant.Filled" Class="btn-error" OnClick="@((e) => OnDeleteRoute(context))">
+                            <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Delete" />
+                            <span class="ml-3" style="white-space: nowrap">@localizer["DELETE"]</span>
+                        </MudButton>
+                    </MudTooltip>
+                </MudButtonGroup>
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[] { 5, 10 }" />
+        </PagerContent>
+    </MudTable>
+
+    @code {
+    [Parameter, EditorRequired]
+    public List<RouteDto> RouteList { get; init; } = new();
+
+    [Parameter, EditorRequired]
+    public EventCallback<RouteDto> UpdateRoute { get; init; }
+
+    [Parameter, EditorRequired]
+    public EventCallback<RouteDto> DeleteRoute { get; init; }
+
+    private async Task OnUpdateRoute(RouteDto route)
+        => await UpdateRoute.InvokeAsync(route);
+
+    private async Task OnDeleteRoute(RouteDto route)
+        => await DeleteRoute.InvokeAsync(route);
+}

@@ -62,13 +62,13 @@
     </EditForm>
 </MudPaper>
 
-@if (isSubmitPressed)
+@if (_isSubmitPressed)
 {
-    if (routesList.Count > 0)
+    if (_routesList.Count > 0)
     {
         <br />
         <br />
-        <SearchRouteTable RouteList="routesList" TrainList="trainList"/>
+        <SearchRouteTable RouteList="_routesList" TrainList="_trainList"/>
     }
     else
     {
@@ -80,15 +80,15 @@
 
     #region General Summary
 
-    private List<StationDto> stationsList = new();
+    private List<StationDto> _stationsList = new();
 
-    private List<MergedRoutesDto> routesList = new();
+    private List<MergedRoutesDto> _routesList = new();
 
-    private List<TrainDto> trainList = new();
+    private List<TrainDto> _trainList = new();
 
     #endregion
 
-    private bool isSubmitPressed = false;
+    private bool _isSubmitPressed = false;
 
     private RouteSearchDto _model { get; set; } = new();
 
@@ -96,18 +96,18 @@
     {
         await base.OnInitializedAsync();
 
-        stationsList = await _stationService.GetAll();
-        trainList = await _trainService.GetAll();
+        _stationsList = await _stationService.GetAll();
+        _trainList = await _trainService.GetAll();
     }
 
     private async Task<IEnumerable<StationDto>> SortStations(string value)
     {
         if (string.IsNullOrEmpty(value))
-            return stationsList;
-        else if (stationsList.Any(x => x.Name == value))
-            return stationsList;
+            return _stationsList;
+        else if (_stationsList.Any(x => x.Name == value))
+            return _stationsList;
         else
-            return stationsList.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            return _stationsList.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase)).ToList();
     }
 
     private void SwapStations()
@@ -129,8 +129,8 @@
         var response = await _routeService.SearchRoutes(_model);
         if (response.IsSuccessStatusCode)
         {
-            routesList = await response.Content.ReadFromJsonAsync<List<MergedRoutesDto>>();
-            isSubmitPressed = true;
+            _routesList = await response.Content.ReadFromJsonAsync<List<MergedRoutesDto>>();
+            _isSubmitPressed = true;
             StateHasChanged();
         }
     }
