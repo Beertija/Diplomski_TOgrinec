@@ -17,10 +17,10 @@
             <MudTd Style="font-weight: 400">@context.Email</MudTd>
             <MudTd Class="mr-3" Style="text-align: right">
                 <MudButtonGroup Variant="Variant.Filled" OverrideStyles="false">
-                    <MudTooltip Text=@localizer["PROMOTE_BUTTON"]>
-                        <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="@((e) => PromoteToEmployee(context))">
-                            <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.TrendingUp" />
-                            <span class="ml-3" style="white-space: nowrap">@localizer["PROMOTE"]</span>
+                    <MudTooltip Text=@(IsEmployeeView ? localizer["DEMOTE_BUTTON"] : localizer["PROMOTE_BUTTON"])>
+                        <MudButton Variant="Variant.Filled" Class=@(IsEmployeeView ? "btn-secondary" : "btn-primary") OnClick=@((e) => OnAction(context))>
+                            <MudIcon Style="color: var(--white)" Icon=@(IsEmployeeView ? Icons.Material.Filled.TrendingDown : Icons.Material.Filled.TrendingUp) />
+                            <span class="ml-3" style="white-space: nowrap">@(IsEmployeeView ? localizer["DEMOTE"] : localizer["PROMOTE"])</span>
                         </MudButton>
                     </MudTooltip>
                 </MudButtonGroup>
@@ -36,7 +36,12 @@
     [Parameter, EditorRequired]
     public List<UserDto> UsersList { get; init; } = new();
 
-    private void PromoteToEmployee(UserDto user)
-    {
-    }
+    [Parameter, EditorRequired]
+    public bool IsEmployeeView { get; init; }
+
+    [Parameter, EditorRequired]
+    public EventCallback<UserDto> Action { get; init; }
+
+    private async Task OnAction(UserDto user)
+        => await Action.InvokeAsync(user);
 }

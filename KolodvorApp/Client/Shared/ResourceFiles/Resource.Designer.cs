@@ -169,6 +169,24 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Demote.
+        /// </summary>
+        public static string DEMOTE {
+            get {
+                return ResourceManager.GetString("DEMOTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demote to user.
+        /// </summary>
+        public static string DEMOTE_BUTTON {
+            get {
+                return ResourceManager.GetString("DEMOTE_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rasinja.
         /// </summary>
         public static string END_STATION {
@@ -601,6 +619,24 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EMPLOYEES.
+        /// </summary>
+        public static string TAB_EMPLOYEES {
+            get {
+                return ResourceManager.GetString("TAB_EMPLOYEES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to REGULAR USERS.
+        /// </summary>
+        public static string TAB_USERS {
+            get {
+                return ResourceManager.GetString("TAB_USERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Capacity.
         /// </summary>
         public static string TABLE_CAPACITY {
@@ -822,6 +858,24 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string UPDATE_TRAIN {
             get {
                 return ResourceManager.GetString("UPDATE_TRAIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User has been demoted to regular user.
+        /// </summary>
+        public static string USER_SUCCESSFUL_DEMOTED {
+            get {
+                return ResourceManager.GetString("USER_SUCCESSFUL_DEMOTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User has been promoted to worker.
+        /// </summary>
+        public static string USER_SUCCESSFUL_PROMOTED {
+            get {
+                return ResourceManager.GetString("USER_SUCCESSFUL_PROMOTED", resourceCulture);
             }
         }
     }

@@ -30,4 +30,40 @@ public class UsersController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpPatch("promote")]
+    public async Task<IActionResult> PromoteUserAsync([FromBody] Guid userId)
+    {
+        try
+        {
+            await _service.PromoteUser(userId);
+            return Ok();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return Conflict("There's an error on the server.");
+        }
+    }
+
+    [HttpPatch("demote")]
+    public async Task<IActionResult> DemoteUserAsync([FromBody] Guid userId)
+    {
+        try
+        {
+            await _service.DemoteUser(userId);
+            return Ok();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return Conflict("There's an error on the server.");
+        }
+    }
 }

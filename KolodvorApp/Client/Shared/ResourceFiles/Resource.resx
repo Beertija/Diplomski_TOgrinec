@@ -153,6 +153,12 @@
   <data name="DELETE_BUTTON" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="DEMOTE" xml:space="preserve">
+    <value>Demote</value>
+  </data>
+  <data name="DEMOTE_BUTTON" xml:space="preserve">
+    <value>Demote to user</value>
+  </data>
   <data name="END_STATION" xml:space="preserve">
     <value>Rasinja</value>
   </data>
@@ -342,6 +348,12 @@
   <data name="TABLE_TRANSFERS" xml:space="preserve">
     <value>Transfers</value>
   </data>
+  <data name="TAB_EMPLOYEES" xml:space="preserve">
+    <value>EMPLOYEES</value>
+  </data>
+  <data name="TAB_USERS" xml:space="preserve">
+    <value>REGULAR USERS</value>
+  </data>
   <data name="TRAIN_DIALOG_TITLE_1" xml:space="preserve">
     <value>Train </value>
   </data>
@@ -371,5 +383,11 @@
   </data>
   <data name="UPDATE_TRAIN" xml:space="preserve">
     <value>Update train</value>
+  </data>
+  <data name="USER_SUCCESSFUL_DEMOTED" xml:space="preserve">
+    <value>User has been demoted to regular user</value>
+  </data>
+  <data name="USER_SUCCESSFUL_PROMOTED" xml:space="preserve">
+    <value>User has been promoted to worker</value>
   </data>
 </root>

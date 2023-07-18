@@ -22,4 +22,14 @@ public class UserService : IUserService
     {
         return await _http.GetFromJsonAsync<List<UserDto>>($"{RequestUri}/regular");
     }
+
+    public async Task<HttpResponseMessage> PromoteUser(Guid userId)
+    {
+        return await _http.PatchAsJsonAsync($"{RequestUri}/promote", userId);
+    }
+
+    public async Task<HttpResponseMessage> DemoteUser(Guid userId)
+    {
+        return await _http.PatchAsJsonAsync($"{RequestUri}/demote", userId);
+    }
 }

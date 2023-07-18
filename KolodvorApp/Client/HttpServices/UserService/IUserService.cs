@@ -7,4 +7,8 @@ public interface IUserService
     Task<List<UserDto>> GetAllEmployees();
 
     Task<List<UserDto>> GetAllRegularUsers();
+
+    Task<HttpResponseMessage> PromoteUser(Guid userId);
+
+    Task<HttpResponseMessage> DemoteUser(Guid userId);
 }

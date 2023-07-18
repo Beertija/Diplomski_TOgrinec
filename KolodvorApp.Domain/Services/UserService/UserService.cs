@@ -26,4 +26,32 @@ public class UserService : IUserService
         var usersList = _repository.GetAll().Where(x => x.Role == Role.User);
         return _mapper.Map<List<UserDto>>(usersList);
     }
+
+    public async Task PromoteUser(Guid userId)
+    {
+        try
+        {
+            var user = await _repository.GetAsync(userId);
+            user.Role = Role.Worker;
+            await _repository.UpdateAsync(user);
+        }
+        catch (KeyNotFoundException)
+        {
+            throw new InvalidOperationException("Tried to update an non-existing entity.");
+        }
+    }
+
+    public async Task DemoteUser(Guid userId)
+    {
+        try
+        {
+            var user = await _repository.GetAsync(userId);
+            user.Role = Role.User;
+            await _repository.UpdateAsync(user);
+        }
+        catch (KeyNotFoundException)
+        {
+            throw new InvalidOperationException("Tried to update an non-existing entity.");
+        }
+    }
 }
