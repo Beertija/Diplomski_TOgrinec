@@ -1,4 +1,5 @@
 ﻿using KolodvorApp.Domain.Entities;
+using KolodvorApp.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace KolodvorApp.Persistance.DataContext;
@@ -178,7 +179,7 @@ public sealed class KolodvorAppContext : DbContext
                 .IsRequired();
 
             b.Property(x => x.Role)
-                .HasDefaultValue(Role.User)
+                .HasDefaultValue(RoleEnum.User)
                 .IsRequired();
         });
 

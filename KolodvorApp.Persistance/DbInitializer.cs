@@ -1,5 +1,6 @@
 ﻿using KolodvorApp.Domain.Entities;
 using KolodvorApp.Persistance.DataContext;
+using KolodvorApp.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -761,21 +762,21 @@ public static class DbInitializer
                     Name = "Test User",
                     Email = "testuser@gmail.com",
                     Password = "testuser",
-                    Role = Role.User
+                    Role = RoleEnum.User
                 },
                 new User
                 {
                     Name = "Test Worker",
                     Email = "testworker@gmail.com",
                     Password = "testworker",
-                    Role = Role.Worker
+                    Role = RoleEnum.Worker
                 },
                 new User
                 {
                     Name = "Admin",
                     Email = "admin@gmail.com",
                     Password = "admin",
-                    Role = Role.Admin
+                    Role = RoleEnum.Admin
                 }
             );
 
