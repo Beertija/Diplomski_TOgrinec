@@ -196,6 +196,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entered text is not an email.
+        /// </summary>
+        public static string ERROR_EMAIL {
+            get {
+                return ResourceManager.GetString("ERROR_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input arrival time.
         /// </summary>
         public static string INPUT_ARRIVAL_TIME {
@@ -250,6 +259,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input email.
+        /// </summary>
+        public static string INPUT_EMAIL {
+            get {
+                return ResourceManager.GetString("INPUT_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input end station.
         /// </summary>
         public static string INPUT_END_STATION {
@@ -273,6 +291,24 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string INPUT_MAINTENANCE {
             get {
                 return ResourceManager.GetString("INPUT_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input name.
+        /// </summary>
+        public static string INPUT_NAME {
+            get {
+                return ResourceManager.GetString("INPUT_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input password.
+        /// </summary>
+        public static string INPUT_PASSWORD {
+            get {
+                return ResourceManager.GetString("INPUT_PASSWORD", resourceCulture);
             }
         }
         
@@ -493,11 +529,47 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to REGISTRATION.
+        /// </summary>
+        public static string REGISTRATION_TITLE {
+            get {
+                return ResourceManager.GetString("REGISTRATION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Regular.
         /// </summary>
         public static string REGULAR {
             get {
                 return ResourceManager.GetString("REGULAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email is required.
+        /// </summary>
+        public static string REQUIRED_EMAIL {
+            get {
+                return ResourceManager.GetString("REQUIRED_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name is required.
+        /// </summary>
+        public static string REQUIRED_NAME {
+            get {
+                return ResourceManager.GetString("REQUIRED_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is required.
+        /// </summary>
+        public static string REQUIRED_PASSWORD {
+            get {
+                return ResourceManager.GetString("REQUIRED_PASSWORD", resourceCulture);
             }
         }
         
@@ -876,6 +948,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string USER_SUCCESSFUL_PROMOTED {
             get {
                 return ResourceManager.GetString("USER_SUCCESSFUL_PROMOTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have been registered!.
+        /// </summary>
+        public static string USER_SUCCESSFUL_REGISTRATION {
+            get {
+                return ResourceManager.GetString("USER_SUCCESSFUL_REGISTRATION", resourceCulture);
             }
         }
     }

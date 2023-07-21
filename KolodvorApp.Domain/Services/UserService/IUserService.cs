@@ -11,4 +11,6 @@ public interface IUserService
     Task PromoteUser(Guid userId);
 
     Task DemoteUser(Guid userId);
+
+    Task Register(RegisterUserDto userDto);
 }

@@ -32,4 +32,9 @@ public class UserService : IUserService
     {
         return await _http.PatchAsJsonAsync($"{RequestUri}/demote", userId);
     }
+
+    public async Task<HttpResponseMessage> Register(RegisterUserDto user)
+    {
+        return await _http.PostAsJsonAsync(RequestUri, user);
+    }
 }

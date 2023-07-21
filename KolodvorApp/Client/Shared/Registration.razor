@@ -1,0 +1,95 @@
+﻿@page "/registration"
+
+@using KolodvorApp.Client.HttpServices
+@using KolodvorApp.Shared.DTOs
+@using System.Net.Mail
+
+@inject IUserService _userService
+@inject ISnackbar _snackbar
+@inject NavigationManager _navigationManager
+
+<MudContainer Style="height: 100vh; display: flex; justify-content: center; align-items: center;">
+    <EditForm Model="_model">
+        <MudPaper Width="auto" Class="pa-5">
+            <MudText Typo="Typo.h5" Style="color: var(--primary-color)">@localizer["REGISTRATION_TITLE"]</MudText>
+            <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_NAME"]</span>
+            <MudTextField T="string"
+                          Required="true"
+                          RequiredError=@localizer["REQUIRED_NAME"]
+                          Variant="Variant.Outlined"
+                          @bind-Value="_model.Name" />
+            <br />
+            <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_EMAIL"]</span>
+            <MudTextField T="string"
+                          Required="true"
+                          RequiredError=@localizer["REQUIRED_EMAIL"]
+                          InputType="InputType.Email"
+                          Variant="Variant.Outlined"
+                          Validation="@((string email) => ValidateEmail(email))"
+                          @bind-Value="_model.Email" />
+            <br />
+            <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_PASSWORD"]</span>
+            <MudTextField T="string"
+                          Required="true"
+                          RequiredError=@localizer["REQUIRED_PASSWORD"]
+                          InputType="InputType.Password"
+                          Variant="Variant.Outlined"
+                          @bind-Value="_model.Password" />
+            <br />
+            <MudButton Class="btn-primary mt-2" Variant="Variant.Filled" FullWidth="true" OnClick="Submit" Disabled=@Validate()>@localizer["SUBMIT"]</MudButton>
+        </MudPaper>
+    </EditForm>
+</MudContainer>
+
+@code {
+    private RegisterUserDto _model = new();
+
+    private IEnumerable<string> ValidateEmail(string email)
+    {
+        bool emailValid = true;
+        if (string.IsNullOrWhiteSpace(email))
+        {
+            emailValid = false;
+        }
+        else
+        {
+            try
+            {
+                MailAddress m = new MailAddress(email);
+            }
+            catch (FormatException)
+            {
+                emailValid = false;
+            }
+        }
+
+        if (!emailValid)
+        {
+            yield return "Invalid email address";
+        }
+    }
+
+    private bool Validate()
+    {
+        var errors = ValidateEmail(_model.Email ?? "");
+        if (string.IsNullOrWhiteSpace(_model.Name)) return true;
+        if (errors.Any()) return true;
+        if (string.IsNullOrWhiteSpace(_model.Password)) return true;
+        return false;
+    }
+
+    private async Task Submit()
+    {
+        var response = await _userService.Register(_model);
+
+        if (response.IsSuccessStatusCode)
+        {
+            _snackbar.Add(localizer["USER_SUCCESSFUL_REGISTRATION"], Severity.Success);
+            _navigationManager.NavigateTo("/");
+        }
+        else
+        {
+            _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
+        }
+    }
+}

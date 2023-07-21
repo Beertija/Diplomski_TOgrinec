@@ -11,4 +11,6 @@ public interface IUserService
     Task<HttpResponseMessage> PromoteUser(Guid userId);
 
     Task<HttpResponseMessage> DemoteUser(Guid userId);
+
+    Task<HttpResponseMessage> Register(RegisterUserDto user);
 }

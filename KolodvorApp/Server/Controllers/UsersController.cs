@@ -66,4 +66,18 @@ public class UsersController : ControllerBase
             return Conflict("There's an error on the server.");
         }
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Register([FromBody] RegisterUserDto user)
+    {
+        try
+        {
+            await _service.Register(user);
+            return Ok();
+        }
+        catch (Exception)
+        {
+            return Conflict("There's an error on the server.");
+        }
+    }
 }

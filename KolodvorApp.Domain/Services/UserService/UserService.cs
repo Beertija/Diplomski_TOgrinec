@@ -54,4 +54,10 @@ public class UserService : IUserService
             throw new InvalidOperationException("Tried to update an non-existing entity.");
         }
     }
+
+    public async Task Register(RegisterUserDto userDto)
+    {
+        var user = _mapper.Map<User>(userDto);
+        await _repository.InsertAsync(user);
+    }
 }

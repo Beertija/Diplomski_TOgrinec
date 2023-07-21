@@ -162,6 +162,9 @@
   <data name="END_STATION" xml:space="preserve">
     <value>Rasinja</value>
   </data>
+  <data name="ERROR_EMAIL" xml:space="preserve">
+    <value>Entered text is not an email</value>
+  </data>
   <data name="INPUT_ARRIVAL_TIME" xml:space="preserve">
     <value>Input arrival time</value>
   </data>
@@ -180,6 +183,9 @@
   <data name="INPUT_DEPARTURE_TIME" xml:space="preserve">
     <value>Input departure time</value>
   </data>
+  <data name="INPUT_EMAIL" xml:space="preserve">
+    <value>Input email</value>
+  </data>
   <data name="INPUT_END_STATION" xml:space="preserve">
     <value>Input end station</value>
   </data>
@@ -188,6 +194,12 @@
   </data>
   <data name="INPUT_MAINTENANCE" xml:space="preserve">
     <value>Input train maintenance</value>
+  </data>
+  <data name="INPUT_NAME" xml:space="preserve">
+    <value>Input name</value>
+  </data>
+  <data name="INPUT_PASSWORD" xml:space="preserve">
+    <value>Input password</value>
   </data>
   <data name="INPUT_START_STATION" xml:space="preserve">
     <value>Input start station</value>
@@ -261,8 +273,20 @@
   <data name="PROMOTE_BUTTON" xml:space="preserve">
     <value>Promote to employee</value>
   </data>
+  <data name="REGISTRATION_TITLE" xml:space="preserve">
+    <value>REGISTRATION</value>
+  </data>
   <data name="REGULAR" xml:space="preserve">
     <value>Regular</value>
+  </data>
+  <data name="REQUIRED_EMAIL" xml:space="preserve">
+    <value>Email is required</value>
+  </data>
+  <data name="REQUIRED_NAME" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="REQUIRED_PASSWORD" xml:space="preserve">
+    <value>Password is required</value>
   </data>
   <data name="REQURED_CATEGORIES" xml:space="preserve">
     <value>Train categories are required</value>
@@ -389,5 +413,8 @@
   </data>
   <data name="USER_SUCCESSFUL_PROMOTED" xml:space="preserve">
     <value>User has been promoted to worker</value>
+  </data>
+  <data name="USER_SUCCESSFUL_REGISTRATION" xml:space="preserve">
+    <value>You have been registered!</value>
   </data>
 </root>
