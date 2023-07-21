@@ -1,0 +1,98 @@
+﻿@using KolodvorApp.Shared.DTOs
+
+<MudTable Items="RouteList" FixedHeader="true" Striped="true" Hover="true" Dense="true" Virtualize="true" Breakpoint="Breakpoint.Sm" Height="40vh">
+    <ColGroup>
+        <col style="width: 18%;" />
+        <col style="width: 18%;" />
+        <col style="width: 18%;" />
+        <col style="width: 18%;" />
+        <col style="width: 14%;" />
+        <col style="width: 14%;" />
+    </ColGroup>
+
+    <HeaderContent>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_START_TIME"]</MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_END_TIME"]</MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_DURATION"]</MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_TRAIN_TAG"]</MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_TRANSFERS"]</MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_COST"]</MudTh>
+        <MudTh Style="background-color: var(--primary-color)" />
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd Style="font-size: 16px">@context.StartTime.DisplayTime()</MudTd>
+        <MudTd Style="font-size: 16px">@context.EndTime.DisplayTime()</MudTd>
+        <MudTd Style="font-size: 16px">@context.Duration.DisplayDuration()</MudTd>
+        <MudTd Style="font-size: 16px">@context.TrainTag</MudTd>
+        <MudTd Style="font-size: 16px">@context.Transfers</MudTd>
+        <MudTd Style="font-size: 16px">@context.Cost.DisplayDecimal() €</MudTd>
+        <MudTd>
+            @if (context.ShowDetails)
+            {
+                <MudTooltip Text=@localizer["CLOSE_ROUTE_DETAILS"]>
+                    <MudIconButton Icon="@Icons.Material.Filled.KeyboardArrowUp" OnClick="@(() => context.ShowDetails = !context.ShowDetails)"></MudIconButton>
+                </MudTooltip>
+            }
+            else
+            {
+                <MudTooltip Text=@localizer["OPEN_ROUTE_DETAILS"]>
+                    <MudIconButton Icon="@Icons.Material.Filled.KeyboardArrowDown" OnClick="@(() => context.ShowDetails = !context.ShowDetails)"></MudIconButton>
+                </MudTooltip>
+            }
+        </MudTd>
+
+    </RowTemplate>
+
+    <ChildRowContent>
+        @if (context.ShowDetails)
+        {
+            <MudTr>
+                <td colspan="7">
+                    <MudCard>
+                        <MudCardContent Class="pa-4">
+                            <MudTable Items="@context.RouteStations" Context="routeStation" Hover="true" Breakpoint="Breakpoint.Sm" Height="300px">
+                                <ColGroup>
+                                    <col style="width: 20%;" />
+                                    <col style="width: 5%;" />
+                                    <col style="width: 5%;" />
+                                    <col style="width: 20%;" />
+                                    <col style="width: 10%;" />
+                                    <col style="width: 20%;" />
+                                </ColGroup>
+                                <HeaderContent>
+                                    <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 400;">@localizer["TABLE_START_STATION"]</MudTh>
+                                    <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 400;">@localizer["TABLE_START_TIME"]</MudTh>
+                                    <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 400;">@localizer["TABLE_END_TIME"]</MudTh>
+                                    <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 400;">@localizer["TABLE_END_STATION"]</MudTh>
+                                    <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 400;">@localizer["TABLE_TRAIN_TAG"]</MudTh>
+                                    <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 400;">@localizer["TABLE_CATEGORIES"]</MudTh>
+                                </HeaderContent>
+                                <RowTemplate>
+                                    <MudTd>@routeStation.StartStation!.Name</MudTd>
+                                    <MudTd>@routeStation.DepartureTime.DisplayTime()</MudTd>
+                                    <MudTd>@routeStation.ArrivalTime.DisplayTime()</MudTd>
+                                    <MudTd>@routeStation.EndStation!.Name</MudTd>
+                                    <MudTd>@context.RouteStationTrainConnection[routeStation.Id]</MudTd>
+                                    <MudTd>@RenderTrainCategoryIcons.IconDisplay(TrainList.Single(x => x.Tag.Equals(context.RouteStationTrainConnection[routeStation.Id])).Categories)</MudTd>
+                                </RowTemplate>
+                            </MudTable>
+                        </MudCardContent>
+                    </MudCard>
+                </td>
+            </MudTr>
+        }
+    </ChildRowContent>
+
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[] { 5, 10 }" />
+    </PagerContent>
+</MudTable>
+
+@code {
+    [Parameter, EditorRequired]
+    public List<MergedRoutesDto> RouteList { get; init; } = null!;
+
+    [Parameter, EditorRequired]
+    public List<TrainDto> TrainList { get; init; } = null!;
+}

@@ -15,24 +15,6 @@ public class TrainMaintenancesController : ControllerBase
         _service = service;
     }
 
-    [HttpGet("Trains/{id}")]
-    public async Task<ActionResult<List<TrainMaintenanceDto>>> GetAllByTrainIdAsync(Guid id)
-    {
-        try
-        {
-            var result = await _service.GetAllByTrainIdAsync(id);
-            return Ok(result);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-        catch (Exception)
-        {
-            return Conflict("There's an error on the server.");
-        }
-    }
-
     [HttpPost]
     public async Task<ActionResult<TrainMaintenanceDto>> CreateOrUpdateAsync([FromBody] TrainMaintenanceDto trainMaintenanceDto)
     {

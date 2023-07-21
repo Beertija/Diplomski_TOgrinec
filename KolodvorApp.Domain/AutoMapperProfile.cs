@@ -44,7 +44,17 @@ public class AutoMapperProfile : Profile
                 Cost = model.Cost,
                 ArrivalTime = model.ArrivalTime,
                 DepartureTime = model.DepartureTime,
+                StartStation = new StationDto
+                {
+                    Id = model.StartStation.Id,
+                    Name = model.StartStation.Name
+                },
                 StartStationId = model.StartStationId,
+                EndStation = new StationDto
+                {
+                    Id = model.EndStation.Id,
+                    Name = model.EndStation.Name
+                },
                 EndStationId = model.EndStationId,
                 Order = model.Order
             })))
@@ -65,5 +75,8 @@ public class AutoMapperProfile : Profile
                 Order = model.Order
             })));
         CreateMap<Route, Route>();
+
+        CreateMap<User, UserDto>();
+        CreateMap<RegisterUserDto, User>();
     }
 }

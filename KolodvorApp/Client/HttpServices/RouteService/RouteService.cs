@@ -27,4 +27,9 @@ public class RouteService : IRouteService
     {
         return await _http.DeleteAsync($"{RequestUri}/{routeId}");
     }
+
+    public async Task<HttpResponseMessage> SearchRoutes(RouteSearchDto searchInfo)
+    {
+        return await _http.PostAsJsonAsync($"{RequestUri}/search", searchInfo);
+    }
 }

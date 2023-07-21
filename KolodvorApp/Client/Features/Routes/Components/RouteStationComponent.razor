@@ -11,6 +11,7 @@
                             <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_START_STATION"]</span>
                             <MudAutocomplete T="StationDto"
                                              @bind-Value="Model.StartStation"
+                                             Placeholder=@localizer["START_STATION"]
                                              AnchorOrigin="Origin.BottomCenter"
                                              SearchFunc="SortStations"
                                              ToStringFunc="@(x => x == null ? null : $"{x.Name}")"
@@ -25,6 +26,7 @@
                             <span style="font-weight: 600; color: var(--secondary-color);">@localizer["INPUT_END_STATION"]</span>
                             <MudAutocomplete T="StationDto"
                                              @bind-Value="Model.EndStation"
+                                             Placeholder=@localizer["END_STATION"]
                                              AnchorOrigin="Origin.BottomCenter"
                                              SearchFunc="SortStations"
                                              ToStringFunc="@(x => x == null ? null : $"{x.Name}")"
@@ -66,12 +68,14 @@
     [Parameter, EditorRequired]
     public RouteStationModel Model { get; set; } = new();
 
-    [Parameter]
+    [Parameter, EditorRequired]
     public EventCallback<RouteStationModel> OnDelete { get; set; }
 
     private async Task<IEnumerable<StationDto>> SortStations(string value)
     {
         if (string.IsNullOrEmpty(value))
+            return StationsList;
+        else if (StationsList.Any(x => x.Name == value))
             return StationsList;
         else
             return StationsList.Where(x => x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase)).ToList();

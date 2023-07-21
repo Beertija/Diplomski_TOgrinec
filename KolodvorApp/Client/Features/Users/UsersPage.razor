@@ -1,0 +1,69 @@
+﻿@page "/users-page"
+
+@using KolodvorApp.Client.Features.Users.Components
+@using KolodvorApp.Client.HttpServices
+@using KolodvorApp.Shared.DTOs
+
+@inject IUserService _userService
+@inject ISnackbar _snackbar
+
+<MudText Typo="Typo.h4" Style="color: var(--primary-color)">@localizer["PAGE_TITLE_USER_MANAGEMENT"]</MudText>
+<br />
+
+<MudTabs PanelClass="pt-4" Rounded="true" ActivePanelIndexChanged="TabChanged">
+    <MudTabPanel Text=@localizer["TAB_EMPLOYEES"]>
+        <UsersTable UsersList="_usersList" IsEmployeeView="true" Action="Demote"/>
+    </MudTabPanel>
+    <MudTabPanel Text=@localizer["TAB_USERS"]>
+        <UsersTable UsersList="_usersList" IsEmployeeView="false" Action="Promote"/>
+    </MudTabPanel>
+</MudTabs>
+
+@code {
+    #region General summary
+
+    private List<UserDto> _usersList { get; set; } = new();
+
+    #endregion
+
+    protected override async Task OnInitializedAsync()
+    {
+        _usersList = await _userService.GetAllEmployees();
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task TabChanged(int tabIndex)
+    {
+        if (tabIndex == 0)
+        {
+            _usersList = await _userService.GetAllEmployees();
+        }
+        else
+        {
+            _usersList = await _userService.GetAllRegularUsers();
+        }
+    }
+
+    private async Task Promote(UserDto user)
+    {
+        var response = await _userService.PromoteUser((Guid)user.Id!);
+        if (response.IsSuccessStatusCode)
+        {
+            _snackbar.Add(localizer["USER_SUCCESSFUL_PROMOTED"], Severity.Success);
+            _usersList.Remove(user);
+            StateHasChanged();
+        }
+    }
+
+    private async Task Demote(UserDto user)
+    {
+        var response = await _userService.DemoteUser((Guid)user.Id!);
+        if (response.IsSuccessStatusCode)
+        {
+            _snackbar.Add(localizer["USER_SUCCESSFUL_DEMOTED"], Severity.Success);
+            _usersList.Remove(user);
+            StateHasChanged();
+        }
+    }
+}

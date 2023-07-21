@@ -142,6 +142,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close route details.
+        /// </summary>
+        public static string CLOSE_ROUTE_DETAILS {
+            get {
+                return ResourceManager.GetString("CLOSE_ROUTE_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DELETE.
         /// </summary>
         public static string DELETE {
@@ -156,6 +165,42 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string DELETE_BUTTON {
             get {
                 return ResourceManager.GetString("DELETE_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demote.
+        /// </summary>
+        public static string DEMOTE {
+            get {
+                return ResourceManager.GetString("DEMOTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demote to user.
+        /// </summary>
+        public static string DEMOTE_BUTTON {
+            get {
+                return ResourceManager.GetString("DEMOTE_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rasinja.
+        /// </summary>
+        public static string END_STATION {
+            get {
+                return ResourceManager.GetString("END_STATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entered text is not an email.
+        /// </summary>
+        public static string ERROR_EMAIL {
+            get {
+                return ResourceManager.GetString("ERROR_EMAIL", resourceCulture);
             }
         }
         
@@ -196,11 +241,38 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input wanted date.
+        /// </summary>
+        public static string INPUT_DATE {
+            get {
+                return ResourceManager.GetString("INPUT_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input departure time.
         /// </summary>
         public static string INPUT_DEPARTURE_TIME {
             get {
                 return ResourceManager.GetString("INPUT_DEPARTURE_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input email.
+        /// </summary>
+        public static string INPUT_EMAIL {
+            get {
+                return ResourceManager.GetString("INPUT_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input email or username.
+        /// </summary>
+        public static string INPUT_EMAIL_OR_NAME {
+            get {
+                return ResourceManager.GetString("INPUT_EMAIL_OR_NAME", resourceCulture);
             }
         }
         
@@ -228,6 +300,24 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string INPUT_MAINTENANCE {
             get {
                 return ResourceManager.GetString("INPUT_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input name.
+        /// </summary>
+        public static string INPUT_NAME {
+            get {
+                return ResourceManager.GetString("INPUT_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input password.
+        /// </summary>
+        public static string INPUT_PASSWORD {
+            get {
+                return ResourceManager.GetString("INPUT_PASSWORD", resourceCulture);
             }
         }
         
@@ -295,6 +385,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LOGIN.
+        /// </summary>
+        public static string LOGIN_TITLE {
+            get {
+                return ResourceManager.GetString("LOGIN_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new maintenance for the train.
         /// </summary>
         public static string MAINTENANCE_DIALOG_TITLE {
@@ -331,6 +430,24 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User management.
+        /// </summary>
+        public static string NAV_MENU_USERS {
+            get {
+                return ResourceManager.GetString("NAV_MENU_USERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no routes available for.
+        /// </summary>
+        public static string NO_ROUTE_FOUND {
+            get {
+                return ResourceManager.GetString("NO_ROUTE_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to VIEW DETAILS.
         /// </summary>
         public static string OPEN_DETAIL {
@@ -358,6 +475,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SEARCH A ROUTE.
+        /// </summary>
+        public static string PAGE_TITLE_HOME {
+            get {
+                return ResourceManager.GetString("PAGE_TITLE_HOME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ROUTE OVERVIEW.
         /// </summary>
         public static string PAGE_TITLE_ROUTE_OVERVIEW {
@@ -372,6 +498,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string PAGE_TITLE_TRAIN_OVERVIEW {
             get {
                 return ResourceManager.GetString("PAGE_TITLE_TRAIN_OVERVIEW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USER MANAGEMENT.
+        /// </summary>
+        public static string PAGE_TITLE_USER_MANAGEMENT {
+            get {
+                return ResourceManager.GetString("PAGE_TITLE_USER_MANAGEMENT", resourceCulture);
             }
         }
         
@@ -394,11 +529,74 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Promote.
+        /// </summary>
+        public static string PROMOTE {
+            get {
+                return ResourceManager.GetString("PROMOTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Promote to employee.
+        /// </summary>
+        public static string PROMOTE_BUTTON {
+            get {
+                return ResourceManager.GetString("PROMOTE_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to REGISTRATION.
+        /// </summary>
+        public static string REGISTRATION_TITLE {
+            get {
+                return ResourceManager.GetString("REGISTRATION_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Regular.
         /// </summary>
         public static string REGULAR {
             get {
                 return ResourceManager.GetString("REGULAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email is required.
+        /// </summary>
+        public static string REQUIRED_EMAIL {
+            get {
+                return ResourceManager.GetString("REQUIRED_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter email or username.
+        /// </summary>
+        public static string REQUIRED_EMAIL_OR_NAME {
+            get {
+                return ResourceManager.GetString("REQUIRED_EMAIL_OR_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name is required.
+        /// </summary>
+        public static string REQUIRED_NAME {
+            get {
+                return ResourceManager.GetString("REQUIRED_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is required.
+        /// </summary>
+        public static string REQUIRED_PASSWORD {
+            get {
+                return ResourceManager.GetString("REQUIRED_PASSWORD", resourceCulture);
             }
         }
         
@@ -466,6 +664,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SEARCH.
+        /// </summary>
+        public static string SEARCH {
+            get {
+                return ResourceManager.GetString("SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string SEARCH_PLACEHOLDER {
@@ -484,11 +691,47 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Koprivnica.
+        /// </summary>
+        public static string START_STATION {
+            get {
+                return ResourceManager.GetString("START_STATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
         public static string SUBMIT {
             get {
                 return ResourceManager.GetString("SUBMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swap stations.
+        /// </summary>
+        public static string SWAP_BUTTON {
+            get {
+                return ResourceManager.GetString("SWAP_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EMPLOYEES.
+        /// </summary>
+        public static string TAB_EMPLOYEES {
+            get {
+                return ResourceManager.GetString("TAB_EMPLOYEES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to REGULAR USERS.
+        /// </summary>
+        public static string TAB_USERS {
+            get {
+                return ResourceManager.GetString("TAB_USERS", resourceCulture);
             }
         }
         
@@ -529,11 +772,38 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        public static string TABLE_DURATION {
+            get {
+                return ResourceManager.GetString("TABLE_DURATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string TABLE_EMAIL {
+            get {
+                return ResourceManager.GetString("TABLE_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End station.
         /// </summary>
         public static string TABLE_END_STATION {
             get {
                 return ResourceManager.GetString("TABLE_END_STATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arrival.
+        /// </summary>
+        public static string TABLE_END_TIME {
+            get {
+                return ResourceManager.GetString("TABLE_END_TIME", resourceCulture);
             }
         }
         
@@ -547,11 +817,29 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string TABLE_NAME {
+            get {
+                return ResourceManager.GetString("TABLE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start station.
         /// </summary>
         public static string TABLE_START_STATION {
             get {
                 return ResourceManager.GetString("TABLE_START_STATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Departure.
+        /// </summary>
+        public static string TABLE_START_TIME {
+            get {
+                return ResourceManager.GetString("TABLE_START_TIME", resourceCulture);
             }
         }
         
@@ -570,6 +858,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string TABLE_TRAIN_TAG {
             get {
                 return ResourceManager.GetString("TABLE_TRAIN_TAG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfers.
+        /// </summary>
+        public static string TABLE_TRANSFERS {
+            get {
+                return ResourceManager.GetString("TABLE_TRANSFERS", resourceCulture);
             }
         }
         
@@ -660,6 +957,42 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string UPDATE_TRAIN {
             get {
                 return ResourceManager.GetString("UPDATE_TRAIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User has been demoted to regular user.
+        /// </summary>
+        public static string USER_SUCCESSFUL_DEMOTED {
+            get {
+                return ResourceManager.GetString("USER_SUCCESSFUL_DEMOTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are logged in!.
+        /// </summary>
+        public static string USER_SUCCESSFUL_LOGIN {
+            get {
+                return ResourceManager.GetString("USER_SUCCESSFUL_LOGIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User has been promoted to worker.
+        /// </summary>
+        public static string USER_SUCCESSFUL_PROMOTED {
+            get {
+                return ResourceManager.GetString("USER_SUCCESSFUL_PROMOTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have been registered!.
+        /// </summary>
+        public static string USER_SUCCESSFUL_REGISTRATION {
+            get {
+                return ResourceManager.GetString("USER_SUCCESSFUL_REGISTRATION", resourceCulture);
             }
         }
     }

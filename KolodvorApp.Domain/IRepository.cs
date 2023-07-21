@@ -11,7 +11,6 @@ public interface IRepository<TEntity>
     Task<TEntity?> FindAsync([NotNull] Expression<Func<TEntity, bool>> predicate);
     IQueryable<TEntity> GetAll();
     IQueryable<TEntity> WithDetails(params Expression<Func<TEntity, object>>[] propertySelectors);
-    IEnumerable<object> WithDeepDetails(params Expression<Func<object, object>>[] propertySelectors);
     Task<TEntity> InsertAsync([NotNull] TEntity entity);
     Task<TEntity> UpdateAsync([NotNull] TEntity entity);
     Task DeleteAsync(Guid key);

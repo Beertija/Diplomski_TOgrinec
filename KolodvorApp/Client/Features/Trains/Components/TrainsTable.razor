@@ -1,0 +1,90 @@
+﻿@using KolodvorApp.Shared.DTOs
+
+<MudTable Items="TrainList" FixedHeader="true" Striped="true" Hover="true" Dense="true" Virtualize="true" Breakpoint="Breakpoint.Sm" Filter="new Func<TrainDto, bool>(FilterFunc)">
+    <ColGroup>
+        <col style="width: 20%;" />
+        <col style="width: 20%;" />
+        <col style="width: 40%;" />
+    </ColGroup>
+
+    <HeaderContent>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
+            <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Tag)">@localizer["TABLE_TRAIN_TAG"]</MudTableSortLabel>
+        </MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white);">
+            <MudTableSortLabel SortBy="new Func<TrainDto, object>(x => x.Capacity)">@localizer["TABLE_CAPACITY"]</MudTableSortLabel>
+        </MudTh>
+        <MudTh Style="background-color: var(--primary-color); color: var(--white); font-weight: 600;">@localizer["TABLE_CATEGORIES"]</MudTh>
+        <MudTh Style="background-color: var(--primary-color)">
+            <MudFocusTrap Class="search">
+                <MudTextField Style="color: var(--white); font-weight: 600;" @bind-Value="_searchString" Immediate="true" Clearable="true" Placeholder=@localizer["SEARCH_PLACEHOLDER"] Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Class="mt-0" />
+            </MudFocusTrap>
+        </MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd Style="font-size: 16px">@context.Tag</MudTd>
+        <MudTd Style="font-size: 16px">@context.Capacity</MudTd>
+        <MudTd>@RenderTrainCategoryIcons.IconDisplay(context.Categories)</MudTd>
+        <MudTd Class="mr-3" Style="text-align: right">
+            <MudButtonGroup Variant="Variant.Filled" OverrideStyles="false">
+                <MudTooltip Text=@localizer["OPEN_TRAIN_DETAILS"]>
+                    <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="@((e) => OnOpenTrainDetail(context))">
+                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.OpenInNew" />
+                        <span class="ml-3" style="white-space: nowrap">@localizer["OPEN_DETAIL"]</span>
+                    </MudButton>
+                </MudTooltip>
+                <MudTooltip Text=@localizer["UPDATE_TRAIN"]>
+                    <MudButton Variant="Variant.Filled" Class="btn-warning" OnClick="@((e) => OnUpdateTrain(context))">
+                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Update" />
+                        <span class="ml-3" style="white-space: nowrap">@localizer["UPDATE"]</span>
+                    </MudButton>
+                </MudTooltip>
+                <MudTooltip Text=@localizer["DELETE_BUTTON"]>
+                    <MudButton Variant="Variant.Filled" Class="btn-error" OnClick="@((e) => OnDeleteTrain(context))">
+                        <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.Delete" />
+                        <span class="ml-3" style="white-space: nowrap">@localizer["DELETE"]</span>
+                    </MudButton>
+                </MudTooltip>
+            </MudButtonGroup>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[] { 5, 10 }" />
+    </PagerContent>
+</MudTable>
+
+@code {
+    [Parameter, EditorRequired]
+    public List<TrainDto> TrainList { get; init; } = new();
+
+    [Parameter, EditorRequired]
+    public EventCallback<TrainDto> OpenTrainDetail { get; init; }
+
+    [Parameter, EditorRequired]
+    public EventCallback<TrainDto> UpdateTrain { get; init; }
+
+    [Parameter, EditorRequired]
+    public EventCallback<TrainDto> DeleteTrain { get; init; }
+
+    private string? _searchString { get; set; }
+
+    private bool FilterFunc(TrainDto element) => FilterFunction(element, _searchString);
+
+    private bool FilterFunction(TrainDto element, string? searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString) ||
+            element.Tag.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        return false;
+    }
+
+    private async Task OnOpenTrainDetail(TrainDto train)
+        => await OpenTrainDetail.InvokeAsync(train);
+
+    private async Task OnUpdateTrain(TrainDto train)
+        => await UpdateTrain.InvokeAsync(train);
+
+    private async Task OnDeleteTrain(TrainDto train)
+        => await DeleteTrain.InvokeAsync(train);
+}

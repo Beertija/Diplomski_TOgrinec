@@ -17,13 +17,6 @@ public class TrainMaintenanceService : ITrainMaintenanceService
         _trainService = trainService;
     }
 
-    public async Task<List<TrainMaintenanceDto>> GetAllByTrainIdAsync(Guid trainId)
-    {
-        await CheckIfExistsAsync(trainId);
-        var trainMaintenanceList = _repository.GetAll().Where(x => x.TrainId == trainId);
-        return _mapper.Map<List<TrainMaintenanceDto>>(trainMaintenanceList);
-    }
-
     public async Task<TrainMaintenanceDto> CreateOrUpdateAsync(TrainMaintenanceDto trainMaintenaceDto)
     {
         var trainMaintenace = _mapper.Map<TrainMaintenance>(trainMaintenaceDto);
