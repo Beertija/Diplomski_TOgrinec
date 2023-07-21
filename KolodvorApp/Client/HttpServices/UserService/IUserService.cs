@@ -13,4 +13,6 @@ public interface IUserService
     Task<HttpResponseMessage> DemoteUser(Guid userId);
 
     Task<HttpResponseMessage> Register(RegisterUserDto user);
+
+    Task<HttpResponseMessage> Login(LoginUserDto user);
 }

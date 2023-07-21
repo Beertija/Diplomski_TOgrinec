@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KolodvorApp.Domain.Entities;
+using KolodvorApp.Shared;
 using KolodvorApp.Shared.DTOs;
 
 namespace KolodvorApp.Domain.Services;
@@ -17,13 +18,13 @@ public class UserService : IUserService
 
     public List<UserDto> GetAllEmployees()
     {
-        var usersList = _repository.GetAll().Where(x => x.Role == Role.Worker);
+        var usersList = _repository.GetAll().Where(x => x.Role == RoleEnum.Worker);
         return _mapper.Map<List<UserDto>>(usersList);
     }
 
     public List<UserDto> GetAllRegularUsers()
     {
-        var usersList = _repository.GetAll().Where(x => x.Role == Role.User);
+        var usersList = _repository.GetAll().Where(x => x.Role == RoleEnum.User);
         return _mapper.Map<List<UserDto>>(usersList);
     }
 
@@ -32,7 +33,7 @@ public class UserService : IUserService
         try
         {
             var user = await _repository.GetAsync(userId);
-            user.Role = Role.Worker;
+            user.Role = RoleEnum.Worker;
             await _repository.UpdateAsync(user);
         }
         catch (KeyNotFoundException)
@@ -46,7 +47,7 @@ public class UserService : IUserService
         try
         {
             var user = await _repository.GetAsync(userId);
-            user.Role = Role.User;
+            user.Role = RoleEnum.User;
             await _repository.UpdateAsync(user);
         }
         catch (KeyNotFoundException)
@@ -59,5 +60,18 @@ public class UserService : IUserService
     {
         var user = _mapper.Map<User>(userDto);
         await _repository.InsertAsync(user);
+    }
+
+    public UserDto Login(LoginUserDto userDto)
+    {
+        try
+        {
+            var user = _repository.GetAll().Single(x => (x.Name.Equals(userDto.EmailOrUsername) || x.Email.Equals(userDto.EmailOrUsername)) && x.Password.Equals(userDto.Password));
+            return _mapper.Map<UserDto>(user);
+        }
+        catch (Exception)
+        {
+            throw new InvalidOperationException("Wrong credentials.");
+        }
     }
 }

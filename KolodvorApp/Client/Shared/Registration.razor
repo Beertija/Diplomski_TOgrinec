@@ -85,7 +85,7 @@
         if (response.IsSuccessStatusCode)
         {
             _snackbar.Add(localizer["USER_SUCCESSFUL_REGISTRATION"], Severity.Success);
-            _navigationManager.NavigateTo("/");
+            _navigationManager.NavigateTo("/login");
         }
         else
         {

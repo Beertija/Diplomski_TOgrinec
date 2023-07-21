@@ -67,13 +67,31 @@ public class UsersController : ControllerBase
         }
     }
 
-    [HttpPost]
+    [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterUserDto user)
     {
         try
         {
             await _service.Register(user);
             return Ok();
+        }
+        catch (Exception)
+        {
+            return Conflict("There's an error on the server.");
+        }
+    }
+
+    [HttpPost("login")]
+    public ActionResult<UserDto> Login([FromBody] LoginUserDto userDto)
+    {
+        try
+        {
+            var user = _service.Login(userDto);
+            return Ok(user);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
         }
         catch (Exception)
         {

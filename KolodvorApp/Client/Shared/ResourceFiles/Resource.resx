@@ -186,6 +186,9 @@
   <data name="INPUT_EMAIL" xml:space="preserve">
     <value>Input email</value>
   </data>
+  <data name="INPUT_EMAIL_OR_NAME" xml:space="preserve">
+    <value>Input email or username</value>
+  </data>
   <data name="INPUT_END_STATION" xml:space="preserve">
     <value>Input end station</value>
   </data>
@@ -221,6 +224,9 @@
   </data>
   <data name="LABEL_MAINTENANCE" xml:space="preserve">
     <value>Train maintenance</value>
+  </data>
+  <data name="LOGIN_TITLE" xml:space="preserve">
+    <value>LOGIN</value>
   </data>
   <data name="MAINTENANCE_DIALOG_TITLE" xml:space="preserve">
     <value>Add new maintenance for the train</value>
@@ -281,6 +287,9 @@
   </data>
   <data name="REQUIRED_EMAIL" xml:space="preserve">
     <value>Email is required</value>
+  </data>
+  <data name="REQUIRED_EMAIL_OR_NAME" xml:space="preserve">
+    <value>Please enter email or username</value>
   </data>
   <data name="REQUIRED_NAME" xml:space="preserve">
     <value>Name is required</value>
@@ -410,6 +419,9 @@
   </data>
   <data name="USER_SUCCESSFUL_DEMOTED" xml:space="preserve">
     <value>User has been demoted to regular user</value>
+  </data>
+  <data name="USER_SUCCESSFUL_LOGIN" xml:space="preserve">
+    <value>You are logged in!</value>
   </data>
   <data name="USER_SUCCESSFUL_PROMOTED" xml:space="preserve">
     <value>User has been promoted to worker</value>

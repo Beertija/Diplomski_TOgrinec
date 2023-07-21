@@ -268,6 +268,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input email or username.
+        /// </summary>
+        public static string INPUT_EMAIL_OR_NAME {
+            get {
+                return ResourceManager.GetString("INPUT_EMAIL_OR_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input end station.
         /// </summary>
         public static string INPUT_END_STATION {
@@ -372,6 +381,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string LABEL_MAINTENANCE {
             get {
                 return ResourceManager.GetString("LABEL_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LOGIN.
+        /// </summary>
+        public static string LOGIN_TITLE {
+            get {
+                return ResourceManager.GetString("LOGIN_TITLE", resourceCulture);
             }
         }
         
@@ -552,6 +570,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string REQUIRED_EMAIL {
             get {
                 return ResourceManager.GetString("REQUIRED_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter email or username.
+        /// </summary>
+        public static string REQUIRED_EMAIL_OR_NAME {
+            get {
+                return ResourceManager.GetString("REQUIRED_EMAIL_OR_NAME", resourceCulture);
             }
         }
         
@@ -939,6 +966,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string USER_SUCCESSFUL_DEMOTED {
             get {
                 return ResourceManager.GetString("USER_SUCCESSFUL_DEMOTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are logged in!.
+        /// </summary>
+        public static string USER_SUCCESSFUL_LOGIN {
+            get {
+                return ResourceManager.GetString("USER_SUCCESSFUL_LOGIN", resourceCulture);
             }
         }
         

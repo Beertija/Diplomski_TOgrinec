@@ -35,6 +35,11 @@ public class UserService : IUserService
 
     public async Task<HttpResponseMessage> Register(RegisterUserDto user)
     {
-        return await _http.PostAsJsonAsync(RequestUri, user);
+        return await _http.PostAsJsonAsync($"{RequestUri}/register", user);
+    }
+
+    public async Task<HttpResponseMessage> Login(LoginUserDto user)
+    {
+        return await _http.PostAsJsonAsync($"{RequestUri}/login", user);
     }
 }

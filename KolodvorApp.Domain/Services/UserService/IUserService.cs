@@ -13,4 +13,6 @@ public interface IUserService
     Task DemoteUser(Guid userId);
 
     Task Register(RegisterUserDto userDto);
+
+    UserDto Login(LoginUserDto userDto);
 }
