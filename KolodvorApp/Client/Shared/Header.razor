@@ -1,0 +1,21 @@
+﻿@inject NavigationManager _navigationManager
+
+<div class="mr-5">
+    <MudTooltip Text=@localizer["LOGIN_BUTTON"]>
+        <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="ToLogin">
+            <span style="white-space: nowrap">@localizer["LOGIN_BUTTON"]</span>
+        </MudButton>
+    </MudTooltip>
+</div>
+
+<MudTooltip Text=@localizer["REGISTRATION_BUTTON"]>
+    <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="ToRegistration">
+        <span style="white-space: nowrap">@localizer["REGISTRATION_BUTTON"]</span>
+    </MudButton>
+</MudTooltip>
+
+@code {
+    private void ToLogin() => _navigationManager.NavigateTo("/login");
+
+    private void ToRegistration() => _navigationManager.NavigateTo("/registration");
+}

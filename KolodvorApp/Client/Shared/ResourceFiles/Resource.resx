@@ -225,6 +225,9 @@
   <data name="LABEL_MAINTENANCE" xml:space="preserve">
     <value>Train maintenance</value>
   </data>
+  <data name="LOGIN_BUTTON" xml:space="preserve">
+    <value>Login</value>
+  </data>
   <data name="LOGIN_TITLE" xml:space="preserve">
     <value>LOGIN</value>
   </data>
@@ -278,6 +281,9 @@
   </data>
   <data name="PROMOTE_BUTTON" xml:space="preserve">
     <value>Promote to employee</value>
+  </data>
+  <data name="REGISTRATION_BUTTON" xml:space="preserve">
+    <value>Registration</value>
   </data>
   <data name="REGISTRATION_TITLE" xml:space="preserve">
     <value>REGISTRATION</value>

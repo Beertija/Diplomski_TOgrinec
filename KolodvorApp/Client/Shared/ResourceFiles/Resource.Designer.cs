@@ -385,6 +385,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string LOGIN_BUTTON {
+            get {
+                return ResourceManager.GetString("LOGIN_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOGIN.
         /// </summary>
         public static string LOGIN_TITLE {
@@ -543,6 +552,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string PROMOTE_BUTTON {
             get {
                 return ResourceManager.GetString("PROMOTE_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration.
+        /// </summary>
+        public static string REGISTRATION_BUTTON {
+            get {
+                return ResourceManager.GetString("REGISTRATION_BUTTON", resourceCulture);
             }
         }
         
