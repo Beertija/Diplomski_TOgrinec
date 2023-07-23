@@ -165,6 +165,9 @@
   <data name="ERROR_EMAIL" xml:space="preserve">
     <value>Entered text is not an email</value>
   </data>
+  <data name="HELLO_MESSAGE" xml:space="preserve">
+    <value>Hello</value>
+  </data>
   <data name="INPUT_ARRIVAL_TIME" xml:space="preserve">
     <value>Input arrival time</value>
   </data>
@@ -225,8 +228,14 @@
   <data name="LABEL_MAINTENANCE" xml:space="preserve">
     <value>Train maintenance</value>
   </data>
+  <data name="LOGIN_BUTTON" xml:space="preserve">
+    <value>Login</value>
+  </data>
   <data name="LOGIN_TITLE" xml:space="preserve">
     <value>LOGIN</value>
+  </data>
+  <data name="LOGOUT_BUTTON" xml:space="preserve">
+    <value>Logout</value>
   </data>
   <data name="MAINTENANCE_DIALOG_TITLE" xml:space="preserve">
     <value>Add new maintenance for the train</value>
@@ -278,6 +287,9 @@
   </data>
   <data name="PROMOTE_BUTTON" xml:space="preserve">
     <value>Promote to employee</value>
+  </data>
+  <data name="REGISTRATION_BUTTON" xml:space="preserve">
+    <value>Registration</value>
   </data>
   <data name="REGISTRATION_TITLE" xml:space="preserve">
     <value>REGISTRATION</value>
@@ -386,6 +398,12 @@
   </data>
   <data name="TAB_USERS" xml:space="preserve">
     <value>REGULAR USERS</value>
+  </data>
+  <data name="TICKET_BUTTON" xml:space="preserve">
+    <value>BUY</value>
+  </data>
+  <data name="TICKET_DETAILS" xml:space="preserve">
+    <value>Buy a ticket</value>
   </data>
   <data name="TRAIN_DIALOG_TITLE_1" xml:space="preserve">
     <value>Train </value>

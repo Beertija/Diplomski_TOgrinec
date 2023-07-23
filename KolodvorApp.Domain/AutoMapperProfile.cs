@@ -77,6 +77,7 @@ public class AutoMapperProfile : Profile
         CreateMap<Route, Route>();
 
         CreateMap<User, UserDto>();
+        CreateMap<User, LoggedUserDto>();
         CreateMap<RegisterUserDto, User>();
     }
 }

@@ -2,6 +2,8 @@
 using KolodvorApp.Domain.Entities;
 using KolodvorApp.Shared;
 using KolodvorApp.Shared.DTOs;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace KolodvorApp.Domain.Services;
 
@@ -62,16 +64,36 @@ public class UserService : IUserService
         await _repository.InsertAsync(user);
     }
 
-    public UserDto Login(LoginUserDto userDto)
+    public LoggedUserDto Login(LoginUserDto userDto)
     {
         try
         {
             var user = _repository.GetAll().Single(x => (x.Name.Equals(userDto.EmailOrUsername) || x.Email.Equals(userDto.EmailOrUsername)) && x.Password.Equals(userDto.Password));
-            return _mapper.Map<UserDto>(user);
+            var model = _mapper.Map<LoggedUserDto>(user);
+            model.JwtToken = CreateToken(model);
+            return model;
         }
         catch (Exception)
         {
             throw new InvalidOperationException("Wrong credentials.");
         }
+    }
+
+    private static string CreateToken(LoggedUserDto user)
+    {
+        List<Claim> claims = new()
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()!),
+            new Claim(ClaimTypes.Name, user.Email),
+            new Claim(ClaimTypes.Role, user.Role.ToString())
+        };
+
+        var token = new JwtSecurityToken(
+                    claims: claims,
+                    expires: DateTime.Now.AddDays(1));
+
+        var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+        return jwt;
     }
 }

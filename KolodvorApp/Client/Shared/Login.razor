@@ -4,8 +4,10 @@
 @using KolodvorApp.Shared.DTOs
 
 @inject IUserService _userService
+@inject ILocalStorageService _localStorage
 @inject ISnackbar _snackbar
 @inject NavigationManager _navigationManager
+@inject AuthenticationStateProvider _authenticationStateProvider
 
 <MudContainer Style="height: 100vh; display: flex; justify-content: center; align-items: center;">
     <EditForm Model="_model">
@@ -32,6 +34,9 @@
 </MudContainer>
 
 @code {
+    [CascadingParameter]
+    protected CascadingAppState AppState { get; set; }
+
     private LoginUserDto _model = new();
 
     private bool Validate()
@@ -48,6 +53,10 @@
         if (response.IsSuccessStatusCode)
         {
             _snackbar.Add(localizer["USER_SUCCESSFUL_LOGIN"], Severity.Success);
+            var content = await response.Content.ReadFromJsonAsync<LoggedUserDto>();
+            await _localStorage.SetItemAsync("authToken", content!.JwtToken);
+            await _authenticationStateProvider.GetAuthenticationStateAsync();
+            AppState.Init(content);
             _navigationManager.NavigateTo("/");
         }
         else
