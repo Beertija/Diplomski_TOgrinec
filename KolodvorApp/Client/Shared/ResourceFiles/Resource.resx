@@ -405,6 +405,9 @@
   <data name="TICKET_DETAILS" xml:space="preserve">
     <value>Buy a ticket</value>
   </data>
+  <data name="TICKET_SUCCESSFUL_BOUGHT" xml:space="preserve">
+    <value>Your ticket purchase was successful!</value>
+  </data>
   <data name="TRAIN_DIALOG_TITLE_1" xml:space="preserve">
     <value>Train </value>
   </data>

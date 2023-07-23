@@ -7,6 +7,8 @@
 @inject IStationService _stationService
 @inject IRouteService _routeService
 @inject ITrainService _trainService
+@inject ITicketService _ticketService
+@inject ISnackbar _snackbar
 
 <MudText Typo="Typo.h4" Style="color: var(--primary-color)">@localizer["PAGE_TITLE_HOME"]</MudText>
 <br />
@@ -68,7 +70,7 @@
     {
         <br />
         <br />
-        <SearchRouteTable RouteList="_routesList" TrainList="_trainList"/>
+        <SearchRouteTable RouteList="_routesList" TrainList="_trainList" BuyTicket="BuyTicket" />
     }
     else
     {
@@ -77,6 +79,8 @@
 }
 
 @code {
+    [CascadingParameter]
+    protected CascadingAppState AppState { get; set; }
 
     #region General Summary
 
@@ -133,5 +137,18 @@
             _isSubmitPressed = true;
             StateHasChanged();
         }
+    }
+
+    private async Task BuyTicket(MergedRoutesDto route)
+    {
+        var ticketInfo = new TicketPurchaseDto()
+            {
+                Route = route,
+                UserId = (Guid)AppState.LoggedInUser.Id!
+            };
+        var response = await _ticketService.BuyTicket(ticketInfo);
+
+        if (response.IsSuccessStatusCode) _snackbar.Add(localizer["TICKET_SUCCESSFUL_BOUGHT"], Severity.Success);
+        else _snackbar.Add(localizer["SERVER_PROBLEMS"], Severity.Warning);
     }
 }
