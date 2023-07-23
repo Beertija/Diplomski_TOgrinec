@@ -3,8 +3,10 @@ using KolodvorApp.Domain.Entities;
 using KolodvorApp.Domain.Services;
 using KolodvorApp.Persistance;
 using KolodvorApp.Persistance.DataContext;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.FeatureManagement;
+using Microsoft.IdentityModel.Tokens;
 
 namespace KolodvorApp.Server.Config;
 
@@ -18,6 +20,8 @@ public static class IServiceCollectionExtensions
         services.AddSingleton(environment.ContentRootFileProvider);
 
         services.ConfigureServices();
+
+        services.ConfigureAuthentication(configuration);
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -59,6 +63,24 @@ public static class IServiceCollectionExtensions
         services.AddScoped<IRouteService, RouteService>();
         services.AddScoped<IRouteCalculatorService, RouteCalculatorService>();
         services.AddScoped<IUserService, UserService>();
+
+        return services;
+    }
+
+    private static IServiceCollection ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new()
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8
+                        .GetBytes(configuration.GetSection("AppSettings:Token").Value)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
         return services;
     }
