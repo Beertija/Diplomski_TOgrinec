@@ -1,0 +1,17 @@
+﻿@using KolodvorApp.Shared.DTOs
+
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    public LoggedUserDto LoggedInUser { get; private set; } = new();
+
+    public void Init(LoggedUserDto loggedInUser)
+    {
+        LoggedInUser = loggedInUser;
+    }
+}

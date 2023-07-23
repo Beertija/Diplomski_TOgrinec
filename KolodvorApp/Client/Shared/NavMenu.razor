@@ -8,27 +8,31 @@
     <nav class="flex-column">
         <div class="nav-item">
             <NavLink class="nav-link" href="home" Match="NavLinkMatch.All">
-                <MudIcon Icon="@Icons.Material.Filled.Home"/>
+                <MudIcon Icon="@Icons.Material.Filled.Home" />
                 <span aria-hidden="true"></span> @localizer["NAV_MENU_HOME"]
             </NavLink>
         </div>
-        <div class="nav-item">
-            <NavLink class="nav-link" href="trains-page">
-                <MudIcon Icon="@Icons.Material.Filled.Train" />
-                <span aria-hidden="true"></span> @localizer["NAV_MENU_TRAINS"]
-            </NavLink>
-        </div>
-        <div class="nav-item">
-            <NavLink class="nav-link" href="routes-page">
-                <MudIcon Icon="@Icons.Material.Filled.Map" />
-                <span aria-hidden="true"></span> @localizer["NAV_MENU_ROUTES"]
-            </NavLink>
-        </div>
-        <div class="nav-item">
-            <NavLink class="nav-link" href="users-page">
-                <MudIcon Icon="@Icons.Material.Filled.SupervisedUserCircle" />
-                <span aria-hidden="true"></span> @localizer["NAV_MENU_USERS"]
-            </NavLink>
-        </div>
+        <AuthorizeView Roles="Worker, Admin">
+            <div class="nav-item">
+                <NavLink class="nav-link" href="trains-page">
+                    <MudIcon Icon="@Icons.Material.Filled.Train" />
+                    <span aria-hidden="true"></span> @localizer["NAV_MENU_TRAINS"]
+                </NavLink>
+            </div>
+            <div class="nav-item">
+                <NavLink class="nav-link" href="routes-page">
+                    <MudIcon Icon="@Icons.Material.Filled.Map" />
+                    <span aria-hidden="true"></span> @localizer["NAV_MENU_ROUTES"]
+                </NavLink>
+            </div>
+        </AuthorizeView>
+        <AuthorizeView Roles="Admin">
+            <div class="nav-item">
+                <NavLink class="nav-link" href="users-page">
+                    <MudIcon Icon="@Icons.Material.Filled.SupervisedUserCircle" />
+                    <span aria-hidden="true"></span> @localizer["NAV_MENU_USERS"]
+                </NavLink>
+            </div>
+        </AuthorizeView>
     </nav>
 </div>

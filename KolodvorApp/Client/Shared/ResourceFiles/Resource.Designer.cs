@@ -205,6 +205,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hello.
+        /// </summary>
+        public static string HELLO_MESSAGE {
+            get {
+                return ResourceManager.GetString("HELLO_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input arrival time.
         /// </summary>
         public static string INPUT_ARRIVAL_TIME {
@@ -385,11 +394,29 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string LOGIN_BUTTON {
+            get {
+                return ResourceManager.GetString("LOGIN_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOGIN.
         /// </summary>
         public static string LOGIN_TITLE {
             get {
                 return ResourceManager.GetString("LOGIN_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string LOGOUT_BUTTON {
+            get {
+                return ResourceManager.GetString("LOGOUT_BUTTON", resourceCulture);
             }
         }
         
@@ -543,6 +570,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string PROMOTE_BUTTON {
             get {
                 return ResourceManager.GetString("PROMOTE_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration.
+        /// </summary>
+        public static string REGISTRATION_BUTTON {
+            get {
+                return ResourceManager.GetString("REGISTRATION_BUTTON", resourceCulture);
             }
         }
         
@@ -867,6 +903,33 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         public static string TABLE_TRANSFERS {
             get {
                 return ResourceManager.GetString("TABLE_TRANSFERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BUY.
+        /// </summary>
+        public static string TICKET_BUTTON {
+            get {
+                return ResourceManager.GetString("TICKET_BUTTON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buy a ticket.
+        /// </summary>
+        public static string TICKET_DETAILS {
+            get {
+                return ResourceManager.GetString("TICKET_DETAILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your ticket purchase was successful!.
+        /// </summary>
+        public static string TICKET_SUCCESSFUL_BOUGHT {
+            get {
+                return ResourceManager.GetString("TICKET_SUCCESSFUL_BOUGHT", resourceCulture);
             }
         }
         

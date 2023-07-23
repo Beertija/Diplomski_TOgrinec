@@ -14,5 +14,5 @@ public interface IUserService
 
     Task Register(RegisterUserDto userDto);
 
-    UserDto Login(LoginUserDto userDto);
+    LoggedUserDto Login(LoginUserDto userDto);
 }

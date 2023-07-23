@@ -1,4 +1,6 @@
-﻿using KolodvorApp.Client.HttpServices;
+﻿using Blazored.LocalStorage;
+using KolodvorApp.Client.HttpServices;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor;
 using MudBlazor.Services;
@@ -13,6 +15,9 @@ public static class IServiceCollectionExtensions
         InitializeHttpClient(services, hostEnvironment);
         InitializeServices(services);
         InitializeMudServices(services);
+        services.AddBlazoredLocalStorage();
+
+        InitializeAuthentication(services);
 
         services.AddLocalization();
 
@@ -37,6 +42,7 @@ public static class IServiceCollectionExtensions
         services.AddScoped<IRouteService, RouteService>();
         services.AddScoped<IStationService, StationService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ITicketService, TicketService>();
     }
 
     private static void InitializeMudServices(IServiceCollection services)
@@ -53,5 +59,12 @@ public static class IServiceCollectionExtensions
             config.SnackbarConfiguration.ShowTransitionDuration = 500;
             config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
         });
+    }
+
+    private static void InitializeAuthentication(IServiceCollection services)
+    {
+        services.AddOptions();
+        services.AddAuthorizationCore();
+        services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
     }
 }

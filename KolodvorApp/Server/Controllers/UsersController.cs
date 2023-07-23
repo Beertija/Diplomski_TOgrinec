@@ -82,7 +82,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost("login")]
-    public ActionResult<UserDto> Login([FromBody] LoginUserDto userDto)
+    public ActionResult<LoggedUserDto> Login([FromBody] LoginUserDto userDto)
     {
         try
         {

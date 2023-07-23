@@ -1,5 +1,7 @@
 ﻿@page "/users-page"
 
+@attribute [Authorize(Roles = "Admin")]
+
 @using KolodvorApp.Client.Features.Users.Components
 @using KolodvorApp.Client.HttpServices
 @using KolodvorApp.Shared.DTOs
