@@ -42,6 +42,7 @@ public static class IServiceCollectionExtensions
         services.AddScoped<IRouteService, RouteService>();
         services.AddScoped<IStationService, StationService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ITicketService, TicketService>();
     }
 
     private static void InitializeMudServices(IServiceCollection services)

@@ -1,6 +1,6 @@
 ﻿@using KolodvorApp.Shared.DTOs
 
-<MudTable Items="RouteList" FixedHeader="true" Striped="true" Hover="true" Dense="true" Virtualize="true" Breakpoint="Breakpoint.Sm" Height="40vh">
+<MudTable Items="RouteList" Context="currentRoute" FixedHeader="true" Striped="true" Hover="true" Dense="true" Virtualize="true" Breakpoint="Breakpoint.Sm" Height="40vh">
     <ColGroup>
         <col style="width: 18%;" />
         <col style="width: 18%;" />
@@ -21,37 +21,47 @@
     </HeaderContent>
 
     <RowTemplate>
-        <MudTd Style="font-size: 16px">@context.StartTime.DisplayTime()</MudTd>
-        <MudTd Style="font-size: 16px">@context.EndTime.DisplayTime()</MudTd>
-        <MudTd Style="font-size: 16px">@context.Duration.DisplayDuration()</MudTd>
-        <MudTd Style="font-size: 16px">@context.TrainTag</MudTd>
-        <MudTd Style="font-size: 16px">@context.Transfers</MudTd>
-        <MudTd Style="font-size: 16px">@context.Cost.DisplayDecimal() €</MudTd>
+        <MudTd Style="font-size: 16px">@currentRoute.StartTime.DisplayTime()</MudTd>
+        <MudTd Style="font-size: 16px">@currentRoute.EndTime.DisplayTime()</MudTd>
+        <MudTd Style="font-size: 16px">@currentRoute.Duration.DisplayDuration()</MudTd>
+        <MudTd Style="font-size: 16px">@currentRoute.TrainTag</MudTd>
+        <MudTd Style="font-size: 16px">@currentRoute.Transfers</MudTd>
+        <MudTd Style="font-size: 16px">@currentRoute.Cost.DisplayDecimal() €</MudTd>
         <MudTd>
-            @if (context.ShowDetails)
-            {
-                <MudTooltip Text=@localizer["CLOSE_ROUTE_DETAILS"]>
-                    <MudIconButton Icon="@Icons.Material.Filled.KeyboardArrowUp" OnClick="@(() => context.ShowDetails = !context.ShowDetails)"></MudIconButton>
-                </MudTooltip>
-            }
-            else
-            {
-                <MudTooltip Text=@localizer["OPEN_ROUTE_DETAILS"]>
-                    <MudIconButton Icon="@Icons.Material.Filled.KeyboardArrowDown" OnClick="@(() => context.ShowDetails = !context.ShowDetails)"></MudIconButton>
-                </MudTooltip>
-            }
+            <div style="display: flex; justify-content:center; align-items: center;">
+                <AuthorizeView>
+                    <MudTooltip Text=@localizer["TICKET_DETAILS"]>
+                        <MudButton Variant="Variant.Filled" Class="btn-primary" OnClick="@((e) => OnRowBuy(currentRoute))">
+                            <MudIcon Style="color: var(--white)" Icon="@Icons.Material.Filled.AttachMoney" />
+                            <span class="ml-3" style="white-space: nowrap">@localizer["TICKET_BUTTON"]</span>
+                        </MudButton>
+                    </MudTooltip>
+                </AuthorizeView>
+                @if (currentRoute.ShowDetails)
+                {
+                    <MudTooltip Text=@localizer["CLOSE_ROUTE_DETAILS"]>
+                        <MudIconButton Icon="@Icons.Material.Filled.KeyboardArrowUp" OnClick="@(() => currentRoute.ShowDetails = !currentRoute.ShowDetails)"></MudIconButton>
+                    </MudTooltip>
+                }
+                else
+                {
+                    <MudTooltip Text=@localizer["OPEN_ROUTE_DETAILS"]>
+                        <MudIconButton Icon="@Icons.Material.Filled.KeyboardArrowDown" OnClick="@(() => currentRoute.ShowDetails = !currentRoute.ShowDetails)"></MudIconButton>
+                    </MudTooltip>
+                }
+            </div>
         </MudTd>
 
     </RowTemplate>
 
     <ChildRowContent>
-        @if (context.ShowDetails)
+        @if (currentRoute.ShowDetails)
         {
             <MudTr>
                 <td colspan="7">
                     <MudCard>
                         <MudCardContent Class="pa-4">
-                            <MudTable Items="@context.RouteStations" Context="routeStation" Hover="true" Breakpoint="Breakpoint.Sm" Height="300px">
+                            <MudTable Items="@currentRoute.RouteStations" Context="routeStation" Hover="true" Breakpoint="Breakpoint.Sm" Height="300px">
                                 <ColGroup>
                                     <col style="width: 20%;" />
                                     <col style="width: 5%;" />
@@ -73,8 +83,8 @@
                                     <MudTd>@routeStation.DepartureTime.DisplayTime()</MudTd>
                                     <MudTd>@routeStation.ArrivalTime.DisplayTime()</MudTd>
                                     <MudTd>@routeStation.EndStation!.Name</MudTd>
-                                    <MudTd>@context.RouteStationTrainConnection[routeStation.Id]</MudTd>
-                                    <MudTd>@RenderTrainCategoryIcons.IconDisplay(TrainList.Single(x => x.Tag.Equals(context.RouteStationTrainConnection[routeStation.Id])).Categories)</MudTd>
+                                    <MudTd>@currentRoute.RouteStationTrainConnection[routeStation.Id]</MudTd>
+                                    <MudTd>@RenderTrainCategoryIcons.IconDisplay(TrainList.Single(x => x.Tag.Equals(currentRoute.RouteStationTrainConnection[routeStation.Id])).Categories)</MudTd>
                                 </RowTemplate>
                             </MudTable>
                         </MudCardContent>
@@ -95,4 +105,10 @@
 
     [Parameter, EditorRequired]
     public List<TrainDto> TrainList { get; init; } = null!;
+
+    [Parameter, EditorRequired]
+    public EventCallback<MergedRoutesDto> BuyTicket { get; init; }
+
+    private async Task OnRowBuy(MergedRoutesDto route)
+        => await BuyTicket.InvokeAsync(route);
 }

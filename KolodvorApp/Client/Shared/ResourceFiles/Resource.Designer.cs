@@ -925,6 +925,15 @@ namespace KolodvorApp.Client.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your ticket purchase was successful!.
+        /// </summary>
+        public static string TICKET_SUCCESSFUL_BOUGHT {
+            get {
+                return ResourceManager.GetString("TICKET_SUCCESSFUL_BOUGHT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Train .
         /// </summary>
         public static string TRAIN_DIALOG_TITLE_1 {

@@ -79,5 +79,12 @@ public class AutoMapperProfile : Profile
         CreateMap<User, UserDto>();
         CreateMap<User, LoggedUserDto>();
         CreateMap<RegisterUserDto, User>();
+
+        CreateMap<TicketPurchaseDto, Ticket>()
+            .ForMember(dest => dest.Cost, opt => opt.MapFrom(src => src.Route.Cost))
+            .ForMember(dest => dest.StartStation, opt => opt.MapFrom(src => src.Route.RouteStations.First().StartStation!.Name))
+            .ForMember(dest => dest.EndStation, opt => opt.MapFrom(src => src.Route.RouteStations.Last().EndStation!.Name))
+            .ForPath(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
+            .ForMember(dest => dest.User, opt => opt.Ignore());
     }
 }

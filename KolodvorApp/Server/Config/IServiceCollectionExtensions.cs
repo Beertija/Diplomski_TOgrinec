@@ -50,6 +50,7 @@ public static class IServiceCollectionExtensions
         services.AddScoped<IRepository<RouteStation>, Repository<RouteStation>>();
         services.AddScoped<IRepository<Domain.Entities.Route>, Repository<Domain.Entities.Route>>();
         services.AddScoped<IRepository<User>, Repository<User>>();
+        services.AddScoped<IRepository<Ticket>, Repository<Ticket>>();
 
         return services;
     }
@@ -63,6 +64,7 @@ public static class IServiceCollectionExtensions
         services.AddScoped<IRouteService, RouteService>();
         services.AddScoped<IRouteCalculatorService, RouteCalculatorService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ITicketService, TicketService>();
 
         return services;
     }
